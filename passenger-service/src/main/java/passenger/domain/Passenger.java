@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import org.springframework.data.annotation.Id;
+import passenger.domain.enumeration.ERole;
 
 /**
  * A Passenger.

@@ -1,4 +1,4 @@
-# payment
+# paymentmanagement
 
 This application was generated using JHipster 6.9.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.9.0](https://www.jhipster.tech/documentation-archive/v6.9.0).
 
@@ -32,7 +32,7 @@ Refer to [Doing API-First development][] for more details.
 
 ### Packaging as jar
 
-To build the final jar and optimize the payment application for production, run:
+To build the final jar and optimize the paymentmanagement application for production, run:
 
     ./mvnw -Pprod clean verify
 

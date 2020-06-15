@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.mycompany.myapp"
+      "packageName": "payments"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "microservice",
-    "baseName": "payment",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
+    "baseName": "paymentmanagement",
+    "packageName": "payments",
+    "packageFolder": "payments",
     "serverPort": "8085",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -21,9 +21,9 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "NWE3ZjdiNmQyMzVmZGJkZGFjM2I1YzVkYWY1NzlmOGU2OTBjNDgwZWI1NDcyYzM0MmI5MzU2MjVhMDgzNTgzYTliMmRlYWM4YjUzMWUwZDUxYTU2ZmY3MDc5OWU1NzQyYWU5ZjFkZGQ5NDdiNDU4NTY0NzdiOTU2MDJkYTBlOGI=",
+    "jwtSecretKey": "MGE1MjViZjhlMjhiMDQ3NzZkOWE2OGYwZjdlY2Q5OTc4YThjZDUyZDQ1MmQ2NjEzNzczOTg1YjFhMmQwM2NhMzA4MTAzMzU0YzQzMTcxOTMwZjM5ZDZmMDMxNjhhNWUxNmQ3OTcxZDNkNzhiZGJhMjYyYTdlZDE3NjQwODU4MjI=",
     "embeddableLaunchScript": false,
-    "creationTimestamp": 1591826650561,
+    "creationTimestamp": 1592214703805,
     "testFrameworks": ["gatling", "cucumber"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",

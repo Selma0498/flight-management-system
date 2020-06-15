@@ -1,26 +1,26 @@
 version: '2'
 services:
-  payment-app:
-    image: payment
+  paymentmanagement-app:
+    image: paymentmanagement
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
-      - SPRING_DATASOURCE_URL=jdbc:mysql://payment-mysql:3306/payment?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://paymentmanagement-mysql:3306/paymentmanagement?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
-      - SPRING_DATA_JEST_URI=http://payment-elasticsearch:9200
-      - SPRING_ELASTICSEARCH_REST_URIS=http://payment-elasticsearch:9200
+      - SPRING_DATA_JEST_URI=http://paymentmanagement-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://paymentmanagement-elasticsearch:9200
       - KAFKA_BOOTSTRAPSERVERS=kafka:9092
-  payment-mysql:
+  paymentmanagement-mysql:
     extends:
       file: mysql.yml
-      service: payment-mysql
-  payment-elasticsearch:
+      service: paymentmanagement-mysql
+  paymentmanagement-elasticsearch:
     extends:
       file: elasticsearch.yml
-      service: payment-elasticsearch
+      service: paymentmanagement-elasticsearch
   kafka:
     extends:
       file: kafka.yml

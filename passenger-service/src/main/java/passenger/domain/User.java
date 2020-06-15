@@ -2,6 +2,7 @@ package passenger.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import passenger.domain.enumeration.ERole;
 
 import javax.persistence.*;
 import java.io.Serializable;
