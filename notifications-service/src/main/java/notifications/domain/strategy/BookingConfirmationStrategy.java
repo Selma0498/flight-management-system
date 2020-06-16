@@ -10,8 +10,10 @@ public class BookingConfirmationStrategy implements NotificationStrategy {
     private BookingData subjectToChange;
 
     //TODO Check if subject to change casting to local object is valid
-    public BookingConfirmationStrategy(Object subjectToChange) {
-        this.subjectToChange = (BookingData) subjectToChange;
+
+
+    public BookingConfirmationStrategy(BookingData subjectToChange) {
+        this.subjectToChange = subjectToChange;
     }
 
     @Override

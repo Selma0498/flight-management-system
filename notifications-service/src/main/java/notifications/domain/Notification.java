@@ -10,7 +10,6 @@ public class Notification {
     private ENotificationType notificationType;
     private ENotificationState notificationState;
     private String description;
-    private boolean isSent;
 
     public Notification(ENotificationType notificationType, ENotificationState notificationState, String description) {
         this.notificationType = notificationType;
@@ -42,11 +41,4 @@ public class Notification {
         this.description = description;
     }
 
-    public boolean isSent() {
-        return isSent;
-    }
-
-    public void setSent(boolean sent) {
-        isSent = sent;
-    }
 }
