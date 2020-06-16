@@ -2,6 +2,14 @@
   "name": "Passenger",
   "fields": [
     {
+      "fieldName": "username",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "name",
       "fieldType": "String"
     },
@@ -19,7 +27,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200611224127",
+  "changelogDate": "20200616061249",
   "entityTableName": "passenger",
   "dto": "no",
   "pagination": "no",

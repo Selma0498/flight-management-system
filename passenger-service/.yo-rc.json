@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.mycompany.myapp"
+      "packageName": "passengers"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "microservice",
     "baseName": "passengers",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
+    "packageName": "passengers",
+    "packageFolder": "passengers",
     "serverPort": "8081",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -16,15 +16,15 @@
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
-    "searchEngine": "elasticsearch",
-    "messageBroker": "kafka",
+    "searchEngine": false,
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
-    "enableSwaggerCodegen": true,
-    "jwtSecretKey": "YjRlZTYyYjA5ZWZiMjNmN2I4YTFiOTUxMTNjZGJjYWZmZDk1Yzc5ZDAyNDE5MmFhZGRkZWQyZTJlNjNhNmRjMzJkOWM1ZTI5MTk1OGJjYmI5NDkwNDVmMjgwZjY4ZTdkY2E4MjViZDYyMmQxZDY1ZWU3YjcxZjE0ZmVkYTk5Mzc=",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YzlmMTVlMGNlNzBjN2QxNmM4YWY4NWJmYTcxMTc5MDMzYmJhNDg5ZmIzZGU4ODY3ZDQxODI3ZGM2YjM2MGIzZTk1NmFiN2I2OTU0MTMxZGI3NTYyNmEyYWFlMzYzMjNkZGVjNmE5Njg3M2JkNDcxZWVlNjVmNmU3N2Y0ZGJhZTY=",
     "embeddableLaunchScript": false,
-    "creationTimestamp": 1591811282596,
-    "testFrameworks": ["gatling", "cucumber"],
+    "creationTimestamp": 1592287392634,
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
