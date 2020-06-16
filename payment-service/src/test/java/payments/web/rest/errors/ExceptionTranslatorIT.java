@@ -1,6 +1,6 @@
 package payments.web.rest.errors;
 
-import payments.PaymentmanagementApp;
+import payments.PaymentsApp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WithMockUser
 @AutoConfigureMockMvc
-@SpringBootTest(classes = PaymentmanagementApp.class)
+@SpringBootTest(classes = PaymentsApp.class)
 public class ExceptionTranslatorIT {
 
     @Autowired

@@ -63,12 +63,12 @@ class LuggageGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all luggages")
-            .get("/services/luggagemanagement/api/luggages")
+            .get("/services/luggage/api/luggages")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new luggage")
-            .post("/services/luggagemanagement/api/luggages")
+            .post("/services/luggage/api/luggages")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
@@ -84,12 +84,12 @@ class LuggageGatlingTest extends Simulation {
             .pause(10)
             .repeat(5) {
                 exec(http("Get created luggage")
-                .get("/services/luggagemanagement${new_luggage_url}")
+                .get("/services/luggage${new_luggage_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
             .exec(http("Delete created luggage")
-            .delete("/services/luggagemanagement${new_luggage_url}")
+            .delete("/services/luggage${new_luggage_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

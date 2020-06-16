@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.mycompany.myapp"
+      "packageName": "flights"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "microservice",
     "baseName": "flights",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
+    "packageName": "flights",
+    "packageFolder": "flights",
     "serverPort": "8082",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -16,15 +16,15 @@
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
-    "searchEngine": "elasticsearch",
-    "messageBroker": "kafka",
+    "searchEngine": false,
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
-    "enableSwaggerCodegen": true,
-    "jwtSecretKey": "YjI3NDQ0NGQ5MDczOTNlMGQzNDM5MzRjZTU3M2IzODYzZmIyMTFlNjAzNWZiZjkzODg2N2M5MGM4N2U2NTBjYjdlNWUwZjcyYzVhYzdmNDJmMTM1M2RkMWJhODMwZDE4NDhjMzhjNWJhNDMwZjkyOTg5YmUzNDI4ZGNhZDA4OTU=",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "M2Y4NjU0M2IwYWEzOGQ1MTA1N2UwYmQxNWI1YWViZmNiNzE3YzZkMzAyYmI3N2Q2YmZjNDJmZjE4ZjA2YzYyOGQzZmNmOTgxZjBhZDU1ZjM3NDY5MWMzMDQ0NzM1YWUzN2IzMTVmNTFiNTVjMzA1YTQ0YmFhOGRkMWQzY2ZjZGQ=",
     "embeddableLaunchScript": false,
-    "creationTimestamp": 1591812775570,
-    "testFrameworks": ["gatling", "cucumber"],
+    "creationTimestamp": 1592308900355,
+    "testFrameworks": ["gatling"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",

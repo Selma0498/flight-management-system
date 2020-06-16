@@ -1,15 +1,111 @@
 package payments.domain;
 
-public class Payment {
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-    private PaymentMethod method;
-    private String passengerId;
-    private double toPay;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+
+import java.io.Serializable;
+
+/**
+ * A Payment.
+ */
+@Entity
+@Table(name = "payment")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Payment implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
+    @Column(name = "passenger_id", nullable = false)
+    private Integer passengerId;
+
+    @NotNull
+    @Column(name = "to_pay", nullable = false)
+    private Double toPay;
+
+    @OneToOne
+    @JoinColumn(unique = true)
     private Invoice invoice;
-    private Validator validator;
 
-    //generate invoice
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Long getId() {
+        return id;
+    }
 
-    //validate payment
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Integer getPassengerId() {
+        return passengerId;
+    }
+
+    public Payment passengerId(Integer passengerId) {
+        this.passengerId = passengerId;
+        return this;
+    }
+
+    public void setPassengerId(Integer passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public Double getToPay() {
+        return toPay;
+    }
+
+    public Payment toPay(Double toPay) {
+        this.toPay = toPay;
+        return this;
+    }
+
+    public void setToPay(Double toPay) {
+        this.toPay = toPay;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public Payment invoice(Invoice invoice) {
+        this.invoice = invoice;
+        return this;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Payment)) {
+            return false;
+        }
+        return id != null && id.equals(((Payment) o).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "Payment{" +
+            "id=" + getId() +
+            ", passengerId=" + getPassengerId() +
+            ", toPay=" + getToPay() +
+            "}";
+    }
 }

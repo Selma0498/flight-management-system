@@ -1,6 +1,6 @@
 package luggage.config.timezone;
 
-import luggage.LuggagemanagementApp;
+import luggage.LuggageApp;
 import luggage.repository.timezone.DateTimeWrapper;
 import luggage.repository.timezone.DateTimeWrapperRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for the UTC Hibernate configuration.
  */
-@SpringBootTest(classes = LuggagemanagementApp.class)
+@SpringBootTest(classes = LuggageApp.class)
 public class HibernateTimeZoneIT {
 
     @Autowired

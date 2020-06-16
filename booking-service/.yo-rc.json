@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.mycompany.myapp"
+      "packageName": "bookings"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "microservice",
     "baseName": "bookings",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
+    "packageName": "bookings",
+    "packageFolder": "bookings",
     "serverPort": "8083",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -16,15 +16,15 @@
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
-    "searchEngine": "elasticsearch",
-    "messageBroker": "kafka",
+    "searchEngine": false,
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
-    "enableSwaggerCodegen": true,
-    "jwtSecretKey": "ZjFjZGVhZGVmYWQ5ODMwMTBhMWE2MmFlMzM0NmUwYTllOWM4OWE5NjliMTBlYjI3OGY0ZjczYWEwYTVjZGMwYzBkNmE4Njc2OGUyNDJkMzFmZjFiNDlkMzY5YjUxNmY3YmQzMzhlN2FhODEzY2ZmOTM5MmFmOTQ5MjQ2NTE4ODg=",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZmFjMGJkM2UyYWQ4N2E3YzcyY2YzZmNlNDgzODVkNzQyNDA2YmFlNzg5ZGQwYWMxYzdmMDU0NWFlODFjOGY5MWZjOGNkNWZmYzI5NDk2Y2QxNmEwNGVhYzhiODM3YzY1NGRiNjE4Zjk3MzZiNjcwOGM1MTBkYzU1ZjY2NTdjN2Y=",
     "embeddableLaunchScript": false,
-    "creationTimestamp": 1591826529155,
-    "testFrameworks": ["gatling", "cucumber"],
+    "creationTimestamp": 1592309094245,
+    "testFrameworks": ["gatling"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",

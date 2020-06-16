@@ -1,0 +1,26 @@
+{
+  "name": "Validator",
+  "fields": [
+    {
+      "fieldName": "isPaymentMethodValid",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isInvoiceValid",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200616122548",
+  "entityTableName": "validator",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "payments",
+  "applications": "*",
+  "microserviceName": "payments"
+}

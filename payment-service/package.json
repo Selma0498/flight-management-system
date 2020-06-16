@@ -1,7 +1,7 @@
 {
-  "name": "paymentmanagement",
+  "name": "payments",
   "version": "0.0.0",
-  "description": "Description for paymentmanagement",
+  "description": "Description for payments",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

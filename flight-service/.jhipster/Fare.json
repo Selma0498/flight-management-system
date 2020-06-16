@@ -1,0 +1,41 @@
+{
+  "name": "Fare",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "EFareType",
+      "fieldValues": "ECONOMY,BUSINESS",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "flight",
+      "otherEntityRelationshipName": "fare",
+      "relationshipName": "flight",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200616121228",
+  "entityTableName": "fare",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "flights",
+  "applications": "*",
+  "microserviceName": "flights"
+}

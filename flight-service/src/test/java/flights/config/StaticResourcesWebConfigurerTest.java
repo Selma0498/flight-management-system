@@ -4,7 +4,6 @@ import io.github.jhipster.config.JHipsterDefaults;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.http.CacheControl;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.WebApplicationContext;
@@ -31,7 +30,7 @@ public class StaticResourcesWebConfigurerTest {
         applicationContext = mock(WebApplicationContext.class);
         resourceHandlerRegistry = spy(new ResourceHandlerRegistry(applicationContext, servletContext));
         props = new JHipsterProperties();
-        staticResourcesWebConfiguration = Mockito.spy(new StaticResourcesWebConfiguration(props));
+        staticResourcesWebConfiguration = spy(new StaticResourcesWebConfiguration(props));
     }
 
     @Test

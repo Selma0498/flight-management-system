@@ -1,6 +1,6 @@
 package payments.config.timezone;
 
-import payments.PaymentmanagementApp;
+import payments.PaymentsApp;
 import payments.repository.timezone.DateTimeWrapper;
 import payments.repository.timezone.DateTimeWrapperRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for the UTC Hibernate configuration.
  */
-@SpringBootTest(classes = PaymentmanagementApp.class)
+@SpringBootTest(classes = PaymentsApp.class)
 public class HibernateTimeZoneIT {
 
     @Autowired

@@ -1,7 +1,7 @@
 {
-  "name": "luggagemanagement",
+  "name": "luggage",
   "version": "0.0.0",
-  "description": "Description for luggagemanagement",
+  "description": "Description for luggage",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

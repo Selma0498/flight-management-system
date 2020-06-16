@@ -26,11 +26,6 @@ eureka:
     service-url:
       defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
-management:
-  health:
-    elasticsearch:
-      enabled: false
-
 spring:
   profiles:
     active: dev
@@ -49,8 +44,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/paymentmanagement;DB_CLOSE_DELAY=-1
-    username: paymentmanagement
+    url: jdbc:h2:file:./target/h2db/db/payments;DB_CLOSE_DELAY=-1
+    username: payments
     password:
     hikari:
       poolName: Hikari
@@ -60,11 +55,6 @@ spring:
       enabled: false
   jpa:
     show-sql: true
-  data:
-    elasticsearch:
-      properties:
-        path:
-          home: target/elasticsearch
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
@@ -118,7 +108,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: MGE1MjViZjhlMjhiMDQ3NzZkOWE2OGYwZjdlY2Q5OTc4YThjZDUyZDQ1MmQ2NjEzNzczOTg1YjFhMmQwM2NhMzA4MTAzMzU0YzQzMTcxOTMwZjM5ZDZmMDMxNjhhNWUxNmQ3OTcxZDNkNzhiZGJhMjYyYTdlZDE3NjQwODU4MjI=
+        base64-secret: NWNhZTc2NDU4MjkwMjgyNDYwMjk3NWFmODRhNTE4NTE4YTYwNmFjNTFjZGY5MjcxNGRjZGQ4ODYwOGNhMzEzMmU3ZTliODQzMDhmOGY4MTNmN2UyZDZiNzQxMzBlNzZjNWFkMjgzMmYzOTg5NDcwZTNjY2Y2N2RkOTUwZDI2ODE=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

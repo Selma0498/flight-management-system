@@ -14,15 +14,15 @@ class ArchTest {
 
         JavaClasses importedClasses = new ClassFileImporter()
             .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-            .importPackages("com.mycompany.myapp");
+            .importPackages("flights");
 
         noClasses()
             .that()
-                .resideInAnyPackage("com.mycompany.myapp.service..")
+                .resideInAnyPackage("flights.service..")
             .or()
-                .resideInAnyPackage("com.mycompany.myapp.repository..")
+                .resideInAnyPackage("flights.repository..")
             .should().dependOnClassesThat()
-                .resideInAnyPackage("..com.mycompany.myapp.web..")
+                .resideInAnyPackage("..flights.web..")
         .because("Services and repositories should not depend on web layer")
         .check(importedClasses);
     }

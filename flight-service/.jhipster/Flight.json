@@ -1,0 +1,80 @@
+{
+  "name": "Flight",
+  "fields": [
+    {
+      "fieldName": "flightNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "flightType",
+      "fieldType": "EFlightType",
+      "fieldValues": "ONE_WAY,RETURN_TRIP",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "pilot",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "flightHandling",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "flightHandler",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "fare",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "fare"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airport",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "origin",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airport",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "destination",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airline",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "airline",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "plane",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "plane",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200616120828",
+  "entityTableName": "flight",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "flights",
+  "applications": "*",
+  "microserviceName": "flights"
+}

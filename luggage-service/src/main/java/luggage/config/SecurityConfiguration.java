@@ -1,12 +1,11 @@
 package luggage.config;
 
-import com.mycompany.myapp.security.*;
-import com.mycompany.myapp.security.jwt.*;
+import luggage.security.*;
+import luggage.security.jwt.*;
 
-import luggage.security.AuthoritiesConstants;
-import luggage.security.jwt.JWTConfigurer;
-import luggage.security.jwt.TokenProvider;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

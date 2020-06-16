@@ -1,17 +1,11 @@
 package luggage.web.rest;
 
-import luggage.LuggagemanagementApp;
+import luggage.LuggageApp;
 import luggage.domain.Luggage;
 import luggage.repository.LuggageRepository;
-import luggage.repository.search.LuggageSearchRepository;
 
-import luggage.domain.enumeration.ELuggageType;
-import luggage.repository.search.LuggageSearchRepositoryMockConfiguration;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,21 +14,18 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import luggage.domain.enumeration.ELuggageType;
 /**
  * Integration tests for the {@link LuggageResource} REST controller.
  */
-@SpringBootTest(classes = LuggagemanagementApp.class)
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(classes = LuggageApp.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class LuggageResourceIT {
@@ -59,14 +50,6 @@ public class LuggageResourceIT {
 
     @Autowired
     private LuggageRepository luggageRepository;
-
-    /**
-     * This repository is mocked in the com.mycompany.myapp.repository.search test package.
-     *
-     * @see LuggageSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private LuggageSearchRepository mockLuggageSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -128,15 +111,12 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeCreate + 1);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        Assertions.assertThat(testLuggage.getRole()).isEqualTo(DEFAULT_ROLE);
+        assertThat(testLuggage.getRole()).isEqualTo(DEFAULT_ROLE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(DEFAULT_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(DEFAULT_FLIGHT_NUMBER);
         assertThat(testLuggage.getPassengerId()).isEqualTo(DEFAULT_PASSENGER_ID);
         assertThat(testLuggage.getWeight()).isEqualTo(DEFAULT_WEIGHT);
         assertThat(testLuggage.getRfidTag()).isEqualTo(DEFAULT_RFID_TAG);
-
-        // Validate the Luggage in Elasticsearch
-        verify(mockLuggageSearchRepository, times(1)).save(testLuggage);
     }
 
     @Test
@@ -156,9 +136,6 @@ public class LuggageResourceIT {
         // Validate the Luggage in the database
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeCreate);
-
-        // Validate the Luggage in Elasticsearch
-        verify(mockLuggageSearchRepository, times(0)).save(luggage);
     }
 
 
@@ -331,15 +308,12 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeUpdate);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        Assertions.assertThat(testLuggage.getRole()).isEqualTo(UPDATED_ROLE);
+        assertThat(testLuggage.getRole()).isEqualTo(UPDATED_ROLE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(UPDATED_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(UPDATED_FLIGHT_NUMBER);
         assertThat(testLuggage.getPassengerId()).isEqualTo(UPDATED_PASSENGER_ID);
         assertThat(testLuggage.getWeight()).isEqualTo(UPDATED_WEIGHT);
         assertThat(testLuggage.getRfidTag()).isEqualTo(UPDATED_RFID_TAG);
-
-        // Validate the Luggage in Elasticsearch
-        verify(mockLuggageSearchRepository, times(1)).save(testLuggage);
     }
 
     @Test
@@ -356,9 +330,6 @@ public class LuggageResourceIT {
         // Validate the Luggage in the database
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeUpdate);
-
-        // Validate the Luggage in Elasticsearch
-        verify(mockLuggageSearchRepository, times(0)).save(luggage);
     }
 
     @Test
@@ -377,30 +348,5 @@ public class LuggageResourceIT {
         // Validate the database contains one less item
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeDelete - 1);
-
-        // Validate the Luggage in Elasticsearch
-        verify(mockLuggageSearchRepository, times(1)).deleteById(luggage.getId());
-    }
-
-    @Test
-    @Transactional
-    public void searchLuggage() throws Exception {
-        // Configure the mock search repository
-        // Initialize the database
-        luggageRepository.saveAndFlush(luggage);
-        when(mockLuggageSearchRepository.search(queryStringQuery("id:" + luggage.getId())))
-            .thenReturn(Collections.singletonList(luggage));
-
-        // Search the luggage
-        restLuggageMockMvc.perform(get("/api/_search/luggages?query=id:" + luggage.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(luggage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
-            .andExpect(jsonPath("$.[*].luggageNumber").value(hasItem(DEFAULT_LUGGAGE_NUMBER)))
-            .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(DEFAULT_FLIGHT_NUMBER)))
-            .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)))
-            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.doubleValue())))
-            .andExpect(jsonPath("$.[*].rfidTag").value(hasItem(DEFAULT_RFID_TAG)));
     }
 }

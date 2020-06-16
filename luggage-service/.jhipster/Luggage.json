@@ -43,7 +43,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200615091903",
+  "changelogDate": "20200616121509",
   "entityTableName": "luggage",
   "dto": "no",
   "pagination": "no",
@@ -52,7 +52,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "clientRootFolder": "luggagemanagement",
+  "clientRootFolder": "luggage",
   "applications": "*",
-  "microserviceName": "luggagemanagement"
+  "microserviceName": "luggage"
 }

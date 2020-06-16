@@ -1,12 +1,11 @@
 package bookings.config;
 
-import bookings.security.AuthoritiesConstants;
-import bookings.security.jwt.JWTConfigurer;
-import bookings.security.jwt.TokenProvider;
-import com.mycompany.myapp.security.*;
-import com.mycompany.myapp.security.jwt.*;
+import bookings.security.*;
+import bookings.security.jwt.*;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

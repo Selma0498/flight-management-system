@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
+import passengers.domain.enumeration.EUserRole;
+
 /**
  * A Passenger.
  */
@@ -26,6 +28,10 @@ public class Passenger implements Serializable {
 
     @Column(name = "password")
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private EUserRole role;
 
     @Column(name = "name")
     private String name;
@@ -72,6 +78,19 @@ public class Passenger implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public EUserRole getRole() {
+        return role;
+    }
+
+    public Passenger role(EUserRole role) {
+        this.role = role;
+        return this;
+    }
+
+    public void setRole(EUserRole role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -150,6 +169,7 @@ public class Passenger implements Serializable {
             "id=" + getId() +
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
+            ", role='" + getRole() + "'" +
             ", name='" + getName() + "'" +
             ", surname='" + getSurname() + "'" +
             ", email='" + getEmail() + "'" +

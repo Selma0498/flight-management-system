@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     io.github.jhipster: INFO
-    com.mycompany.myapp: INFO
+    luggage: INFO
 
 eureka:
   instance:
@@ -40,7 +40,7 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/luggagemanagement?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/luggage?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
     password:
     hikari:
@@ -53,13 +53,6 @@ spring:
         useServerPrepStmts: true
   jpa:
     show-sql: false
-  data:
-    jest:
-      uri: http://localhost:9200
-  # see https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-connecting-to-elasticsearch-jest
-  elasticsearch:
-    rest:
-      uris: http://localhost:9200
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
@@ -82,7 +75,7 @@ spring:
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias luggagemanagement -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias luggage -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
@@ -132,7 +125,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: YjIyZjU3ZDcxNjJmMWVmYWJjZGZkMGE5YzdkN2QyNGJiNWUyZTkxZTNmYTc1YzNkOTNhZDY3NjY1ZjRiYzM3OWUyMzk2YzBjY2I1OTIwMjM0Njc5MjEwZmYyOTg0MTU1MzM5OGVlNWQzMDNiZTc4YzExZDhkODZmYWRiOTIzY2U=
+        base64-secret: OWUyZWRmOTg4MTA5NDNlNzEwYWUwZGIxYzY4MTQzYmIwODJkODlmMzA5MTBiMjI5MTY3ZTAwOWE4MjVlNmI3YzVmZjIzMDY0OTE3ODU2ZTgxOWNlYzVkZDA1ZDcyNGViMGYzMjE1ZGI5ZDg1NGQzYTM1NzA5MDdhZGU4MGFhM2M=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

@@ -17,18 +17,18 @@ eureka:
   client:
     enabled: false
   instance:
-    appname: luggagemanagement
-    instanceId: luggagemanagement:${spring.application.instance-id:${random.value}}
+    appname: luggage
+    instanceId: luggage:${spring.application.instance-id:${random.value}}
 
 spring:
   profiles:
   # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
   #active: testcontainers
   application:
-    name: luggagemanagement
+    name: luggage
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:luggagemanagement;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:luggage;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
@@ -54,14 +54,6 @@ spring:
       hibernate.generate_statistics: false
       hibernate.hbm2ddl.auto: validate
       hibernate.jdbc.time_zone: UTC
-  data:
-    elasticsearch:
-      properties:
-        path:
-          home: target/elasticsearch
-        # See https://github.com/jhipster/generator-jhipster/issues/10302
-        node:
-          max_local_storage_nodes: 2
   liquibase:
     contexts: test
   mail:
@@ -75,13 +67,13 @@ spring:
       enabled: false
   task:
     execution:
-      thread-name-prefix: luggagemanagement-task-
+      thread-name-prefix: luggage-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: luggagemanagement-scheduling-
+      thread-name-prefix: luggage-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -99,7 +91,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'luggagemanagementApp'
+    name: 'luggageApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -112,23 +104,14 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: YjIyZjU3ZDcxNjJmMWVmYWJjZGZkMGE5YzdkN2QyNGJiNWUyZTkxZTNmYTc1YzNkOTNhZDY3NjY1ZjRiYzM3OWUyMzk2YzBjY2I1OTIwMjM0Njc5MjEwZmYyOTg0MTU1MzM5OGVlNWQzMDNiZTc4YzExZDhkODZmYWRiOTIzY2U=
+        base64-secret: OWUyZWRmOTg4MTA5NDNlNzEwYWUwZGIxYzY4MTQzYmIwODJkODlmMzA5MTBiMjI5MTY3ZTAwOWE4MjVlNmI3YzVmZjIzMDY0OTE3ODU2ZTgxOWNlYzVkZDA1ZDcyNGViMGYzMjE1ZGI5ZDg1NGQzYTM1NzA5MDdhZGU4MGFhM2M=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:
     logs: # Reports metrics in the logs
       enabled: true
       report-frequency: 60 # in seconds
-kafka:
-  bootstrap-servers: localhost:9092
-  consumer:
-    key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    group.id: luggagemanagement
-    auto.offset.reset: earliest
-  producer:
-    key.serializer: org.apache.kafka.common.serialization.StringSerializer
-    value.serializer: org.apache.kafka.common.serialization.StringSerializer
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

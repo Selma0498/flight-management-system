@@ -16,7 +16,6 @@ import luggage.domain.enumeration.ELuggageType;
 @Entity
 @Table(name = "luggage")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "luggage")
 public class Luggage implements Serializable {
 
     private static final long serialVersionUID = 1L;

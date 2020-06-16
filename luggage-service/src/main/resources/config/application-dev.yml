@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    com.mycompany.myapp: DEBUG
+    luggage: DEBUG
 
 eureka:
   instance:
@@ -25,11 +25,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
-management:
-  health:
-    elasticsearch:
-      enabled: false
 
 spring:
   profiles:
@@ -49,8 +44,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/luggagemanagement;DB_CLOSE_DELAY=-1
-    username: luggagemanagement
+    url: jdbc:h2:file:./target/h2db/db/luggage;DB_CLOSE_DELAY=-1
+    username: luggage
     password:
     hikari:
       poolName: Hikari
@@ -60,11 +55,6 @@ spring:
       enabled: false
   jpa:
     show-sql: true
-  data:
-    elasticsearch:
-      properties:
-        path:
-          home: target/elasticsearch
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
@@ -118,7 +108,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: YjIyZjU3ZDcxNjJmMWVmYWJjZGZkMGE5YzdkN2QyNGJiNWUyZTkxZTNmYTc1YzNkOTNhZDY3NjY1ZjRiYzM3OWUyMzk2YzBjY2I1OTIwMjM0Njc5MjEwZmYyOTg0MTU1MzM5OGVlNWQzMDNiZTc4YzExZDhkODZmYWRiOTIzY2U=
+        base64-secret: OWUyZWRmOTg4MTA5NDNlNzEwYWUwZGIxYzY4MTQzYmIwODJkODlmMzA5MTBiMjI5MTY3ZTAwOWE4MjVlNmI3YzVmZjIzMDY0OTE3ODU2ZTgxOWNlYzVkZDA1ZDcyNGViMGYzMjE1ZGI5ZDg1NGQzYTM1NzA5MDdhZGU4MGFhM2M=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

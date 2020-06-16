@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import passengers.domain.enumeration.EUserRole;
 /**
  * Integration tests for the {@link PassengerResource} REST controller.
  */
@@ -34,6 +35,9 @@ public class PassengerResourceIT {
 
     private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
     private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
+
+    private static final EUserRole DEFAULT_ROLE = EUserRole.ADMIN;
+    private static final EUserRole UPDATED_ROLE = EUserRole.PASSENGER;
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -68,6 +72,7 @@ public class PassengerResourceIT {
         Passenger passenger = new Passenger()
             .username(DEFAULT_USERNAME)
             .password(DEFAULT_PASSWORD)
+            .role(DEFAULT_ROLE)
             .name(DEFAULT_NAME)
             .surname(DEFAULT_SURNAME)
             .email(DEFAULT_EMAIL)
@@ -84,6 +89,7 @@ public class PassengerResourceIT {
         Passenger passenger = new Passenger()
             .username(UPDATED_USERNAME)
             .password(UPDATED_PASSWORD)
+            .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
@@ -112,6 +118,7 @@ public class PassengerResourceIT {
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(DEFAULT_USERNAME);
         assertThat(testPassenger.getPassword()).isEqualTo(DEFAULT_PASSWORD);
+        assertThat(testPassenger.getRole()).isEqualTo(DEFAULT_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(DEFAULT_EMAIL);
@@ -151,6 +158,7 @@ public class PassengerResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(passenger.getId().intValue())))
             .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME)))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
+            .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
@@ -170,6 +178,7 @@ public class PassengerResourceIT {
             .andExpect(jsonPath("$.id").value(passenger.getId().intValue()))
             .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
+            .andExpect(jsonPath("$.role").value(DEFAULT_ROLE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
@@ -198,6 +207,7 @@ public class PassengerResourceIT {
         updatedPassenger
             .username(UPDATED_USERNAME)
             .password(UPDATED_PASSWORD)
+            .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
@@ -214,6 +224,7 @@ public class PassengerResourceIT {
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(UPDATED_USERNAME);
         assertThat(testPassenger.getPassword()).isEqualTo(UPDATED_PASSWORD);
+        assertThat(testPassenger.getRole()).isEqualTo(UPDATED_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(UPDATED_EMAIL);

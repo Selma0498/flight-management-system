@@ -1,6 +1,6 @@
 package luggage.web.rest.errors;
 
-import luggage.LuggagemanagementApp;
+import luggage.LuggageApp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WithMockUser
 @AutoConfigureMockMvc
-@SpringBootTest(classes = LuggagemanagementApp.class)
+@SpringBootTest(classes = LuggageApp.class)
 public class ExceptionTranslatorIT {
 
     @Autowired

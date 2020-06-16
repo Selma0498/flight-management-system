@@ -1,8 +1,8 @@
 package luggage.domain;
 
-import luggage.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import luggage.web.rest.TestUtil;
 
 public class LuggageTest {
 

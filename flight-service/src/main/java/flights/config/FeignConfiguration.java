@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@EnableFeignClients(basePackages = "com.mycompany.myapp")
+@EnableFeignClients(basePackages = "flights")
 @Import(FeignClientsConfiguration.class)
 public class FeignConfiguration {
 
