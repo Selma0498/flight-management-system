@@ -26,9 +26,6 @@ public class Passenger implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
-    private String password;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private EUserRole role;
@@ -44,6 +41,19 @@ public class Passenger implements Serializable {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    public Passenger() {
+    }
+
+    // constructor for network conversion purposes
+    public Passenger(String username, EUserRole role, String name, String surname, String email, String phoneNumber) {
+        this.username = username;
+        this.role = role;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -65,19 +75,6 @@ public class Passenger implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Passenger password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public EUserRole getRole() {
@@ -168,7 +165,6 @@ public class Passenger implements Serializable {
         return "Passenger{" +
             "id=" + getId() +
             ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
             ", role='" + getRole() + "'" +
             ", name='" + getName() + "'" +
             ", surname='" + getSurname() + "'" +

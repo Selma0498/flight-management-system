@@ -33,9 +33,6 @@ public class PassengerResourceIT {
     private static final String DEFAULT_USERNAME = "AAAAAAAAAA";
     private static final String UPDATED_USERNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
-    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
-
     private static final EUserRole DEFAULT_ROLE = EUserRole.ADMIN;
     private static final EUserRole UPDATED_ROLE = EUserRole.PASSENGER;
 
@@ -71,7 +68,6 @@ public class PassengerResourceIT {
     public static Passenger createEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(DEFAULT_USERNAME)
-            .password(DEFAULT_PASSWORD)
             .role(DEFAULT_ROLE)
             .name(DEFAULT_NAME)
             .surname(DEFAULT_SURNAME)
@@ -88,7 +84,6 @@ public class PassengerResourceIT {
     public static Passenger createUpdatedEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(UPDATED_USERNAME)
-            .password(UPDATED_PASSWORD)
             .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
@@ -117,7 +112,6 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeCreate + 1);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(DEFAULT_USERNAME);
-        assertThat(testPassenger.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testPassenger.getRole()).isEqualTo(DEFAULT_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(DEFAULT_SURNAME);
@@ -157,7 +151,6 @@ public class PassengerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(passenger.getId().intValue())))
             .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME)))
-            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
             .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
@@ -177,7 +170,6 @@ public class PassengerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(passenger.getId().intValue()))
             .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME))
-            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
             .andExpect(jsonPath("$.role").value(DEFAULT_ROLE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME))
@@ -206,7 +198,6 @@ public class PassengerResourceIT {
         em.detach(updatedPassenger);
         updatedPassenger
             .username(UPDATED_USERNAME)
-            .password(UPDATED_PASSWORD)
             .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
@@ -223,7 +214,6 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeUpdate);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(UPDATED_USERNAME);
-        assertThat(testPassenger.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testPassenger.getRole()).isEqualTo(UPDATED_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(UPDATED_SURNAME);

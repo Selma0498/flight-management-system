@@ -1,6 +1,7 @@
 package passengers.web.rest;
 
 import passengers.domain.Passenger;
+import passengers.domain.enumeration.EUserRole;
 import passengers.repository.PassengerRepository;
 import passengers.web.rest.errors.BadRequestAlertException;
 
@@ -12,14 +13,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
  * REST controller for managing {@link passengers.domain.Passenger}.
+ * Data to the endpoints provided by the controller are sent by the gateway!
  */
 @RestController
 @RequestMapping("/api")
@@ -40,17 +44,32 @@ public class PassengerResource {
     }
 
     /**
-     * {@code POST  /passengers} : Create a new passenger.
+     * {@code POST  /passengers} : Create a new passenger. Used for registering a passenger - when a user requests registration
+     * via the interface
      *
-     * @param passenger the passenger to create.
+     * @param passengerJSON the passenger to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new passenger, or with status {@code 400 (Bad Request)} if the passenger has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/passengers")
-    public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger) throws URISyntaxException {
+    public ResponseEntity<Passenger> createPassenger(@RequestBody Map<String, String> passengerJSON) throws URISyntaxException {
+        Passenger passenger = null;
+        try {
+            passenger = new Passenger(
+                passengerJSON.get("login"),
+                EUserRole.PASSENGER,
+                passengerJSON.get("firstName"),
+                passengerJSON.get("lastName"),
+                passengerJSON.get("email"),
+                " "
+            );
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
         log.debug("REST request to save Passenger : {}", passenger);
         if (passenger.getId() != null) {
-            throw new BadRequestAlertException("A new passenger cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new passenger cannot already have an ID", ENTITY_NAME, "id exists");
         }
         Passenger result = passengerRepository.save(passenger);
         return ResponseEntity.created(new URI("/api/passengers/" + result.getId()))
@@ -59,7 +78,7 @@ public class PassengerResource {
     }
 
     /**
-     * {@code PUT  /passengers} : Updates an existing passenger.
+     * {@code PUT  /passengers} : Updates an existing passenger. When user requests update of his/hers data.
      *
      * @param passenger the passenger to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated passenger,
@@ -71,7 +90,7 @@ public class PassengerResource {
     public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger) throws URISyntaxException {
         log.debug("REST request to update Passenger : {}", passenger);
         if (passenger.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "id null");
         }
         Passenger result = passengerRepository.save(passenger);
         return ResponseEntity.ok()
@@ -104,7 +123,7 @@ public class PassengerResource {
     }
 
     /**
-     * {@code DELETE  /passengers/:id} : delete the "id" passenger.
+     * {@code DELETE  /passengers/:id} : delete the "id" passenger. When a user requests deletion of account.
      *
      * @param id the id of the passenger to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
@@ -116,4 +135,6 @@ public class PassengerResource {
         passengerRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+
+
 }
