@@ -36,12 +36,28 @@ spring:
   devtools:
     restart:
       enabled: true
-      additional-exclude: static/**
+      additional-exclude: static/**,.h2.server.properties
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
   jackson:
     serialization:
       indent-output: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:file:./target/h2db/db/gateway;DB_CLOSE_DELAY=-1
+    username: gateway
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  h2:
+    console:
+      enabled: false
+  jpa:
+    show-sql: true
+  liquibase:
+    # Remove 'faker' if you do not want the sample data to be loaded automatically
+    contexts: dev, faker
   mail:
     host: localhost
     port: 25
@@ -94,7 +110,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: M2NhMzQxODVkYTQ2NDQwZDAyOGI0OGNiYTZiZjBhZWY1MTNkZTQ2OGE2NjE0ZGVhZmI1MzY1NDg2MzY2ZTEwNmE0NjIwOTAyZTc2ZmNhNTJkNzhhYzExZjA2NjU4YmNiNDczMDMyNTU4MzVjMTFhNjBlOGVkMDlhYzMxMDY0OWQ=
+        base64-secret: NTU1ZmZkYTUxNDc1NGM3NjU0ZGUxOWU1YjhiNjg5OTYxNTUyNDMzMWJjMmRjNDZhYTNjZjVmZmI1YTVhOTliZTkzYzNkYWUwYzY1NjY3NjQ5Yjg1YTcyZmE2MGI2YjE1MmJkNTRjMWJlYTQ2YzJhMmU1ODI0NzRkMDVjOWM3NmI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
@@ -111,6 +127,9 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
+  audit-events:
+    retention-period: 30 # Number of days before audit events are deleted.
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

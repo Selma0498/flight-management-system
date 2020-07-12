@@ -28,7 +28,7 @@ public class Passenger implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private EUserRole role;
+    private final EUserRole role = EUserRole.PASSENGER;
 
     @Column(name = "name")
     private String name;
@@ -46,9 +46,8 @@ public class Passenger implements Serializable {
     }
 
     // constructor for network conversion purposes
-    public Passenger(String username, EUserRole role, String name, String surname, String email, String phoneNumber) {
+    public Passenger(String username, String name, String surname, String email, String phoneNumber) {
         this.username = username;
-        this.role = role;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -75,19 +74,6 @@ public class Passenger implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public EUserRole getRole() {
-        return role;
-    }
-
-    public Passenger role(EUserRole role) {
-        this.role = role;
-        return this;
-    }
-
-    public void setRole(EUserRole role) {
-        this.role = role;
     }
 
     public String getName() {
@@ -165,7 +151,7 @@ public class Passenger implements Serializable {
         return "Passenger{" +
             "id=" + getId() +
             ", username='" + getUsername() + "'" +
-            ", role='" + getRole() + "'" +
+            ", role='" + role + "'" +
             ", name='" + getName() + "'" +
             ", surname='" + getSurname() + "'" +
             ", email='" + getEmail() + "'" +
