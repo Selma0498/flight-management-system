@@ -55,14 +55,31 @@ public class PassengerResource {
     public ResponseEntity<Passenger> createPassenger(@RequestBody Map<String, String> passengerJSON) throws URISyntaxException {
         Passenger passenger = null;
         try {
-            passenger = new Passenger(
-                passengerJSON.get("login"),
-                EUserRole.PASSENGER,
-                passengerJSON.get("firstName"),
-                passengerJSON.get("lastName"),
-                passengerJSON.get("email"),
-                " "
-            );
+            if(passengerJSON.get("login").equals("user")) {
+                passenger = new Passenger(
+                    passengerJSON.get("login"),
+                    "User",
+                    "Userson",
+                    passengerJSON.get("email"),
+                    ""
+                );
+            } else {
+                String firstName = "";
+                String lastName = "";
+                String email = "";
+                if(passengerJSON.get("firstName").isEmpty()) firstName = "John"; else firstName = passengerJSON.get("firstName");
+                if(passengerJSON.get("lastName").isEmpty()) lastName = "Doe"; else lastName = passengerJSON.get("lastName");
+                if(passengerJSON.get("email").isEmpty()) email = "johndoe@yahoo.com"; else email = passengerJSON.get("email");
+
+                passenger = new Passenger(
+                    passengerJSON.get("login"),
+                    firstName,
+                    lastName,
+                    email,
+                    ""
+                );
+            }
+
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -80,14 +97,32 @@ public class PassengerResource {
     /**
      * {@code PUT  /passengers} : Updates an existing passenger. When user requests update of his/hers data.
      *
-     * @param passenger the passenger to update.
+     * @param passengerJSON the passenger to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated passenger,
      * or with status {@code 400 (Bad Request)} if the passenger is not valid,
      * or with status {@code 500 (Internal Server Error)} if the passenger couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/passengers")
-    public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger) throws URISyntaxException {
+    public ResponseEntity<Passenger> updatePassenger(@RequestBody Map<String, String> passengerJSON) throws URISyntaxException {
+        Passenger passenger = null;
+        try {
+            String username = passengerJSON.get("login");
+
+            if(!username.isEmpty() && passengerRepository.findByUsername(username).isPresent()) {
+                passenger = new Passenger(
+                    passengerJSON.get("login"),
+                    passengerJSON.get("firstName"),
+                    passengerJSON.get("lastName"),
+                    passengerJSON.get("email"),
+                    ""
+                );
+            }
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
         log.debug("REST request to update Passenger : {}", passenger);
         if (passenger.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "id null");
@@ -123,6 +158,19 @@ public class PassengerResource {
     }
 
     /**
+     * {@code GET /passenger/:username} : get the "username" passenger.
+     *
+     * @param username the username of the passenger to retrieve.
+     * @return the {@Link ResponseEntity} with status {@code 200 (OK)} and with body the passenger, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/passengers/{username}")
+    public ResponseEntity<Passenger> getPassenger(@PathVariable String username) {
+        log.debug("REST request to get passenger : {}", username);
+        Optional<Passenger> passenger = passengerRepository.findByUsername(username);
+        return ResponseUtil.wrapOrNotFound(passenger);
+    }
+
+    /**
      * {@code DELETE  /passengers/:id} : delete the "id" passenger. When a user requests deletion of account.
      *
      * @param id the id of the passenger to delete.
@@ -134,6 +182,20 @@ public class PassengerResource {
 
         passengerRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code DELETE  /passengers/:username} : delete the "username" passenger. When a user requests deletion of account.
+     *
+     * @param username the username of the passenger to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/passengers/{username}")
+    public ResponseEntity<Void> deletePassenger(@PathVariable String username) {
+        log.debug("REST request to delete Passenger : {}", username);
+
+        passengerRepository.deleteByUsername(username);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, username)).build();
     }
 
 

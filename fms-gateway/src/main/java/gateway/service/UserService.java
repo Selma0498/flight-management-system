@@ -125,6 +125,7 @@ public class UserService {
         return newUser;
     }
 
+    // TODO Automatically delete on passenger microservice side
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
              return false;
@@ -135,7 +136,7 @@ public class UserService {
         return true;
     }
 
-    public User createUser(UserDTO userDTO) {
+   public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
@@ -221,6 +222,7 @@ public class UserService {
      * @param langKey   language key.
      * @param imageUrl  image URL of user.
      */
+    // TODO Automatically update the passenger at the passenger microservice
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -274,6 +276,7 @@ public class UserService {
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      */
+    // TODO Delete from passenger repository????? Should not happen in a real FMS system
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         userRepository

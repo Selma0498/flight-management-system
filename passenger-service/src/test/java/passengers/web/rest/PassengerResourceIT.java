@@ -68,7 +68,6 @@ public class PassengerResourceIT {
     public static Passenger createEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(DEFAULT_USERNAME)
-            .role(DEFAULT_ROLE)
             .name(DEFAULT_NAME)
             .surname(DEFAULT_SURNAME)
             .email(DEFAULT_EMAIL)
@@ -84,7 +83,6 @@ public class PassengerResourceIT {
     public static Passenger createUpdatedEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(UPDATED_USERNAME)
-            .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
@@ -112,7 +110,6 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeCreate + 1);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(DEFAULT_USERNAME);
-        assertThat(testPassenger.getRole()).isEqualTo(DEFAULT_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(DEFAULT_EMAIL);
@@ -198,7 +195,6 @@ public class PassengerResourceIT {
         em.detach(updatedPassenger);
         updatedPassenger
             .username(UPDATED_USERNAME)
-            .role(UPDATED_ROLE)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
             .email(UPDATED_EMAIL)
@@ -214,7 +210,6 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeUpdate);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(UPDATED_USERNAME);
-        assertThat(testPassenger.getRole()).isEqualTo(UPDATED_ROLE);
         assertThat(testPassenger.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(UPDATED_EMAIL);
