@@ -74,11 +74,9 @@ class PassengerGatlingTest extends Simulation {
                 "id":null
                 , "username":"SAMPLE_TEXT"
                 , "password":"SAMPLE_TEXT"
-                , "role":"ADMIN"
                 , "name":"SAMPLE_TEXT"
                 , "surname":"SAMPLE_TEXT"
                 , "email":"SAMPLE_TEXT"
-                , "phoneNumber":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_passenger_url"))).exitHereIfFailed

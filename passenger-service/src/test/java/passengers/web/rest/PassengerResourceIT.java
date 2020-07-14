@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import passengers.domain.enumeration.EUserRole;
 /**
  * Integration tests for the {@link PassengerResource} REST controller.
  */
@@ -33,8 +32,8 @@ public class PassengerResourceIT {
     private static final String DEFAULT_USERNAME = "AAAAAAAAAA";
     private static final String UPDATED_USERNAME = "BBBBBBBBBB";
 
-    private static final EUserRole DEFAULT_ROLE = EUserRole.ADMIN;
-    private static final EUserRole UPDATED_ROLE = EUserRole.PASSENGER;
+    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
+    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -44,9 +43,6 @@ public class PassengerResourceIT {
 
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
 
     @Autowired
     private PassengerRepository passengerRepository;
@@ -68,10 +64,10 @@ public class PassengerResourceIT {
     public static Passenger createEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(DEFAULT_USERNAME)
+            .password(DEFAULT_PASSWORD)
             .name(DEFAULT_NAME)
             .surname(DEFAULT_SURNAME)
-            .email(DEFAULT_EMAIL)
-            .phoneNumber(DEFAULT_PHONE_NUMBER);
+            .email(DEFAULT_EMAIL);
         return passenger;
     }
     /**
@@ -83,10 +79,10 @@ public class PassengerResourceIT {
     public static Passenger createUpdatedEntity(EntityManager em) {
         Passenger passenger = new Passenger()
             .username(UPDATED_USERNAME)
+            .password(UPDATED_PASSWORD)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
-            .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .email(UPDATED_EMAIL);
         return passenger;
     }
 
@@ -110,10 +106,10 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeCreate + 1);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(DEFAULT_USERNAME);
+        assertThat(testPassenger.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testPassenger.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testPassenger.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
     }
 
     @Test
@@ -148,11 +144,10 @@ public class PassengerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(passenger.getId().intValue())))
             .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME)))
-            .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
+            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
     
     @Test
@@ -167,11 +162,10 @@ public class PassengerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(passenger.getId().intValue()))
             .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME))
-            .andExpect(jsonPath("$.role").value(DEFAULT_ROLE.toString()))
+            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
     @Test
     @Transactional
@@ -195,10 +189,10 @@ public class PassengerResourceIT {
         em.detach(updatedPassenger);
         updatedPassenger
             .username(UPDATED_USERNAME)
+            .password(UPDATED_PASSWORD)
             .name(UPDATED_NAME)
             .surname(UPDATED_SURNAME)
-            .email(UPDATED_EMAIL)
-            .phoneNumber(UPDATED_PHONE_NUMBER);
+            .email(UPDATED_EMAIL);
 
         restPassengerMockMvc.perform(put("/api/passengers")
             .contentType(MediaType.APPLICATION_JSON)
@@ -210,10 +204,10 @@ public class PassengerResourceIT {
         assertThat(passengerList).hasSize(databaseSizeBeforeUpdate);
         Passenger testPassenger = passengerList.get(passengerList.size() - 1);
         assertThat(testPassenger.getUsername()).isEqualTo(UPDATED_USERNAME);
+        assertThat(testPassenger.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testPassenger.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPassenger.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testPassenger.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testPassenger.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
     }
 
     @Test

@@ -10,11 +10,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "role",
-      "fieldType": "EUserRole",
-      "fieldValues": "ADMIN,PASSENGER"
-    },
-    {
       "fieldName": "name",
       "fieldType": "String"
     },
@@ -25,14 +20,10 @@
     {
       "fieldName": "email",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "phoneNumber",
-      "fieldType": "String"
     }
   ],
   "relationships": [],
-  "changelogDate": "20200616110123",
+  "changelogDate": "20200714140428",
   "entityTableName": "passenger",
   "dto": "no",
   "pagination": "no",

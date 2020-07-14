@@ -1,7 +1,6 @@
 package passengers.web.rest;
 
 import passengers.domain.Passenger;
-import passengers.domain.enumeration.EUserRole;
 import passengers.repository.PassengerRepository;
 import passengers.web.rest.errors.BadRequestAlertException;
 
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,7 +21,6 @@ import java.util.Optional;
 
 /**
  * REST controller for managing {@link passengers.domain.Passenger}.
- * Data to the endpoints provided by the controller are sent by the gateway!
  */
 @RestController
 @RequestMapping("/api")
@@ -54,14 +51,14 @@ public class PassengerResource {
     @PostMapping("/passengers")
     public ResponseEntity<Passenger> createPassenger(@RequestBody Map<String, String> passengerJSON) throws URISyntaxException {
         Passenger passenger = null;
-        try {
+        log.debug("MY JSON USER IS   " + passengerJSON.toString());
+
             if(passengerJSON.get("login").equals("user")) {
                 passenger = new Passenger(
                     passengerJSON.get("login"),
                     "User",
                     "Userson",
-                    passengerJSON.get("email"),
-                    ""
+                    passengerJSON.get("email")
                 );
             } else {
                 String firstName = "";
@@ -75,14 +72,11 @@ public class PassengerResource {
                     passengerJSON.get("login"),
                     firstName,
                     lastName,
-                    email,
-                    ""
+                    email
                 );
-            }
 
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
+                log.debug("MY PASSENGER POST JSON CONVERSION IS  " + passenger.toString());
+            }
 
         log.debug("REST request to save Passenger : {}", passenger);
         if (passenger.getId() != null) {
@@ -114,8 +108,7 @@ public class PassengerResource {
                     passengerJSON.get("login"),
                     passengerJSON.get("firstName"),
                     passengerJSON.get("lastName"),
-                    passengerJSON.get("email"),
-                    ""
+                    passengerJSON.get("email")
                 );
             }
 
@@ -163,15 +156,15 @@ public class PassengerResource {
      * @param username the username of the passenger to retrieve.
      * @return the {@Link ResponseEntity} with status {@code 200 (OK)} and with body the passenger, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/passengers/{username}")
-    public ResponseEntity<Passenger> getPassenger(@PathVariable String username) {
+    @GetMapping("/passengers/")
+    public ResponseEntity<Passenger> getPassenger(@RequestParam(value = "username") String username) {
         log.debug("REST request to get passenger : {}", username);
         Optional<Passenger> passenger = passengerRepository.findByUsername(username);
         return ResponseUtil.wrapOrNotFound(passenger);
     }
 
     /**
-     * {@code DELETE  /passengers/:id} : delete the "id" passenger. When a user requests deletion of account.
+     * {@code DELETE  /passengers/:id} : delete the "id" passenger.
      *
      * @param id the id of the passenger to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
@@ -187,16 +180,14 @@ public class PassengerResource {
     /**
      * {@code DELETE  /passengers/:username} : delete the "username" passenger. When a user requests deletion of account.
      *
-     * @param username the username of the passenger to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/passengers/{username}")
-    public ResponseEntity<Void> deletePassenger(@PathVariable String username) {
+    @DeleteMapping("/passengers/")
+    public ResponseEntity<Void> deletePassenger(@RequestParam(value = "username") String username) {
         log.debug("REST request to delete Passenger : {}", username);
 
         passengerRepository.deleteByUsername(username);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, username)).build();
     }
-
 
 }

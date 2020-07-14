@@ -16,4 +16,5 @@ public interface PassengerRepository extends JpaRepository<Passenger, Long> {
 
     Optional<Passenger> findByUsername(String username);
     void deleteByUsername(String username);
+
 }

@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
-import passengers.domain.enumeration.EUserRole;
-
 /**
  * A Passenger.
  */
@@ -26,9 +24,8 @@ public class Passenger implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private final EUserRole role = EUserRole.PASSENGER;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "name")
     private String name;
@@ -39,19 +36,14 @@ public class Passenger implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     public Passenger() {
     }
 
-    // constructor for network conversion purposes
-    public Passenger(String username, String name, String surname, String email, String phoneNumber) {
+    public Passenger(String username, String name, String surname, String email) {
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.phoneNumber = phoneNumber;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -74,6 +66,19 @@ public class Passenger implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Passenger password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -114,19 +119,6 @@ public class Passenger implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public Passenger phoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -151,11 +143,10 @@ public class Passenger implements Serializable {
         return "Passenger{" +
             "id=" + getId() +
             ", username='" + getUsername() + "'" +
-            ", role='" + role + "'" +
+            ", password='" + getPassword() + "'" +
             ", name='" + getName() + "'" +
             ", surname='" + getSurname() + "'" +
             ", email='" + getEmail() + "'" +
-            ", phoneNumber='" + getPhoneNumber() + "'" +
             "}";
     }
 }
