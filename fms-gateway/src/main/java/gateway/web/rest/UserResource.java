@@ -26,10 +26,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -114,9 +116,15 @@ public class UserResource {
             User newUser = userService.createUser(userDTO);
 
             // create the equivalent passenger in passenger microservice
+            // set all necessary information in headers of HTTP request
+            //TODO TRY FIX AUTHORIZATION BUG - ASK MENTOR?
+            HttpHeaders headers = createAuthHeaders(newUser.getLogin(), newUser.getPassword());
+            headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+            HttpEntity<User> request = new HttpEntity<>(newUser, headers);
+
             ResponseEntity resultCode = restTemplate.postForObject(
                 passengerMicroserviceBaseURL+"/api/passengers/",
-                newUser,
+                request,
                 ResponseEntity.class
             );
 
@@ -268,5 +276,20 @@ public class UserResource {
         );
 
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "A user is deleted with identifier " + login, login)).build();
+    }
+
+
+    // Create headers manually to avoid authorization errors during other microservices' endpoint access
+    // source tutorial: https://www.baeldung.com/how-to-use-resttemplate-with-basic-authentication-in-spring#manual_auth
+    private HttpHeaders createAuthHeaders(String login, String password) {
+
+        return new HttpHeaders() {{
+            String auth = login + ":" + password;
+            byte[] base64EncodedAuth = Base64.getEncoder().encode(
+                auth.getBytes(Charset.forName("US-ASCII"))
+            );
+
+            set("Authorization",  "Basic " + new String(base64EncodedAuth));
+        }};
     }
 }
