@@ -1,7 +1,8 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "gateway"
+      "packageName": "gateway",
+      "microservicePath": "C:\\Users\\USER\\Desktop\\Bachelorarbeit\\flight-management-system\\flight-management-system\\flight-service\\"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "gateway",

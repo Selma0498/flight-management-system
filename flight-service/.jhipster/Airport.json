@@ -23,7 +23,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200616120928",
+  "changelogDate": "20200717155008",
   "entityTableName": "airport",
   "dto": "no",
   "pagination": "no",

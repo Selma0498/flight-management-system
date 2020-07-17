@@ -17,8 +17,23 @@
       ]
     },
     {
+      "fieldName": "fareType",
+      "fieldType": "EFareType",
+      "fieldValues": "ECONOMY,BUSINESS",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "pilot",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
     }
   ],
   "relationships": [
@@ -29,12 +44,6 @@
       "relationshipName": "flightHandler",
       "otherEntityField": "id",
       "ownerSide": true
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "fare",
-      "otherEntityRelationshipName": "flight",
-      "relationshipName": "fare"
     },
     {
       "relationshipType": "many-to-one",
@@ -65,7 +74,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200616120828",
+  "changelogDate": "20200717154908",
   "entityTableName": "flight",
   "dto": "no",
   "pagination": "no",

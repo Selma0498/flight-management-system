@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span>Flights</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-flight" [routerLink]="['/flight/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Flight
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="flights?.length === 0">
+        <span>No flights found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="flights && flights.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Flight Number</span></th>
+                    <th scope="col" ><span>Flight Type</span></th>
+                    <th scope="col" ><span>Fare Type</span></th>
+                    <th scope="col" ><span>Pilot</span></th>
+                    <th scope="col" ><span>Price</span></th>
+                    <th scope="col" ><span>Boarding Gate</span></th>
+                    <th scope="col" ><span>Origin City</span></th>
+                    <th scope="col" ><span>Destination City</span></th>
+                    <th scope="col" ><span>Airline Name</span></th>
+                    <th scope="col" ><span>Plane Model Number</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let flight of flights ;trackBy: trackId">
+                    <td><a [routerLink]="['/flight', flight.id, 'view']">{{ flight.id }}</a></td>
+                    <td>{{ flight.flightNumber }}</td>
+                    <td>{{ flight.flightType }}</td>
+                    <td>{{ flight.fareType }}</td>
+                    <td>{{ flight.pilot }}</td>
+                    <td>{{ flight.price }}</td>
+                    <td>
+                        <div *ngIf="flight.flightHandler">
+                            <a [routerLink]="['/flight-handling', flight.flightHandler?.boardingGate, 'view']" >{{ flight.flightHandler?.boardingGate }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="flight.origin">
+                            <a [routerLink]="['/airport', flight.origin?.cityName, 'view']" >{{ flight.origin?.cityName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="flight.destination">
+                            <a [routerLink]="['/airport', flight.destination?.cityName, 'view']" >{{ flight.destination?.cityName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="flight.airline">
+                            <a [routerLink]="['/airline', flight.airline?.airlineName, 'view']" >{{ flight.airline?.airlineName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="flight.plane">
+                            <a [routerLink]="['/plane', flight.plane?.modelNumber, 'view']" >{{ flight.plane?.modelNumber }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/flight', flight.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/flight', flight.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(flight)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

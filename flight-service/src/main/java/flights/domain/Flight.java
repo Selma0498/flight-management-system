@@ -8,10 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import flights.domain.enumeration.EFlightType;
+
+import flights.domain.enumeration.EFareType;
 
 /**
  * A Flight.
@@ -36,16 +36,21 @@ public class Flight implements Serializable {
     @Column(name = "flight_type", nullable = false)
     private EFlightType flightType;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "fare_type", nullable = false)
+    private EFareType fareType;
+
     @Column(name = "pilot")
     private String pilot;
+
+    @NotNull
+    @Column(name = "price", nullable = false)
+    private Double price;
 
     @OneToOne
     @JoinColumn(unique = true)
     private FlightHandling flightHandler;
-
-    @OneToMany(mappedBy = "flight")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Fare> fares = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
@@ -98,6 +103,19 @@ public class Flight implements Serializable {
         this.flightType = flightType;
     }
 
+    public EFareType getFareType() {
+        return fareType;
+    }
+
+    public Flight fareType(EFareType fareType) {
+        this.fareType = fareType;
+        return this;
+    }
+
+    public void setFareType(EFareType fareType) {
+        this.fareType = fareType;
+    }
+
     public String getPilot() {
         return pilot;
     }
@@ -111,6 +129,19 @@ public class Flight implements Serializable {
         this.pilot = pilot;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public Flight price(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public FlightHandling getFlightHandler() {
         return flightHandler;
     }
@@ -122,31 +153,6 @@ public class Flight implements Serializable {
 
     public void setFlightHandler(FlightHandling flightHandling) {
         this.flightHandler = flightHandling;
-    }
-
-    public Set<Fare> getFares() {
-        return fares;
-    }
-
-    public Flight fares(Set<Fare> fares) {
-        this.fares = fares;
-        return this;
-    }
-
-    public Flight addFare(Fare fare) {
-        this.fares.add(fare);
-        fare.setFlight(this);
-        return this;
-    }
-
-    public Flight removeFare(Fare fare) {
-        this.fares.remove(fare);
-        fare.setFlight(null);
-        return this;
-    }
-
-    public void setFares(Set<Fare> fares) {
-        this.fares = fares;
     }
 
     public Airport getOrigin() {
@@ -225,7 +231,9 @@ public class Flight implements Serializable {
             "id=" + getId() +
             ", flightNumber='" + getFlightNumber() + "'" +
             ", flightType='" + getFlightType() + "'" +
+            ", fareType='" + getFareType() + "'" +
             ", pilot='" + getPilot() + "'" +
+            ", price=" + getPrice() +
             "}";
     }
 }

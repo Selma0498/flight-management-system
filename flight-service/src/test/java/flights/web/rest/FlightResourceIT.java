@@ -22,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import flights.domain.enumeration.EFlightType;
+import flights.domain.enumeration.EFareType;
 /**
  * Integration tests for the {@link FlightResource} REST controller.
  */
@@ -36,8 +37,14 @@ public class FlightResourceIT {
     private static final EFlightType DEFAULT_FLIGHT_TYPE = EFlightType.ONE_WAY;
     private static final EFlightType UPDATED_FLIGHT_TYPE = EFlightType.RETURN_TRIP;
 
+    private static final EFareType DEFAULT_FARE_TYPE = EFareType.ECONOMY;
+    private static final EFareType UPDATED_FARE_TYPE = EFareType.BUSINESS;
+
     private static final String DEFAULT_PILOT = "AAAAAAAAAA";
     private static final String UPDATED_PILOT = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_PRICE = 1D;
+    private static final Double UPDATED_PRICE = 2D;
 
     @Autowired
     private FlightRepository flightRepository;
@@ -60,7 +67,9 @@ public class FlightResourceIT {
         Flight flight = new Flight()
             .flightNumber(DEFAULT_FLIGHT_NUMBER)
             .flightType(DEFAULT_FLIGHT_TYPE)
-            .pilot(DEFAULT_PILOT);
+            .fareType(DEFAULT_FARE_TYPE)
+            .pilot(DEFAULT_PILOT)
+            .price(DEFAULT_PRICE);
         return flight;
     }
     /**
@@ -73,7 +82,9 @@ public class FlightResourceIT {
         Flight flight = new Flight()
             .flightNumber(UPDATED_FLIGHT_NUMBER)
             .flightType(UPDATED_FLIGHT_TYPE)
-            .pilot(UPDATED_PILOT);
+            .fareType(UPDATED_FARE_TYPE)
+            .pilot(UPDATED_PILOT)
+            .price(UPDATED_PRICE);
         return flight;
     }
 
@@ -98,7 +109,9 @@ public class FlightResourceIT {
         Flight testFlight = flightList.get(flightList.size() - 1);
         assertThat(testFlight.getFlightNumber()).isEqualTo(DEFAULT_FLIGHT_NUMBER);
         assertThat(testFlight.getFlightType()).isEqualTo(DEFAULT_FLIGHT_TYPE);
+        assertThat(testFlight.getFareType()).isEqualTo(DEFAULT_FARE_TYPE);
         assertThat(testFlight.getPilot()).isEqualTo(DEFAULT_PILOT);
+        assertThat(testFlight.getPrice()).isEqualTo(DEFAULT_PRICE);
     }
 
     @Test
@@ -161,6 +174,44 @@ public class FlightResourceIT {
 
     @Test
     @Transactional
+    public void checkFareTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = flightRepository.findAll().size();
+        // set the field null
+        flight.setFareType(null);
+
+        // Create the Flight, which fails.
+
+
+        restFlightMockMvc.perform(post("/api/flights")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(flight)))
+            .andExpect(status().isBadRequest());
+
+        List<Flight> flightList = flightRepository.findAll();
+        assertThat(flightList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = flightRepository.findAll().size();
+        // set the field null
+        flight.setPrice(null);
+
+        // Create the Flight, which fails.
+
+
+        restFlightMockMvc.perform(post("/api/flights")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(flight)))
+            .andExpect(status().isBadRequest());
+
+        List<Flight> flightList = flightRepository.findAll();
+        assertThat(flightList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFlights() throws Exception {
         // Initialize the database
         flightRepository.saveAndFlush(flight);
@@ -172,7 +223,9 @@ public class FlightResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(flight.getId().intValue())))
             .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(DEFAULT_FLIGHT_NUMBER)))
             .andExpect(jsonPath("$.[*].flightType").value(hasItem(DEFAULT_FLIGHT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].pilot").value(hasItem(DEFAULT_PILOT)));
+            .andExpect(jsonPath("$.[*].fareType").value(hasItem(DEFAULT_FARE_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].pilot").value(hasItem(DEFAULT_PILOT)))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
     }
     
     @Test
@@ -188,7 +241,9 @@ public class FlightResourceIT {
             .andExpect(jsonPath("$.id").value(flight.getId().intValue()))
             .andExpect(jsonPath("$.flightNumber").value(DEFAULT_FLIGHT_NUMBER))
             .andExpect(jsonPath("$.flightType").value(DEFAULT_FLIGHT_TYPE.toString()))
-            .andExpect(jsonPath("$.pilot").value(DEFAULT_PILOT));
+            .andExpect(jsonPath("$.fareType").value(DEFAULT_FARE_TYPE.toString()))
+            .andExpect(jsonPath("$.pilot").value(DEFAULT_PILOT))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()));
     }
     @Test
     @Transactional
@@ -213,7 +268,9 @@ public class FlightResourceIT {
         updatedFlight
             .flightNumber(UPDATED_FLIGHT_NUMBER)
             .flightType(UPDATED_FLIGHT_TYPE)
-            .pilot(UPDATED_PILOT);
+            .fareType(UPDATED_FARE_TYPE)
+            .pilot(UPDATED_PILOT)
+            .price(UPDATED_PRICE);
 
         restFlightMockMvc.perform(put("/api/flights")
             .contentType(MediaType.APPLICATION_JSON)
@@ -226,7 +283,9 @@ public class FlightResourceIT {
         Flight testFlight = flightList.get(flightList.size() - 1);
         assertThat(testFlight.getFlightNumber()).isEqualTo(UPDATED_FLIGHT_NUMBER);
         assertThat(testFlight.getFlightType()).isEqualTo(UPDATED_FLIGHT_TYPE);
+        assertThat(testFlight.getFareType()).isEqualTo(UPDATED_FARE_TYPE);
         assertThat(testFlight.getPilot()).isEqualTo(UPDATED_PILOT);
+        assertThat(testFlight.getPrice()).isEqualTo(UPDATED_PRICE);
     }
 
     @Test

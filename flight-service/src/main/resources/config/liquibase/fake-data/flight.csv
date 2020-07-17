@@ -1,11 +1,11 @@
-id;flight_number;flight_type;pilot
-1;Courts;ONE_WAY;generating Stand-alone functionalities
-2;Wooden override Sleek Frozen Pants;RETURN_TRIP;Berkshire application
-3;action-items Associate responsive;RETURN_TRIP;Small Metal Shoes calculating Berkshire
-4;portals firmware;RETURN_TRIP;installation
-5;sensor synergies next-generation;RETURN_TRIP;invoice bluetooth
-6;redundant Sleek Concrete Bike;ONE_WAY;green
-7;Car;ONE_WAY;Nepal Dynamic
-8;Chad;ONE_WAY;Customer-focused Triple-buffered intermediate
-9;solid state Balanced Grocery;RETURN_TRIP;Handcrafted Steel Mouse
-10;Group withdrawal Balboa US Dollar;RETURN_TRIP;Gorgeous Granite Tuna Intelligent Cotton Chicken
+id;flight_number;flight_type;fare_type;pilot;price
+1;Courts;ONE_WAY;BUSINESS;Fish;20742
+2;Turks and Caicos Islands;ONE_WAY;ECONOMY;Associate responsive;28816
+3;Quality Associate Clothing;RETURN_TRIP;ECONOMY;hacking digital;32392
+4;Somali Shilling Lakes;RETURN_TRIP;BUSINESS;New Zealand Consultant;63349
+5;redundant Sleek Concrete Bike;ONE_WAY;ECONOMY;Intelligent Steel Gloves;25615
+6;Nepal Dynamic;RETURN_TRIP;ECONOMY;Product;54992
+7;solid state Balanced Grocery;RETURN_TRIP;BUSINESS;reintermediate infomediaries Money Market Account;67185
+8;Analyst Gorgeous Granite Tuna Intelligent Cotton Chicken;ONE_WAY;BUSINESS;Credit Card Account orchid;88665
+9;Delaware;ONE_WAY;BUSINESS;Fresh;46518
+10;Chicken;RETURN_TRIP;BUSINESS;Wooden Awesome Soft Chicken;73730
