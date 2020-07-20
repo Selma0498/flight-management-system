@@ -75,7 +75,7 @@ export const flightRoute: Routes = [
       flight: FlightResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'Flights',
     },
     canActivate: [UserRouteAccessService],

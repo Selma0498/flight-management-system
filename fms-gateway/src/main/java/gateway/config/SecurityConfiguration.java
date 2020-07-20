@@ -87,7 +87,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/prometheus").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        .and()
+            .antMatchers("/api/flight/new").hasAuthority(AuthoritiesConstants.ADMIN) // new line
+            .and()
             .apply(securityConfigurerAdapter());
         // @formatter:on
     }
