@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Flights</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-flight" [routerLink]="['/flight/new']">
+        <button id="jh-create-entity" *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn btn-primary float-right jh-create-entity create-flight" [routerLink]="['/flight/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Create a new Flight
@@ -78,17 +78,24 @@
                                 <span class="d-none d-md-inline">View</span>
                             </button>
 
-                            <button type="submit"
+                            <button type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                     [routerLink]="['/flight', flight.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(flight)"
+                            <button type="submit" *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="delete(flight)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Delete</span>
+                            </button>
+
+                            <button type="submit" *jhiHasAnyAuthority="'ROLE_USER'"
+                                    (click)="book(flight)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Book me!</span>
                             </button>
                         </div>
                     </td>

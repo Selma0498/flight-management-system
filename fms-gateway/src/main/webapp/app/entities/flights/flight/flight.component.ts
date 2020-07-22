@@ -46,4 +46,8 @@ export class FlightComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(FlightDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.flight = flight;
   }
+
+  book(flight: IFlight): void {
+    //TODO: LINK TO BOOKING OPTION, ADD A MODAL FOR IT/BOOKING COMPONENT??
+  }
 }
