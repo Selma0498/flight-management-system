@@ -17,7 +17,6 @@ export class FlightHandlingUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    boardingGate: [null, [Validators.required]],
     delay: [],
   });
 
@@ -32,7 +31,6 @@ export class FlightHandlingUpdateComponent implements OnInit {
   updateForm(flightHandling: IFlightHandling): void {
     this.editForm.patchValue({
       id: flightHandling.id,
-      boardingGate: flightHandling.boardingGate,
       delay: flightHandling.delay,
     });
   }
@@ -55,7 +53,6 @@ export class FlightHandlingUpdateComponent implements OnInit {
     return {
       ...new FlightHandling(),
       id: this.editForm.get(['id'])!.value,
-      boardingGate: this.editForm.get(['boardingGate'])!.value,
       delay: this.editForm.get(['delay'])!.value,
     };
   }

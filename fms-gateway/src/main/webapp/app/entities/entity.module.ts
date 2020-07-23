@@ -24,6 +24,11 @@ import { RouterModule } from '@angular/router';
         path: 'plane',
         loadChildren: () => import('./flights/plane/plane.module').then(m => m.FlightsPlaneModule),
       },
+      ,
+      {
+        path: 'booking',
+        loadChildren: () => import('./bookings/booking/booking.module').then(m => m.BookingsBookingModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

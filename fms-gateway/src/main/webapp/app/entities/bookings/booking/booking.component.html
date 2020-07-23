@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span>Bookings</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-booking" [routerLink]="['/booking/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Booking
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="bookings?.length === 0">
+        <span>No bookings found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="bookings && bookings.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Booking Number</span></th>
+                    <th scope="col" ><span>Flight Number</span></th>
+                    <th scope="col" ><span>Passenger Id</span></th>
+                    <th scope="col" ><span>Invoice Number</span></th>
+                    <th scope="col" ><span>Invoice Set</span></th>
+                    <th scope="col" ><span>State</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let booking of bookings ;trackBy: trackId">
+                    <td><a [routerLink]="['/booking', booking.id, 'view']">{{ booking.id }}</a></td>
+                    <td>{{ booking.bookingNumber }}</td>
+                    <td>{{ booking.flightNumber }}</td>
+                    <td>{{ booking.passengerId }}</td>
+                    <td>{{ booking.invoiceNumber }}</td>
+                    <td>{{ booking.invoiceSet }}</td>
+                    <td>{{ booking.state }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/booking', booking.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/booking', booking.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(booking)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

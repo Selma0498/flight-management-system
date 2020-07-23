@@ -39,7 +39,7 @@ export const flightHandlingRoute: Routes = [
     path: '',
     component: FlightHandlingComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'FlightHandlings',
     },
     canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const flightHandlingRoute: Routes = [
       flightHandling: FlightHandlingResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'FlightHandlings',
     },
     canActivate: [UserRouteAccessService],
@@ -63,19 +63,19 @@ export const flightHandlingRoute: Routes = [
       flightHandling: FlightHandlingResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'FlightHandlings',
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
+    path: ':id/delay',
     component: FlightHandlingUpdateComponent,
     resolve: {
       flightHandling: FlightHandlingResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'FlightHandlings',
     },
     canActivate: [UserRouteAccessService],
