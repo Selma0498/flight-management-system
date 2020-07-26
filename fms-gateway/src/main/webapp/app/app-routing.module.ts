@@ -6,7 +6,6 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/shared/constants/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import {FlightUpdateComponent} from "app/entities/flights/flight/flight-update.component";
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 

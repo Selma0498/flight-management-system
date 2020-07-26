@@ -47,7 +47,4 @@ export class FlightComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.flight = flight;
   }
 
-  book(flight: IFlight): void {
-    //TODO: LINK TO BOOKING OPTION, ADD A MODAL FOR IT/BOOKING COMPONENT??
-  }
 }

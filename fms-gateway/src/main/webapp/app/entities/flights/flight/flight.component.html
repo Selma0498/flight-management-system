@@ -91,8 +91,8 @@
                                 <span class="d-none d-md-inline">Delete</span>
                             </button>
 
-                            <button type="submit" *jhiHasAnyAuthority="'ROLE_USER'"
-                                    (click)="book(flight)"
+                            <button type="submit"
+                                    [routerLink]="['/booking/new']"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Book me!</span>
