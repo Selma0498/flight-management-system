@@ -53,7 +53,7 @@ public class PassengerResource {
         Passenger passenger = null;
         log.debug("MY JSON USER IS   " + passengerJSON.toString());
 
-            if(passengerJSON.get("login").equals("user")) {
+            if(passengerJSON.get("login").equals("user") && !passengerRepository.findByUsername("user").isPresent()) {
                 passenger = new Passenger(
                     passengerJSON.get("login"),
                     "User",

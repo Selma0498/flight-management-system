@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-booking-heading">Create or edit a Booking</h2>
+            <h2 id="jhi-luggage-heading">Create or edit a Luggage</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,16 +12,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_bookingNumber">Booking Number</label>
-                    <input type="number" class="form-control" name="bookingNumber" id="field_bookingNumber"
-                           formControlName="bookingNumber"/>
-                    <div *ngIf="editForm.get('bookingNumber')!.invalid && (editForm.get('bookingNumber')!.dirty || editForm.get('bookingNumber')!.touched)">
+                    <label class="form-control-label" for="field_role">Role</label>
+                    <select class="form-control" name="role" formControlName="role" id="field_role">
+                        <option value="CARRY_ON">CARRY_ON</option>
+                        <option value="CABIN_BAG_10KG">CABIN_BAG_10KG</option>
+                        <option value="CARGO_BAG_20KG">CARGO_BAG_20KG</option>
+                        <option value="CARGO_BAG_30KG">CARGO_BAG_30KG</option>
+                    </select>
+                    <div *ngIf="editForm.get('role')!.invalid && (editForm.get('role')!.dirty || editForm.get('role')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('bookingNumber')?.errors?.required">
+                               *ngIf="editForm.get('role')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_luggageNumber">Luggage Number</label>
+                    <input type="number" class="form-control" name="luggageNumber" id="field_luggageNumber"
+                           formControlName="luggageNumber"/>
+                    <div *ngIf="editForm.get('luggageNumber')!.invalid && (editForm.get('luggageNumber')!.dirty || editForm.get('luggageNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('luggageNumber')?.errors?.required">
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('bookingNumber')?.errors?.number">
+                            [hidden]="!editForm.get('luggageNumber')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -52,50 +68,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_invoiceNumber">Invoice Number</label>
-                    <input type="number" class="form-control" name="invoiceNumber" id="field_invoiceNumber"
-                           formControlName="invoiceNumber"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_invoiceSet">Invoice Set</label>
-                    <input type="checkbox" class="form-control" name="invoiceSet" id="field_invoiceSet"
-                           formControlName="invoiceSet"/>
-                    <div *ngIf="editForm.get('invoiceSet')!.invalid && (editForm.get('invoiceSet')!.dirty || editForm.get('invoiceSet')!.touched)">
+                    <label class="form-control-label" for="field_weight">Weight</label>
+                    <input type="number" class="form-control" name="weight" id="field_weight"
+                           formControlName="weight"/>
+                    <div *ngIf="editForm.get('weight')!.invalid && (editForm.get('weight')!.dirty || editForm.get('weight')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('invoiceSet')?.errors?.required">
+                               *ngIf="editForm.get('weight')?.errors?.required">
                         This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('weight')?.errors?.number">
+                            This field should be a number.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_state">State</label>
-                    <select class="form-control" name="state" formControlName="state" id="field_state">
-                        <option value="OPEN">OPEN</option>
-                        <option value="CONFIRMED">CONFIRMED</option>
-                        <option value="CANCELLED">CANCELLED</option>
-                    </select>
-                    <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('state')?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
+                    <label class="form-control-label" for="field_rfidTag">Rfid Tag</label>
+                    <input type="text" class="form-control" name="rfidTag" id="field_rfidTag"
+                           formControlName="rfidTag"/>
                 </div>
             </div>
 
             <div>
-
-                <div>
-                    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-luggage" [routerLink]="['/luggage/new']">
-                        <fa-icon icon="plus"></fa-icon>
-                        <span>
-                    Create a new Luggage
-                    </span>
-                    </button>
-                </div>
-
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
