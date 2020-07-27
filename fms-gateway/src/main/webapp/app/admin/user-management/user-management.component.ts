@@ -141,4 +141,13 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.users = users;
   }
+
+  public getUserLogin(): string {
+    if(this.currentAccount != null) {
+      return this.currentAccount.login;
+    } else {
+      return "";
+    }
+  }
+
 }

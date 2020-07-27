@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import {FormArray, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
 import { BookingService } from './booking.service';
 import {EBookingState} from "app/shared/model/enumerations/e-booking-state.model";
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-booking-update',
@@ -19,8 +20,7 @@ export class BookingUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     bookingNumber: [null, [Validators.required]],
-    flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
-      //[null, [Validators.required]],
+    flightNumber: [null, [Validators.required]],
     passengerId: [null, [Validators.required]],
     invoiceNumber: [],
     invoiceSet: [null, [Validators.required]],
@@ -38,10 +38,9 @@ export class BookingUpdateComponent implements OnInit {
   updateForm(booking: IBooking): void {
     this.editForm.patchValue({
       id: booking.id,
-      bookingNumber: booking.bookingNumber,
+      bookingNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
-      //booking.flightNumber,
-      passengerId: booking.passengerId,
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
       invoiceNumber: booking.invoiceNumber,
       invoiceSet: booking.invoiceSet,
       state: booking.state,
@@ -85,10 +84,12 @@ export class BookingUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.editForm.controls['state'].patchValue(EBookingState.CONFIRMED);
-    this.previousState();
+    window.confirm("Booking Successful!");
+    //this.previousState();
   }
 
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
 }
