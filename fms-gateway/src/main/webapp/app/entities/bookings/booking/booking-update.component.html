@@ -1,5 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-8">
+        <div>
+            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-luggage" [routerLink]="['/luggage/new']">
+                <fa-icon icon="plus"></fa-icon>
+                <span>
+                    Add Luggage
+                </span>
+            </button>
+        </div>
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-booking-heading">Create or edit a Booking</h2>
 
@@ -73,8 +81,6 @@
                     <label class="form-control-label" for="field_state">State</label>
                     <select class="form-control" name="state" formControlName="state" id="field_state">
                         <option value="OPEN">OPEN</option>
-                        <option value="CONFIRMED">CONFIRMED</option>
-                        <option value="CANCELLED">CANCELLED</option>
                     </select>
                     <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
                         <small class="form-text text-danger"
@@ -86,21 +92,12 @@
             </div>
 
             <div>
-
-                <div>
-                    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-luggage" [routerLink]="['/luggage/new']">
-                        <fa-icon icon="plus"></fa-icon>
-                        <span>
-                    Create a new Luggage
-                    </span>
-                    </button>
-                </div>
-
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
+                        [routerLink]="['/payment/new']">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

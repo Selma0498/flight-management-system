@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
 import { BookingService } from './booking.service';
+import {EBookingState} from "app/shared/model/enumerations/e-booking-state.model";
 
 @Component({
   selector: 'jhi-booking-update',
@@ -81,6 +82,7 @@ export class BookingUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
+    this.editForm.controls['state'].patchValue(EBookingState.CONFIRMED);
     this.previousState();
   }
 

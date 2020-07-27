@@ -94,7 +94,6 @@ public class BookingResource {
         log.debug("REST request to get all Bookings");
 
         List<Booking> resultingBookings = new ArrayList<>();
-        // Return 404 if the entity is not owned by the connected user
         Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
 
         for(Booking b: bookingRepository.findAll()) {
@@ -117,15 +116,7 @@ public class BookingResource {
         log.debug("REST request to get Booking : {}", id);
         Optional<Booking> booking = bookingRepository.findById(id);
 
-        // Return 404 if the entity is not owned by the connected user
-        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-        if(booking.isPresent() &&
-            userLogin.isPresent() &&
-            userLogin.get().equals(booking.get().getPassengerId())) {
-            return ResponseUtil.wrapOrNotFound(booking);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseUtil.wrapOrNotFound(booking);
     }
 
     /**
@@ -139,15 +130,8 @@ public class BookingResource {
         log.debug("REST request to delete Booking : {}", id);
         Optional<Booking> booking = bookingRepository.findById(id);
 
-        // Return 404 if the entity is not owned by the connected user
-        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-        if(booking.isPresent() &&
-            userLogin.isPresent() &&
-            userLogin.get().equals(booking.get().getPassengerId())) {
-            bookingRepository.deleteById(id);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        bookingRepository.deleteById(id);
+
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
