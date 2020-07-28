@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { ILuggage, Luggage } from 'app/shared/model/luggage/luggage.model';
 import { LuggageService } from './luggage.service';
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-luggage-update',
@@ -37,11 +38,11 @@ export class LuggageUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: luggage.id,
       role: luggage.role,
-      luggageNumber: luggage.luggageNumber,
+      luggageNumber:  Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: luggage.flightNumber,
-      passengerId: luggage.passengerId,
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
       weight: luggage.weight,
-      rfidTag: luggage.rfidTag,
+      rfidTag: this.getRandomString("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./;[])(*&^%$#@!~"),
     });
   }
 
@@ -62,7 +63,6 @@ export class LuggageUpdateComponent implements OnInit {
   private createFromForm(): ILuggage {
     return {
       ...new Luggage(),
-      id: this.editForm.get(['id'])!.value,
       role: this.editForm.get(['role'])!.value,
       luggageNumber: this.editForm.get(['luggageNumber'])!.value,
       flightNumber: this.editForm.get(['flightNumber'])!.value,
@@ -86,5 +86,15 @@ export class LuggageUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  // Helper method to generate a random string
+  private getRandomString(possible: string): string {
+    const STRING_LEN = 20;
+    let result = "";
+    for (let i = 0; i < STRING_LEN; i++) {
+      result += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return result;
   }
 }

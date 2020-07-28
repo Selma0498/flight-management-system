@@ -146,7 +146,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     if(this.currentAccount != null) {
       return this.currentAccount.login;
     } else {
-      return "";
+      return "unknown";
     }
   }
 
