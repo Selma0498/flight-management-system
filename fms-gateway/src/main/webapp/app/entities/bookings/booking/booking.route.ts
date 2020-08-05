@@ -11,7 +11,6 @@ import { BookingService } from './booking.service';
 import { BookingComponent } from './booking.component';
 import { BookingDetailComponent } from './booking-detail.component';
 import { BookingUpdateComponent } from './booking-update.component';
-import {AdminRoutingModule} from "app/admin/admin-routing.module";
 
 @Injectable({ providedIn: 'root' })
 export class BookingResolve implements Resolve<IBooking> {

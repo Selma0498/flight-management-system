@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import bookings.domain.enumeration.EBookingState;
 /**
  * Integration tests for the {@link BookingResource} REST controller.
  */
@@ -38,15 +37,6 @@ public class BookingResourceIT {
 
     private static final String DEFAULT_PASSENGER_ID = "AAAAAAAAAA";
     private static final String UPDATED_PASSENGER_ID = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_INVOICE_NUMBER = 1;
-    private static final Integer UPDATED_INVOICE_NUMBER = 2;
-
-    private static final Boolean DEFAULT_INVOICE_SET = false;
-    private static final Boolean UPDATED_INVOICE_SET = true;
-
-    private static final EBookingState DEFAULT_STATE = EBookingState.OPEN;
-    private static final EBookingState UPDATED_STATE = EBookingState.CONFIRMED;
 
     @Autowired
     private BookingRepository bookingRepository;
@@ -69,10 +59,7 @@ public class BookingResourceIT {
         Booking booking = new Booking()
             .bookingNumber(DEFAULT_BOOKING_NUMBER)
             .flightNumber(DEFAULT_FLIGHT_NUMBER)
-            .passengerId(DEFAULT_PASSENGER_ID)
-            .invoiceNumber(DEFAULT_INVOICE_NUMBER)
-            .invoiceSet(DEFAULT_INVOICE_SET)
-            .state(DEFAULT_STATE);
+            .passengerId(DEFAULT_PASSENGER_ID);
         return booking;
     }
     /**
@@ -85,10 +72,7 @@ public class BookingResourceIT {
         Booking booking = new Booking()
             .bookingNumber(UPDATED_BOOKING_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
-            .passengerId(UPDATED_PASSENGER_ID)
-            .invoiceNumber(UPDATED_INVOICE_NUMBER)
-            .invoiceSet(UPDATED_INVOICE_SET)
-            .state(UPDATED_STATE);
+            .passengerId(UPDATED_PASSENGER_ID);
         return booking;
     }
 
@@ -114,9 +98,6 @@ public class BookingResourceIT {
         assertThat(testBooking.getBookingNumber()).isEqualTo(DEFAULT_BOOKING_NUMBER);
         assertThat(testBooking.getFlightNumber()).isEqualTo(DEFAULT_FLIGHT_NUMBER);
         assertThat(testBooking.getPassengerId()).isEqualTo(DEFAULT_PASSENGER_ID);
-        assertThat(testBooking.getInvoiceNumber()).isEqualTo(DEFAULT_INVOICE_NUMBER);
-        assertThat(testBooking.isInvoiceSet()).isEqualTo(DEFAULT_INVOICE_SET);
-        assertThat(testBooking.getState()).isEqualTo(DEFAULT_STATE);
     }
 
     @Test
@@ -198,44 +179,6 @@ public class BookingResourceIT {
 
     @Test
     @Transactional
-    public void checkInvoiceSetIsRequired() throws Exception {
-        int databaseSizeBeforeTest = bookingRepository.findAll().size();
-        // set the field null
-        booking.setInvoiceSet(null);
-
-        // Create the Booking, which fails.
-
-
-        restBookingMockMvc.perform(post("/api/bookings")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(booking)))
-            .andExpect(status().isBadRequest());
-
-        List<Booking> bookingList = bookingRepository.findAll();
-        assertThat(bookingList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkStateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = bookingRepository.findAll().size();
-        // set the field null
-        booking.setState(null);
-
-        // Create the Booking, which fails.
-
-
-        restBookingMockMvc.perform(post("/api/bookings")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(booking)))
-            .andExpect(status().isBadRequest());
-
-        List<Booking> bookingList = bookingRepository.findAll();
-        assertThat(bookingList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllBookings() throws Exception {
         // Initialize the database
         bookingRepository.saveAndFlush(booking);
@@ -247,10 +190,7 @@ public class BookingResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(booking.getId().intValue())))
             .andExpect(jsonPath("$.[*].bookingNumber").value(hasItem(DEFAULT_BOOKING_NUMBER)))
             .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(DEFAULT_FLIGHT_NUMBER)))
-            .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)))
-            .andExpect(jsonPath("$.[*].invoiceNumber").value(hasItem(DEFAULT_INVOICE_NUMBER)))
-            .andExpect(jsonPath("$.[*].invoiceSet").value(hasItem(DEFAULT_INVOICE_SET.booleanValue())))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+            .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)));
     }
     
     @Test
@@ -266,10 +206,7 @@ public class BookingResourceIT {
             .andExpect(jsonPath("$.id").value(booking.getId().intValue()))
             .andExpect(jsonPath("$.bookingNumber").value(DEFAULT_BOOKING_NUMBER))
             .andExpect(jsonPath("$.flightNumber").value(DEFAULT_FLIGHT_NUMBER))
-            .andExpect(jsonPath("$.passengerId").value(DEFAULT_PASSENGER_ID))
-            .andExpect(jsonPath("$.invoiceNumber").value(DEFAULT_INVOICE_NUMBER))
-            .andExpect(jsonPath("$.invoiceSet").value(DEFAULT_INVOICE_SET.booleanValue()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.passengerId").value(DEFAULT_PASSENGER_ID));
     }
     @Test
     @Transactional
@@ -294,10 +231,7 @@ public class BookingResourceIT {
         updatedBooking
             .bookingNumber(UPDATED_BOOKING_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
-            .passengerId(UPDATED_PASSENGER_ID)
-            .invoiceNumber(UPDATED_INVOICE_NUMBER)
-            .invoiceSet(UPDATED_INVOICE_SET)
-            .state(UPDATED_STATE);
+            .passengerId(UPDATED_PASSENGER_ID);
 
         restBookingMockMvc.perform(put("/api/bookings")
             .contentType(MediaType.APPLICATION_JSON)
@@ -311,9 +245,6 @@ public class BookingResourceIT {
         assertThat(testBooking.getBookingNumber()).isEqualTo(UPDATED_BOOKING_NUMBER);
         assertThat(testBooking.getFlightNumber()).isEqualTo(UPDATED_FLIGHT_NUMBER);
         assertThat(testBooking.getPassengerId()).isEqualTo(UPDATED_PASSENGER_ID);
-        assertThat(testBooking.getInvoiceNumber()).isEqualTo(UPDATED_INVOICE_NUMBER);
-        assertThat(testBooking.isInvoiceSet()).isEqualTo(UPDATED_INVOICE_SET);
-        assertThat(testBooking.getState()).isEqualTo(UPDATED_STATE);
     }
 
     @Test

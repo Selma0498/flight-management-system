@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {FormBuilder, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
 import { BookingService } from './booking.service';
-import {EBookingState} from "app/shared/model/enumerations/e-booking-state.model";
 import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
@@ -60,7 +59,7 @@ export class BookingUpdateComponent implements OnInit {
       ...new Booking(),
       id: this.editForm.get(['id'])!.value,
       bookingNumber: this.editForm.get(['bookingNumber'])!.value,
-      flightNumber:  this.editForm.get(['flightNumber'])!.value,
+      flightNumber: this.editForm.get(['flightNumber'])!.value,
       passengerId: this.editForm.get(['passengerId'])!.value,
     };
   }
@@ -74,7 +73,6 @@ export class BookingUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    this.editForm.controls['state'].patchValue(EBookingState.CONFIRMED);
     window.confirm("Booking Successful!");
     //this.previousState();
   }
@@ -82,5 +80,4 @@ export class BookingUpdateComponent implements OnInit {
   protected onSaveError(): void {
     this.isSaving = false;
   }
-
 }

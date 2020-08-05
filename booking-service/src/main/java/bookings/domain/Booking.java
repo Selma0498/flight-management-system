@@ -8,8 +8,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
-import bookings.domain.enumeration.EBookingState;
-
 /**
  * A Booking.
  */
@@ -35,18 +33,6 @@ public class Booking implements Serializable {
     @NotNull
     @Column(name = "passenger_id", nullable = false)
     private String passengerId;
-
-    @Column(name = "invoice_number")
-    private Integer invoiceNumber;
-
-    @NotNull
-    @Column(name = "invoice_set", nullable = false)
-    private Boolean invoiceSet;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "state", nullable = false)
-    private EBookingState state;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -95,45 +81,6 @@ public class Booking implements Serializable {
     public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
-
-    public Integer getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public Booking invoiceNumber(Integer invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-        return this;
-    }
-
-    public void setInvoiceNumber(Integer invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    public Boolean isInvoiceSet() {
-        return invoiceSet;
-    }
-
-    public Booking invoiceSet(Boolean invoiceSet) {
-        this.invoiceSet = invoiceSet;
-        return this;
-    }
-
-    public void setInvoiceSet(Boolean invoiceSet) {
-        this.invoiceSet = invoiceSet;
-    }
-
-    public EBookingState getState() {
-        return state;
-    }
-
-    public Booking state(EBookingState state) {
-        this.state = state;
-        return this;
-    }
-
-    public void setState(EBookingState state) {
-        this.state = state;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -160,9 +107,6 @@ public class Booking implements Serializable {
             ", bookingNumber=" + getBookingNumber() +
             ", flightNumber='" + getFlightNumber() + "'" +
             ", passengerId='" + getPassengerId() + "'" +
-            ", invoiceNumber=" + getInvoiceNumber() +
-            ", invoiceSet='" + isInvoiceSet() + "'" +
-            ", state='" + getState() + "'" +
             "}";
     }
 }

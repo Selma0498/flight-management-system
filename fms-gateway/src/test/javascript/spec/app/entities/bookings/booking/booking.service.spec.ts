@@ -2,7 +2,6 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BookingService } from 'app/entities/bookings/booking/booking.service';
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
-import { EBookingState } from 'app/shared/model/enumerations/e-booking-state.model';
 
 describe('Service Tests', () => {
   describe('Booking Service', () => {
@@ -21,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BookingService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Booking(0, 0, 'AAAAAAA', 'AAAAAAA', 0, false, EBookingState.OPEN);
+      elemDefault = new Booking(0, 0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -58,9 +57,6 @@ describe('Service Tests', () => {
             bookingNumber: 1,
             flightNumber: 'BBBBBB',
             passengerId: 'BBBBBB',
-            invoiceNumber: 1,
-            invoiceSet: true,
-            state: 'BBBBBB',
           },
           elemDefault
         );
@@ -80,9 +76,6 @@ describe('Service Tests', () => {
             bookingNumber: 1,
             flightNumber: 'BBBBBB',
             passengerId: 'BBBBBB',
-            invoiceNumber: 1,
-            invoiceSet: true,
-            state: 'BBBBBB',
           },
           elemDefault
         );

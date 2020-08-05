@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import {from, Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 

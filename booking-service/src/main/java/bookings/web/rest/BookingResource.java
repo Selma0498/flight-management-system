@@ -2,7 +2,6 @@ package bookings.web.rest;
 
 import bookings.domain.Booking;
 import bookings.repository.BookingRepository;
-import bookings.security.SecurityUtils;
 import bookings.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -15,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.print.Book;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +74,6 @@ public class BookingResource {
         if (booking.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-
         Booking result = bookingRepository.save(booking);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, booking.getId().toString()))
@@ -92,17 +88,7 @@ public class BookingResource {
     @GetMapping("/bookings")
     public List<Booking> getAllBookings() {
         log.debug("REST request to get all Bookings");
-
-        List<Booking> resultingBookings = new ArrayList<>();
-        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-
-        for(Booking b: bookingRepository.findAll()) {
-            if(userLogin.isPresent() && userLogin.get().equals(b.getPassengerId())) {
-                resultingBookings.add(b);
-            }
-        }
-
-        return resultingBookings;
+        return bookingRepository.findAll();
     }
 
     /**
@@ -115,7 +101,6 @@ public class BookingResource {
     public ResponseEntity<Booking> getBooking(@PathVariable Long id) {
         log.debug("REST request to get Booking : {}", id);
         Optional<Booking> booking = bookingRepository.findById(id);
-
         return ResponseUtil.wrapOrNotFound(booking);
     }
 
@@ -128,10 +113,8 @@ public class BookingResource {
     @DeleteMapping("/bookings/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         log.debug("REST request to delete Booking : {}", id);
-        Optional<Booking> booking = bookingRepository.findById(id);
 
         bookingRepository.deleteById(id);
-
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

@@ -21,25 +21,6 @@
       "fieldValidateRules": [
         "required"
       ]
-    },
-    {
-      "fieldName": "invoiceNumber",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "invoiceSet",
-      "fieldType": "Boolean",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
-      "fieldName": "state",
-      "fieldType": "EBookingState",
-      "fieldValues": "OPEN,CONFIRMED,CANCELLED",
-      "fieldValidateRules": [
-        "required"
-      ]
     }
   ],
   "relationships": [],

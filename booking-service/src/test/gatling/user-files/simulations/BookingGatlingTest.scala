@@ -75,9 +75,6 @@ class BookingGatlingTest extends Simulation {
                 , "bookingNumber":"0"
                 , "flightNumber":"SAMPLE_TEXT"
                 , "passengerId":"SAMPLE_TEXT"
-                , "invoiceNumber":"0"
-                , "invoiceSet":null
-                , "state":"OPEN"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_booking_url"))).exitHereIfFailed
