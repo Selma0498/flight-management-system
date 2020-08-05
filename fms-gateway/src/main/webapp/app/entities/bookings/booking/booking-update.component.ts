@@ -22,9 +22,6 @@ export class BookingUpdateComponent implements OnInit {
     bookingNumber: [null, [Validators.required]],
     flightNumber: [null, [Validators.required]],
     passengerId: [null, [Validators.required]],
-    invoiceNumber: [],
-    invoiceSet: [null, [Validators.required]],
-    state: [null, [Validators.required]],
   });
 
   constructor(protected bookingService: BookingService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -41,9 +38,6 @@ export class BookingUpdateComponent implements OnInit {
       bookingNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
       passengerId: UserManagementComponent.prototype.getUserLogin(),
-      invoiceNumber: booking.invoiceNumber,
-      invoiceSet: booking.invoiceSet,
-      state: booking.state,
     });
   }
 
@@ -68,9 +62,6 @@ export class BookingUpdateComponent implements OnInit {
       bookingNumber: this.editForm.get(['bookingNumber'])!.value,
       flightNumber:  this.editForm.get(['flightNumber'])!.value,
       passengerId: this.editForm.get(['passengerId'])!.value,
-      invoiceNumber: this.editForm.get(['invoiceNumber'])!.value,
-      invoiceSet: this.editForm.get(['invoiceSet'])!.value,
-      state: this.editForm.get(['state'])!.value,
     };
   }
 

@@ -62,24 +62,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_invoiceNumber">Invoice Number</label>
-                    <input type="number" class="form-control" name="invoiceNumber" id="field_invoiceNumber"
-                           formControlName="invoiceNumber"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_invoiceSet">Invoice Set</label>
-                    <input type="checkbox" class="form-control" name="invoiceSet" id="field_invoiceSet"
-                           formControlName="invoiceSet"/>
-                    <div *ngIf="editForm.get('invoiceSet')!.invalid && (editForm.get('invoiceSet')!.dirty || editForm.get('invoiceSet')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('invoiceSet')?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_state">State</label>
                     <select class="form-control" name="state" formControlName="state" id="field_state">
                         <option value="OPEN">OPEN</option>

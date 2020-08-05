@@ -5,9 +5,6 @@ export interface IBooking {
   bookingNumber?: number;
   flightNumber?: string;
   passengerId?: string;
-  invoiceNumber?: number;
-  invoiceSet?: boolean;
-  state?: EBookingState;
 }
 
 export class Booking implements IBooking {
@@ -16,10 +13,5 @@ export class Booking implements IBooking {
     public bookingNumber?: number,
     public flightNumber?: string,
     public passengerId?: string,
-    public invoiceNumber?: number,
-    public invoiceSet?: boolean,
-    public state?: EBookingState
-  ) {
-    this.invoiceSet = this.invoiceSet || false;
-  }
+  ) {}
 }
