@@ -67,7 +67,7 @@ export const bookingRoute: Routes = [
       authorities: [Authority.USER],
       pageTitle: 'Bookings',
     },
-    canActivate: [UserRouteAccessService]p,
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',

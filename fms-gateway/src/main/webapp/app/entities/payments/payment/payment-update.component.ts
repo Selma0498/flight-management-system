@@ -75,9 +75,9 @@ export class PaymentUpdateComponent implements OnInit {
   }
 
   // TODO Create and invoice and show it as the next screen?? Where does notification come in play?
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
+    //this.previousState();
   }
 
   protected onSaveError(): void {
