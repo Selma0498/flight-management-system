@@ -4,12 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { IPayment, Payment } from 'app/shared/model/payments/payment.model';
 import { PaymentService } from './payment.service';
 import { IInvoice } from 'app/shared/model/payments/invoice.model';
-import { InvoiceService } from 'app/entities/payments/invoice/invoice.service';
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-payment-update',
@@ -17,18 +16,15 @@ import { InvoiceService } from 'app/entities/payments/invoice/invoice.service';
 })
 export class PaymentUpdateComponent implements OnInit {
   isSaving = false;
-  invoices: IInvoice[] = [];
 
   editForm = this.fb.group({
     id: [],
     passengerId: [null, [Validators.required]],
     toPay: [null, [Validators.required]],
-    invoice: [],
   });
 
   constructor(
     protected paymentService: PaymentService,
-    protected invoiceService: InvoiceService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -37,36 +33,14 @@ export class PaymentUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ payment }) => {
       this.updateForm(payment);
 
-      this.invoiceService
-        .query({ filter: 'payment-is-null' })
-        .pipe(
-          map((res: HttpResponse<IInvoice[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IInvoice[]) => {
-          if (!payment.invoice || !payment.invoice.id) {
-            this.invoices = resBody;
-          } else {
-            this.invoiceService
-              .find(payment.invoice.id)
-              .pipe(
-                map((subRes: HttpResponse<IInvoice>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IInvoice[]) => (this.invoices = concatRes));
-          }
-        });
     });
   }
 
   updateForm(payment: IPayment): void {
     this.editForm.patchValue({
       id: payment.id,
-      passengerId: payment.passengerId,
-      toPay: payment.toPay,
-      invoice: payment.invoice,
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      toPay: this.activatedRoute.snapshot.paramMap.get('price'),
     });
   }
 
@@ -90,7 +64,6 @@ export class PaymentUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       passengerId: this.editForm.get(['passengerId'])!.value,
       toPay: this.editForm.get(['toPay'])!.value,
-      invoice: this.editForm.get(['invoice'])!.value,
     };
   }
 
@@ -101,6 +74,7 @@ export class PaymentUpdateComponent implements OnInit {
     );
   }
 
+  // TODO Create and invoice and show it as the next screen?? Where does notification come in play?
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();

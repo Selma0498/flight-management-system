@@ -80,4 +80,12 @@ export class BookingUpdateComponent implements OnInit {
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  public getFlightPrice(): string {
+    const result = this.activatedRoute.snapshot.paramMap.get('price');
+    if(result != null) {
+      return result;
+    }
+    return "null";
+  }
 }

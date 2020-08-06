@@ -11,6 +11,7 @@ import { BookingService } from './booking.service';
 import { BookingComponent } from './booking.component';
 import { BookingDetailComponent } from './booking-detail.component';
 import { BookingUpdateComponent } from './booking-update.component';
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Injectable({ providedIn: 'root' })
 export class BookingResolve implements Resolve<IBooking> {
@@ -57,7 +58,7 @@ export const bookingRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new/:flightNumber',
+    path: 'new/:flightNumber/price/:price',
     component: BookingUpdateComponent,
     resolve: {
       booking: BookingResolve,
@@ -66,7 +67,7 @@ export const bookingRoute: Routes = [
       authorities: [Authority.USER],
       pageTitle: 'Bookings',
     },
-    canActivate: [UserRouteAccessService],
+    canActivate: [UserRouteAccessService]p,
   },
   {
     path: ':id/edit',

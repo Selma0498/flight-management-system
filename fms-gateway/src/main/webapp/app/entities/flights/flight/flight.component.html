@@ -92,7 +92,7 @@
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/booking/new', flight.flightNumber]"
+                                    [routerLink]="['/booking/new', flight.flightNumber, 'price', flight.price]"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Book me!</span>
