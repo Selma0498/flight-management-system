@@ -24,7 +24,7 @@ public class Payment implements Serializable {
 
     @NotNull
     @Column(name = "passenger_id", nullable = false)
-    private Integer passengerId;
+    private String passengerId;
 
     @NotNull
     @Column(name = "to_pay", nullable = false)
@@ -43,16 +43,16 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public Integer getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public Payment passengerId(Integer passengerId) {
+    public Payment passengerId(String passengerId) {
         this.passengerId = passengerId;
         return this;
     }
 
-    public void setPassengerId(Integer passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 
@@ -104,7 +104,7 @@ public class Payment implements Serializable {
     public String toString() {
         return "Payment{" +
             "id=" + getId() +
-            ", passengerId=" + getPassengerId() +
+            ", passengerId='" + getPassengerId() + "'" +
             ", toPay=" + getToPay() +
             "}";
     }

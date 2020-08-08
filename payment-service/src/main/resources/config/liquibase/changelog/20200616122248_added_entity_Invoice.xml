@@ -22,7 +22,7 @@
             <column name="amount" type="double">
                 <constraints nullable="false" />
             </column>
-            <column name="passenger_id" type="integer">
+            <column name="passenger_id" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="booking_number" type="integer">
@@ -53,7 +53,7 @@
             <column name="id" type="numeric"/>
             <column name="invoice_number" type="numeric"/>
             <column name="amount" type="numeric"/>
-            <column name="passenger_id" type="numeric"/>
+            <column name="passenger_id" type="string"/>
             <column name="booking_number" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

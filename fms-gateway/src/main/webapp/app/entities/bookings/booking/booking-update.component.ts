@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
 import { BookingService } from './booking.service';
 import {UserManagementComponent} from "app/admin/user-management/user-management.component";
+import {bookingRoute} from "app/entities/bookings/booking/booking.route";
+import {logger} from "codelyzer/util/logger";
 
 @Component({
   selector: 'jhi-booking-update',
@@ -73,8 +75,6 @@ export class BookingUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    window.confirm("Booking Successful!");
-    //this.previousState();
   }
 
   protected onSaveError(): void {
@@ -88,4 +88,9 @@ export class BookingUpdateComponent implements OnInit {
     }
     return "null";
   }
+
+  public getBookingNumber(): number {
+    return this.editForm.get(['bookingNumber'])!.value;
+  }
+
 }

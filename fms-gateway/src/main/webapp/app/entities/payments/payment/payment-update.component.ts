@@ -74,7 +74,6 @@ export class PaymentUpdateComponent implements OnInit {
     );
   }
 
-  // TODO Create and invoice and show it as the next screen?? Where does notification come in play?
   public onSaveSuccess(): void {
     this.isSaving = false;
     //this.previousState();
@@ -86,5 +85,14 @@ export class PaymentUpdateComponent implements OnInit {
 
   trackById(index: number, item: IInvoice): any {
     return item.id;
+  }
+
+  public getBookingNumber(): number {
+    const result = this.activatedRoute.snapshot.paramMap.get('bookingNumber');
+    // check if result is null and castable to a number
+    if(result != null && !isNaN(Number(result))) {
+      return Number(result);
+    }
+    return Number(null);
   }
 }

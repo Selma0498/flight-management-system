@@ -33,7 +33,7 @@ public class Invoice implements Serializable {
 
     @NotNull
     @Column(name = "passenger_id", nullable = false)
-    private Integer passengerId;
+    private String passengerId;
 
     @NotNull
     @Column(name = "booking_number", nullable = false)
@@ -78,16 +78,16 @@ public class Invoice implements Serializable {
         this.amount = amount;
     }
 
-    public Integer getPassengerId() {
+    public String getPassengerId() {
         return passengerId;
     }
 
-    public Invoice passengerId(Integer passengerId) {
+    public Invoice passengerId(String passengerId) {
         this.passengerId = passengerId;
         return this;
     }
 
-    public void setPassengerId(Integer passengerId) {
+    public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
     }
 
@@ -141,7 +141,7 @@ public class Invoice implements Serializable {
             "id=" + getId() +
             ", invoiceNumber=" + getInvoiceNumber() +
             ", amount=" + getAmount() +
-            ", passengerId=" + getPassengerId() +
+            ", passengerId='" + getPassengerId() + "'" +
             ", bookingNumber=" + getBookingNumber() +
             "}";
     }

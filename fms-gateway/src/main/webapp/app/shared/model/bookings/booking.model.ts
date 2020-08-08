@@ -1,3 +1,5 @@
+import {logger} from "codelyzer/util/logger";
+
 export interface IBooking {
   id?: number;
   bookingNumber?: number;

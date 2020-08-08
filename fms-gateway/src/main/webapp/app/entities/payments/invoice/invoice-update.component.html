@@ -45,16 +45,12 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_passengerId">Passenger Id</label>
-                    <input type="number" class="form-control" name="passengerId" id="field_passengerId"
+                    <input type="text" class="form-control" name="passengerId" id="field_passengerId"
                            formControlName="passengerId"/>
                     <div *ngIf="editForm.get('passengerId')!.invalid && (editForm.get('passengerId')!.dirty || editForm.get('passengerId')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('passengerId')?.errors?.required">
                         This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('passengerId')?.errors?.number">
-                            This field should be a number.
                         </small>
                     </div>
                 </div>

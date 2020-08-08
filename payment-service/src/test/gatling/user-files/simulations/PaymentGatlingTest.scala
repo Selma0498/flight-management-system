@@ -72,7 +72,7 @@ class PaymentGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "passengerId":"0"
+                , "passengerId":"SAMPLE_TEXT"
                 , "toPay":null
                 }""")).asJson
             .check(status.is(201))

@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(PaymentService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Payment(0, 0, 0);
+      elemDefault = new Payment(0, 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should update a Payment', () => {
         const returnedFromService = Object.assign(
           {
-            passengerId: 1,
+            passengerId: 'BBBBBB',
             toPay: 1,
           },
           elemDefault
@@ -72,7 +72,7 @@ describe('Service Tests', () => {
       it('should return a list of Payment', () => {
         const returnedFromService = Object.assign(
           {
-            passengerId: 1,
+            passengerId: 'BBBBBB',
             toPay: 1,
           },
           elemDefault

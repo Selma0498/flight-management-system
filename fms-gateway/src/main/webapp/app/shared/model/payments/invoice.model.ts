@@ -4,7 +4,7 @@ export interface IInvoice {
   id?: number;
   invoiceNumber?: number;
   amount?: number;
-  passengerId?: number;
+  passengerId?: string;
   bookingNumber?: number;
   payment?: IPayment;
 }
@@ -14,7 +14,7 @@ export class Invoice implements IInvoice {
     public id?: number,
     public invoiceNumber?: number,
     public amount?: number,
-    public passengerId?: number,
+    public passengerId?: string,
     public bookingNumber?: number,
     public payment?: IPayment
   ) {}

@@ -29,8 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class PaymentResourceIT {
 
-    private static final Integer DEFAULT_PASSENGER_ID = 1;
-    private static final Integer UPDATED_PASSENGER_ID = 2;
+    private static final String DEFAULT_PASSENGER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_PASSENGER_ID = "BBBBBBBBBB";
 
     private static final Double DEFAULT_TO_PAY = 1D;
     private static final Double UPDATED_TO_PAY = 2D;

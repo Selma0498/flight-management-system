@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
 import { InvoiceService } from './invoice.service';
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-invoice-update',
@@ -34,10 +35,10 @@ export class InvoiceUpdateComponent implements OnInit {
   updateForm(invoice: IInvoice): void {
     this.editForm.patchValue({
       id: invoice.id,
-      invoiceNumber: invoice.invoiceNumber,
-      amount: invoice.amount,
-      passengerId: invoice.passengerId,
-      bookingNumber: invoice.bookingNumber,
+      invoiceNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
+      amount: this.activatedRoute.snapshot.paramMap.get('toPay'),
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }
 
@@ -75,7 +76,8 @@ export class InvoiceUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
+    // TODO ADD AN ACTUAL NOTIFICATION CREATION HERE
+    window.confirm("Booking Successful!");
   }
 
   protected onSaveError(): void {

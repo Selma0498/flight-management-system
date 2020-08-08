@@ -18,7 +18,6 @@
                     <th scope="col" ><span>ID</span></th>
                     <th scope="col" ><span>Passenger Id</span></th>
                     <th scope="col" ><span>To Pay</span></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +25,6 @@
                     <td><a [routerLink]="['/payment', payment.id, 'view']">{{ payment.id }}</a></td>
                     <td>{{ payment.passengerId }}</td>
                     <td>{{ payment.toPay }}</td>
-
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

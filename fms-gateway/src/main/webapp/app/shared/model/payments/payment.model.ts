@@ -1,10 +1,9 @@
-
 export interface IPayment {
   id?: number;
-  passengerId?: number;
+  passengerId?: string;
   toPay?: number;
 }
 
 export class Payment implements IPayment {
-  constructor(public id?: number, public passengerId?: number, public toPay?: number) {}
+  constructor(public id?: number, public passengerId?: string, public toPay?: number) {}
 }

@@ -74,7 +74,7 @@ class InvoiceGatlingTest extends Simulation {
                 "id":null
                 , "invoiceNumber":"0"
                 , "amount":null
-                , "passengerId":"0"
+                , "passengerId":"SAMPLE_TEXT"
                 , "bookingNumber":"0"
                 }""")).asJson
             .check(status.is(201))

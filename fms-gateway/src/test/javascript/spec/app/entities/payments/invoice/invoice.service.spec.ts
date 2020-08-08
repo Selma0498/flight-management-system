@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(InvoiceService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Invoice(0, 0, 0, 0, 0);
+      elemDefault = new Invoice(0, 0, 0, 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -56,7 +56,7 @@ describe('Service Tests', () => {
           {
             invoiceNumber: 1,
             amount: 1,
-            passengerId: 1,
+            passengerId: 'BBBBBB',
             bookingNumber: 1,
           },
           elemDefault
@@ -76,7 +76,7 @@ describe('Service Tests', () => {
           {
             invoiceNumber: 1,
             amount: 1,
-            passengerId: 1,
+            passengerId: 'BBBBBB',
             bookingNumber: 1,
           },
           elemDefault

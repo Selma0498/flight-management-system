@@ -67,7 +67,7 @@
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
-                        [routerLink]="['/payment/new', this.getFlightPrice().toString()]">
+                        [routerLink]="['/payment/new', this.getFlightPrice().toString(), this.getBookingNumber()]">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

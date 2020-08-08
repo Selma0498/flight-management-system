@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Invoices</span>
 
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Create a new Invoice
@@ -48,15 +48,13 @@
 
                             <button type="submit"
                                     [routerLink]="['/invoice', invoice.id, 'edit']"
-                                    class="btn btn-primary btn-sm"
-                                    *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                    class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Edit</span>
                             </button>
 
                             <button type="submit" (click)="delete(invoice)"
-                                    class="btn btn-danger btn-sm"
-                                    *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                    class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Delete</span>
                             </button>

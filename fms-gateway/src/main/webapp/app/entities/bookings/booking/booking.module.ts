@@ -13,4 +13,6 @@ import { bookingRoute } from './booking.route';
   declarations: [BookingComponent, BookingDetailComponent, BookingUpdateComponent, BookingDeleteDialogComponent],
   entryComponents: [BookingDeleteDialogComponent],
 })
-export class BookingsBookingModule {}
+export class BookingsBookingModule {
+}
+

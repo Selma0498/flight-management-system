@@ -57,13 +57,13 @@ export const invoiceRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
+    path: 'new/:bookingNumber/amount/:price',
     component: InvoiceUpdateComponent,
     resolve: {
       invoice: InvoiceResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Invoices',
     },
     canActivate: [UserRouteAccessService],
@@ -75,7 +75,7 @@ export const invoiceRoute: Routes = [
       invoice: InvoiceResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Invoices',
     },
     canActivate: [UserRouteAccessService],

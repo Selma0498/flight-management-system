@@ -35,8 +35,8 @@ public class InvoiceResourceIT {
     private static final Double DEFAULT_AMOUNT = 1D;
     private static final Double UPDATED_AMOUNT = 2D;
 
-    private static final Integer DEFAULT_PASSENGER_ID = 1;
-    private static final Integer UPDATED_PASSENGER_ID = 2;
+    private static final String DEFAULT_PASSENGER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_PASSENGER_ID = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_BOOKING_NUMBER = 1;
     private static final Integer UPDATED_BOOKING_NUMBER = 2;
