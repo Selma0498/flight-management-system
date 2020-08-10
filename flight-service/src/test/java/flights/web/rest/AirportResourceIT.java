@@ -134,6 +134,82 @@ public class AirportResourceIT {
 
     @Test
     @Transactional
+    public void checkAirportCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = airportRepository.findAll().size();
+        // set the field null
+        airport.setAirportCode(null);
+
+        // Create the Airport, which fails.
+
+
+        restAirportMockMvc.perform(post("/api/airports")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(airport)))
+            .andExpect(status().isBadRequest());
+
+        List<Airport> airportList = airportRepository.findAll();
+        assertThat(airportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAirportNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = airportRepository.findAll().size();
+        // set the field null
+        airport.setAirportName(null);
+
+        // Create the Airport, which fails.
+
+
+        restAirportMockMvc.perform(post("/api/airports")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(airport)))
+            .andExpect(status().isBadRequest());
+
+        List<Airport> airportList = airportRepository.findAll();
+        assertThat(airportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCountryNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = airportRepository.findAll().size();
+        // set the field null
+        airport.setCountryName(null);
+
+        // Create the Airport, which fails.
+
+
+        restAirportMockMvc.perform(post("/api/airports")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(airport)))
+            .andExpect(status().isBadRequest());
+
+        List<Airport> airportList = airportRepository.findAll();
+        assertThat(airportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCityNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = airportRepository.findAll().size();
+        // set the field null
+        airport.setCityName(null);
+
+        // Create the Airport, which fails.
+
+
+        restAirportMockMvc.perform(post("/api/airports")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(airport)))
+            .andExpect(status().isBadRequest());
+
+        List<Airport> airportList = airportRepository.findAll();
+        assertThat(airportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllAirports() throws Exception {
         // Initialize the database
         airportRepository.saveAndFlush(airport);

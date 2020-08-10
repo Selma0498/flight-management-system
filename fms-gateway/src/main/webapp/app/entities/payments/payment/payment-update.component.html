@@ -45,11 +45,12 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <!-- TODO ADD INVOICE CREATION HERE -->
-                    <div *ngIf="onSaveSuccess()"
-                         [routerLink]="['/invoice/new', this.getBookingNumber(), '/amount', this.editForm.get('toPay')]"></div>
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Confirm</span>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
+                        [routerLink]="['/invoice/new/booking-number', this.getBookingNumber(), 'price', this.getFlightPrice()]">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                    <!--<div *ngIf="onSaveSuccess()"
+                        [routerLink]="['/invoice/new', this.getBookingNumber(), '/amount', this.getFlightPrice()]">
+                    </div>-->
                 </button>
             </div>
         </form>

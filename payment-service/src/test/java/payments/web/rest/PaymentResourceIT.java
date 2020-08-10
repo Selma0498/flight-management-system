@@ -35,6 +35,9 @@ public class PaymentResourceIT {
     private static final Double DEFAULT_TO_PAY = 1D;
     private static final Double UPDATED_TO_PAY = 2D;
 
+    private static final Integer DEFAULT_BOOKING_NUMBER = 1;
+    private static final Integer UPDATED_BOOKING_NUMBER = 2;
+
     @Autowired
     private PaymentRepository paymentRepository;
 
@@ -55,7 +58,8 @@ public class PaymentResourceIT {
     public static Payment createEntity(EntityManager em) {
         Payment payment = new Payment()
             .passengerId(DEFAULT_PASSENGER_ID)
-            .toPay(DEFAULT_TO_PAY);
+            .toPay(DEFAULT_TO_PAY)
+            .bookingNumber(DEFAULT_BOOKING_NUMBER);
         return payment;
     }
     /**
@@ -67,7 +71,8 @@ public class PaymentResourceIT {
     public static Payment createUpdatedEntity(EntityManager em) {
         Payment payment = new Payment()
             .passengerId(UPDATED_PASSENGER_ID)
-            .toPay(UPDATED_TO_PAY);
+            .toPay(UPDATED_TO_PAY)
+            .bookingNumber(UPDATED_BOOKING_NUMBER);
         return payment;
     }
 
@@ -92,6 +97,7 @@ public class PaymentResourceIT {
         Payment testPayment = paymentList.get(paymentList.size() - 1);
         assertThat(testPayment.getPassengerId()).isEqualTo(DEFAULT_PASSENGER_ID);
         assertThat(testPayment.getToPay()).isEqualTo(DEFAULT_TO_PAY);
+        assertThat(testPayment.getBookingNumber()).isEqualTo(DEFAULT_BOOKING_NUMBER);
     }
 
     @Test
@@ -154,6 +160,25 @@ public class PaymentResourceIT {
 
     @Test
     @Transactional
+    public void checkBookingNumberIsRequired() throws Exception {
+        int databaseSizeBeforeTest = paymentRepository.findAll().size();
+        // set the field null
+        payment.setBookingNumber(null);
+
+        // Create the Payment, which fails.
+
+
+        restPaymentMockMvc.perform(post("/api/payments")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(payment)))
+            .andExpect(status().isBadRequest());
+
+        List<Payment> paymentList = paymentRepository.findAll();
+        assertThat(paymentList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPayments() throws Exception {
         // Initialize the database
         paymentRepository.saveAndFlush(payment);
@@ -164,7 +189,8 @@ public class PaymentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(payment.getId().intValue())))
             .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)))
-            .andExpect(jsonPath("$.[*].toPay").value(hasItem(DEFAULT_TO_PAY.doubleValue())));
+            .andExpect(jsonPath("$.[*].toPay").value(hasItem(DEFAULT_TO_PAY.doubleValue())))
+            .andExpect(jsonPath("$.[*].bookingNumber").value(hasItem(DEFAULT_BOOKING_NUMBER)));
     }
     
     @Test
@@ -179,7 +205,8 @@ public class PaymentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(payment.getId().intValue()))
             .andExpect(jsonPath("$.passengerId").value(DEFAULT_PASSENGER_ID))
-            .andExpect(jsonPath("$.toPay").value(DEFAULT_TO_PAY.doubleValue()));
+            .andExpect(jsonPath("$.toPay").value(DEFAULT_TO_PAY.doubleValue()))
+            .andExpect(jsonPath("$.bookingNumber").value(DEFAULT_BOOKING_NUMBER));
     }
     @Test
     @Transactional
@@ -203,7 +230,8 @@ public class PaymentResourceIT {
         em.detach(updatedPayment);
         updatedPayment
             .passengerId(UPDATED_PASSENGER_ID)
-            .toPay(UPDATED_TO_PAY);
+            .toPay(UPDATED_TO_PAY)
+            .bookingNumber(UPDATED_BOOKING_NUMBER);
 
         restPaymentMockMvc.perform(put("/api/payments")
             .contentType(MediaType.APPLICATION_JSON)
@@ -216,6 +244,7 @@ public class PaymentResourceIT {
         Payment testPayment = paymentList.get(paymentList.size() - 1);
         assertThat(testPayment.getPassengerId()).isEqualTo(UPDATED_PASSENGER_ID);
         assertThat(testPayment.getToPay()).isEqualTo(UPDATED_TO_PAY);
+        assertThat(testPayment.getBookingNumber()).isEqualTo(UPDATED_BOOKING_NUMBER);
     }
 
     @Test

@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -21,16 +22,20 @@ public class Airport implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "airport_code")
+    @NotNull
+    @Column(name = "airport_code", nullable = false)
     private String airportCode;
 
-    @Column(name = "airport_name")
+    @NotNull
+    @Column(name = "airport_name", nullable = false)
     private String airportName;
 
-    @Column(name = "country_name")
+    @NotNull
+    @Column(name = "country_name", nullable = false)
     private String countryName;
 
-    @Column(name = "city_name")
+    @NotNull
+    @Column(name = "city_name", nullable = false)
     private String cityName;
 
     @Column(name = "postal_code")

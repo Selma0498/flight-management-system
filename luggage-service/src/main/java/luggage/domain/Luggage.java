@@ -26,8 +26,8 @@ public class Luggage implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private ELuggageType role;
+    @Column(name = "type", nullable = false)
+    private ELuggageType type;
 
     @NotNull
     @Column(name = "luggage_number", nullable = false)
@@ -38,12 +38,16 @@ public class Luggage implements Serializable {
     private String flightNumber;
 
     @NotNull
+    @Column(name = "booking_number", nullable = false)
+    private Integer bookingNumber;
+
+    @NotNull
     @Column(name = "passenger_id", nullable = false)
     private String passengerId;
 
     @NotNull
-    @Column(name = "weight", nullable = false)
-    private Double weight;
+    @Column(name = "weight_category", nullable = false)
+    private Integer weightCategory;
 
     @Column(name = "rfid_tag")
     private String rfidTag;
@@ -57,17 +61,17 @@ public class Luggage implements Serializable {
         this.id = id;
     }
 
-    public ELuggageType getRole() {
-        return role;
+    public ELuggageType getType() {
+        return type;
     }
 
-    public Luggage role(ELuggageType role) {
-        this.role = role;
+    public Luggage type(ELuggageType type) {
+        this.type = type;
         return this;
     }
 
-    public void setRole(ELuggageType role) {
-        this.role = role;
+    public void setType(ELuggageType type) {
+        this.type = type;
     }
 
     public Integer getLuggageNumber() {
@@ -96,6 +100,19 @@ public class Luggage implements Serializable {
         this.flightNumber = flightNumber;
     }
 
+    public Integer getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public Luggage bookingNumber(Integer bookingNumber) {
+        this.bookingNumber = bookingNumber;
+        return this;
+    }
+
+    public void setBookingNumber(Integer bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
     public String getPassengerId() {
         return passengerId;
     }
@@ -109,17 +126,17 @@ public class Luggage implements Serializable {
         this.passengerId = passengerId;
     }
 
-    public Double getWeight() {
-        return weight;
+    public Integer getWeightCategory() {
+        return weightCategory;
     }
 
-    public Luggage weight(Double weight) {
-        this.weight = weight;
+    public Luggage weightCategory(Integer weightCategory) {
+        this.weightCategory = weightCategory;
         return this;
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
+    public void setWeightCategory(Integer weightCategory) {
+        this.weightCategory = weightCategory;
     }
 
     public String getRfidTag() {
@@ -157,11 +174,12 @@ public class Luggage implements Serializable {
     public String toString() {
         return "Luggage{" +
             "id=" + getId() +
-            ", role='" + getRole() + "'" +
+            ", type='" + getType() + "'" +
             ", luggageNumber=" + getLuggageNumber() +
             ", flightNumber='" + getFlightNumber() + "'" +
+            ", bookingNumber=" + getBookingNumber() +
             ", passengerId='" + getPassengerId() + "'" +
-            ", weight=" + getWeight() +
+            ", weightCategory=" + getWeightCategory() +
             ", rfidTag='" + getRfidTag() + "'" +
             "}";
     }

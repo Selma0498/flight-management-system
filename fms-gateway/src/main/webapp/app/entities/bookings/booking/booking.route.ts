@@ -57,7 +57,7 @@ export const bookingRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new/:flightNumber/price/:price',
+    path: 'new/flight/:flightNumber/price/:price',
     component: BookingUpdateComponent,
     resolve: {
       booking: BookingResolve,

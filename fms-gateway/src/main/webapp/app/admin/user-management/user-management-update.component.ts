@@ -102,4 +102,8 @@ export class UserManagementUpdateComponent implements OnInit {
   private onSaveError(): void {
     this.isSaving = false;
   }
+
+  public getUserLogin(): string {
+    return this.editForm.get(['login'])!.value;
+  }
 }

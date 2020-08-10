@@ -72,11 +72,12 @@ class LuggageGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "role":"CARRY_ON"
+                , "type":"CARRY_ON"
                 , "luggageNumber":"0"
                 , "flightNumber":"SAMPLE_TEXT"
+                , "bookingNumber":"0"
                 , "passengerId":"SAMPLE_TEXT"
-                , "weight":null
+                , "weightCategory":"0"
                 , "rfidTag":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

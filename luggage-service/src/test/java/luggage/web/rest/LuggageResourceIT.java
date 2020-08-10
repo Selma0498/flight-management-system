@@ -30,8 +30,8 @@ import luggage.domain.enumeration.ELuggageType;
 @WithMockUser
 public class LuggageResourceIT {
 
-    private static final ELuggageType DEFAULT_ROLE = ELuggageType.CARRY_ON;
-    private static final ELuggageType UPDATED_ROLE = ELuggageType.CABIN_BAG_10KG;
+    private static final ELuggageType DEFAULT_TYPE = ELuggageType.CARRY_ON;
+    private static final ELuggageType UPDATED_TYPE = ELuggageType.CABIN_BAG_10KG;
 
     private static final Integer DEFAULT_LUGGAGE_NUMBER = 1;
     private static final Integer UPDATED_LUGGAGE_NUMBER = 2;
@@ -39,11 +39,14 @@ public class LuggageResourceIT {
     private static final String DEFAULT_FLIGHT_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_FLIGHT_NUMBER = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_BOOKING_NUMBER = 1;
+    private static final Integer UPDATED_BOOKING_NUMBER = 2;
+
     private static final String DEFAULT_PASSENGER_ID = "AAAAAAAAAA";
     private static final String UPDATED_PASSENGER_ID = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_WEIGHT = 1D;
-    private static final Double UPDATED_WEIGHT = 2D;
+    private static final Integer DEFAULT_WEIGHT_CATEGORY = 1;
+    private static final Integer UPDATED_WEIGHT_CATEGORY = 2;
 
     private static final String DEFAULT_RFID_TAG = "AAAAAAAAAA";
     private static final String UPDATED_RFID_TAG = "BBBBBBBBBB";
@@ -67,11 +70,12 @@ public class LuggageResourceIT {
      */
     public static Luggage createEntity(EntityManager em) {
         Luggage luggage = new Luggage()
-            .role(DEFAULT_ROLE)
+            .type(DEFAULT_TYPE)
             .luggageNumber(DEFAULT_LUGGAGE_NUMBER)
             .flightNumber(DEFAULT_FLIGHT_NUMBER)
+            .bookingNumber(DEFAULT_BOOKING_NUMBER)
             .passengerId(DEFAULT_PASSENGER_ID)
-            .weight(DEFAULT_WEIGHT)
+            .weightCategory(DEFAULT_WEIGHT_CATEGORY)
             .rfidTag(DEFAULT_RFID_TAG);
         return luggage;
     }
@@ -83,11 +87,12 @@ public class LuggageResourceIT {
      */
     public static Luggage createUpdatedEntity(EntityManager em) {
         Luggage luggage = new Luggage()
-            .role(UPDATED_ROLE)
+            .type(UPDATED_TYPE)
             .luggageNumber(UPDATED_LUGGAGE_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
+            .bookingNumber(UPDATED_BOOKING_NUMBER)
             .passengerId(UPDATED_PASSENGER_ID)
-            .weight(UPDATED_WEIGHT)
+            .weightCategory(UPDATED_WEIGHT_CATEGORY)
             .rfidTag(UPDATED_RFID_TAG);
         return luggage;
     }
@@ -111,11 +116,12 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeCreate + 1);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        assertThat(testLuggage.getRole()).isEqualTo(DEFAULT_ROLE);
+        assertThat(testLuggage.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(DEFAULT_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(DEFAULT_FLIGHT_NUMBER);
+        assertThat(testLuggage.getBookingNumber()).isEqualTo(DEFAULT_BOOKING_NUMBER);
         assertThat(testLuggage.getPassengerId()).isEqualTo(DEFAULT_PASSENGER_ID);
-        assertThat(testLuggage.getWeight()).isEqualTo(DEFAULT_WEIGHT);
+        assertThat(testLuggage.getWeightCategory()).isEqualTo(DEFAULT_WEIGHT_CATEGORY);
         assertThat(testLuggage.getRfidTag()).isEqualTo(DEFAULT_RFID_TAG);
     }
 
@@ -141,10 +147,10 @@ public class LuggageResourceIT {
 
     @Test
     @Transactional
-    public void checkRoleIsRequired() throws Exception {
+    public void checkTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = luggageRepository.findAll().size();
         // set the field null
-        luggage.setRole(null);
+        luggage.setType(null);
 
         // Create the Luggage, which fails.
 
@@ -198,6 +204,25 @@ public class LuggageResourceIT {
 
     @Test
     @Transactional
+    public void checkBookingNumberIsRequired() throws Exception {
+        int databaseSizeBeforeTest = luggageRepository.findAll().size();
+        // set the field null
+        luggage.setBookingNumber(null);
+
+        // Create the Luggage, which fails.
+
+
+        restLuggageMockMvc.perform(post("/api/luggages")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(luggage)))
+            .andExpect(status().isBadRequest());
+
+        List<Luggage> luggageList = luggageRepository.findAll();
+        assertThat(luggageList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkPassengerIdIsRequired() throws Exception {
         int databaseSizeBeforeTest = luggageRepository.findAll().size();
         // set the field null
@@ -217,10 +242,10 @@ public class LuggageResourceIT {
 
     @Test
     @Transactional
-    public void checkWeightIsRequired() throws Exception {
+    public void checkWeightCategoryIsRequired() throws Exception {
         int databaseSizeBeforeTest = luggageRepository.findAll().size();
         // set the field null
-        luggage.setWeight(null);
+        luggage.setWeightCategory(null);
 
         // Create the Luggage, which fails.
 
@@ -245,11 +270,12 @@ public class LuggageResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(luggage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].luggageNumber").value(hasItem(DEFAULT_LUGGAGE_NUMBER)))
             .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(DEFAULT_FLIGHT_NUMBER)))
+            .andExpect(jsonPath("$.[*].bookingNumber").value(hasItem(DEFAULT_BOOKING_NUMBER)))
             .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)))
-            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].weightCategory").value(hasItem(DEFAULT_WEIGHT_CATEGORY)))
             .andExpect(jsonPath("$.[*].rfidTag").value(hasItem(DEFAULT_RFID_TAG)));
     }
     
@@ -264,11 +290,12 @@ public class LuggageResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(luggage.getId().intValue()))
-            .andExpect(jsonPath("$.role").value(DEFAULT_ROLE.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.luggageNumber").value(DEFAULT_LUGGAGE_NUMBER))
             .andExpect(jsonPath("$.flightNumber").value(DEFAULT_FLIGHT_NUMBER))
+            .andExpect(jsonPath("$.bookingNumber").value(DEFAULT_BOOKING_NUMBER))
             .andExpect(jsonPath("$.passengerId").value(DEFAULT_PASSENGER_ID))
-            .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.doubleValue()))
+            .andExpect(jsonPath("$.weightCategory").value(DEFAULT_WEIGHT_CATEGORY))
             .andExpect(jsonPath("$.rfidTag").value(DEFAULT_RFID_TAG));
     }
     @Test
@@ -292,11 +319,12 @@ public class LuggageResourceIT {
         // Disconnect from session so that the updates on updatedLuggage are not directly saved in db
         em.detach(updatedLuggage);
         updatedLuggage
-            .role(UPDATED_ROLE)
+            .type(UPDATED_TYPE)
             .luggageNumber(UPDATED_LUGGAGE_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
+            .bookingNumber(UPDATED_BOOKING_NUMBER)
             .passengerId(UPDATED_PASSENGER_ID)
-            .weight(UPDATED_WEIGHT)
+            .weightCategory(UPDATED_WEIGHT_CATEGORY)
             .rfidTag(UPDATED_RFID_TAG);
 
         restLuggageMockMvc.perform(put("/api/luggages")
@@ -308,11 +336,12 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeUpdate);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        assertThat(testLuggage.getRole()).isEqualTo(UPDATED_ROLE);
+        assertThat(testLuggage.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(UPDATED_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(UPDATED_FLIGHT_NUMBER);
+        assertThat(testLuggage.getBookingNumber()).isEqualTo(UPDATED_BOOKING_NUMBER);
         assertThat(testLuggage.getPassengerId()).isEqualTo(UPDATED_PASSENGER_ID);
-        assertThat(testLuggage.getWeight()).isEqualTo(UPDATED_WEIGHT);
+        assertThat(testLuggage.getWeightCategory()).isEqualTo(UPDATED_WEIGHT_CATEGORY);
         assertThat(testLuggage.getRfidTag()).isEqualTo(UPDATED_RFID_TAG);
     }
 

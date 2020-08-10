@@ -2,6 +2,9 @@ package flights.web.rest;
 
 import flights.FlightsApp;
 import flights.domain.Flight;
+import flights.domain.Airport;
+import flights.domain.Airline;
+import flights.domain.Plane;
 import flights.repository.FlightRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -70,6 +73,38 @@ public class FlightResourceIT {
             .fareType(DEFAULT_FARE_TYPE)
             .pilot(DEFAULT_PILOT)
             .price(DEFAULT_PRICE);
+        // Add required entity
+        Airport airport;
+        if (TestUtil.findAll(em, Airport.class).isEmpty()) {
+            airport = AirportResourceIT.createEntity(em);
+            em.persist(airport);
+            em.flush();
+        } else {
+            airport = TestUtil.findAll(em, Airport.class).get(0);
+        }
+        flight.setOrigin(airport);
+        // Add required entity
+        flight.setDestination(airport);
+        // Add required entity
+        Airline airline;
+        if (TestUtil.findAll(em, Airline.class).isEmpty()) {
+            airline = AirlineResourceIT.createEntity(em);
+            em.persist(airline);
+            em.flush();
+        } else {
+            airline = TestUtil.findAll(em, Airline.class).get(0);
+        }
+        flight.setAirline(airline);
+        // Add required entity
+        Plane plane;
+        if (TestUtil.findAll(em, Plane.class).isEmpty()) {
+            plane = PlaneResourceIT.createEntity(em);
+            em.persist(plane);
+            em.flush();
+        } else {
+            plane = TestUtil.findAll(em, Plane.class).get(0);
+        }
+        flight.setPlane(plane);
         return flight;
     }
     /**
@@ -85,6 +120,38 @@ public class FlightResourceIT {
             .fareType(UPDATED_FARE_TYPE)
             .pilot(UPDATED_PILOT)
             .price(UPDATED_PRICE);
+        // Add required entity
+        Airport airport;
+        if (TestUtil.findAll(em, Airport.class).isEmpty()) {
+            airport = AirportResourceIT.createUpdatedEntity(em);
+            em.persist(airport);
+            em.flush();
+        } else {
+            airport = TestUtil.findAll(em, Airport.class).get(0);
+        }
+        flight.setOrigin(airport);
+        // Add required entity
+        flight.setDestination(airport);
+        // Add required entity
+        Airline airline;
+        if (TestUtil.findAll(em, Airline.class).isEmpty()) {
+            airline = AirlineResourceIT.createUpdatedEntity(em);
+            em.persist(airline);
+            em.flush();
+        } else {
+            airline = TestUtil.findAll(em, Airline.class).get(0);
+        }
+        flight.setAirline(airline);
+        // Add required entity
+        Plane plane;
+        if (TestUtil.findAll(em, Plane.class).isEmpty()) {
+            plane = PlaneResourceIT.createUpdatedEntity(em);
+            em.persist(plane);
+            em.flush();
+        } else {
+            plane = TestUtil.findAll(em, Plane.class).get(0);
+        }
+        flight.setPlane(plane);
         return flight;
     }
 

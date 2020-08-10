@@ -30,6 +30,10 @@ public class Payment implements Serializable {
     @Column(name = "to_pay", nullable = false)
     private Double toPay;
 
+    @NotNull
+    @Column(name = "booking_number", nullable = false)
+    private Integer bookingNumber;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Invoice invoice;
@@ -69,6 +73,19 @@ public class Payment implements Serializable {
         this.toPay = toPay;
     }
 
+    public Integer getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public Payment bookingNumber(Integer bookingNumber) {
+        this.bookingNumber = bookingNumber;
+        return this;
+    }
+
+    public void setBookingNumber(Integer bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
     public Invoice getInvoice() {
         return invoice;
     }
@@ -106,6 +123,7 @@ public class Payment implements Serializable {
             "id=" + getId() +
             ", passengerId='" + getPassengerId() + "'" +
             ", toPay=" + getToPay() +
+            ", bookingNumber=" + getBookingNumber() +
             "}";
     }
 }

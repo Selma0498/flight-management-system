@@ -74,6 +74,7 @@ class PaymentGatlingTest extends Simulation {
                 "id":null
                 , "passengerId":"SAMPLE_TEXT"
                 , "toPay":null
+                , "bookingNumber":"0"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_payment_url"))).exitHereIfFailed

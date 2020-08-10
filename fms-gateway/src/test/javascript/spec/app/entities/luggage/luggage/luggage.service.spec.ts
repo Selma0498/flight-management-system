@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LuggageService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Luggage(0, ELuggageType.CARRY_ON, 0, 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA');
+      elemDefault = new Luggage(0, ELuggageType.CARRY_ON, 0, 'AAAAAAA', 0, 'AAAAAAA', 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -55,11 +55,12 @@ describe('Service Tests', () => {
       it('should update a Luggage', () => {
         const returnedFromService = Object.assign(
           {
-            role: 'BBBBBB',
+            type: 'BBBBBB',
             luggageNumber: 1,
             flightNumber: 'BBBBBB',
+            bookingNumber: 1,
             passengerId: 'BBBBBB',
-            weight: 1,
+            weightCategory: 1,
             rfidTag: 'BBBBBB',
           },
           elemDefault
@@ -77,11 +78,12 @@ describe('Service Tests', () => {
       it('should return a list of Luggage', () => {
         const returnedFromService = Object.assign(
           {
-            role: 'BBBBBB',
+            type: 'BBBBBB',
             luggageNumber: 1,
             flightNumber: 'BBBBBB',
+            bookingNumber: 1,
             passengerId: 'BBBBBB',
-            weight: 1,
+            weightCategory: 1,
             rfidTag: 'BBBBBB',
           },
           elemDefault

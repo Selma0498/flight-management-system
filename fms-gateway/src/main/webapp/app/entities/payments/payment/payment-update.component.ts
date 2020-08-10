@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { IPayment, Payment } from 'app/shared/model/payments/payment.model';
 import { PaymentService } from './payment.service';
 import { IInvoice } from 'app/shared/model/payments/invoice.model';
-import {UserManagementComponent} from "app/admin/user-management/user-management.component";
+import {UserManagementUpdateComponent} from "app/admin/user-management/user-management-update.component";
 
 @Component({
   selector: 'jhi-payment-update',
@@ -21,6 +21,7 @@ export class PaymentUpdateComponent implements OnInit {
     id: [],
     passengerId: [null, [Validators.required]],
     toPay: [null, [Validators.required]],
+    bookingNumber: [null, [Validators.required]],
   });
 
   constructor(
@@ -39,8 +40,9 @@ export class PaymentUpdateComponent implements OnInit {
   updateForm(payment: IPayment): void {
     this.editForm.patchValue({
       id: payment.id,
-      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      passengerId: UserManagementUpdateComponent.prototype.getUserLogin(),
       toPay: this.activatedRoute.snapshot.paramMap.get('price'),
+      bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }
 
@@ -64,6 +66,7 @@ export class PaymentUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       passengerId: this.editForm.get(['passengerId'])!.value,
       toPay: this.editForm.get(['toPay'])!.value,
+      bookingNumber: this.editForm.get(['bookingNumber'])!.value,
     };
   }
 
@@ -76,7 +79,6 @@ export class PaymentUpdateComponent implements OnInit {
 
   public onSaveSuccess(): void {
     this.isSaving = false;
-    //this.previousState();
   }
 
   protected onSaveError(): void {
@@ -88,11 +90,10 @@ export class PaymentUpdateComponent implements OnInit {
   }
 
   public getBookingNumber(): number {
-    const result = this.activatedRoute.snapshot.paramMap.get('bookingNumber');
-    // check if result is null and castable to a number
-    if(result != null && !isNaN(Number(result))) {
-      return Number(result);
-    }
-    return Number(null);
+    return this.editForm.get(['bookingNumber'])!.value;
+  }
+
+  public getFlightPrice(): number {
+    return this.editForm.get(['toPay'])!.value;
   }
 }

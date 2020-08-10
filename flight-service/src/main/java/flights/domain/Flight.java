@@ -52,19 +52,23 @@ public class Flight implements Serializable {
     @JoinColumn(unique = true)
     private FlightHandling flightHandler;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
     private Airport origin;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
     private Airport destination;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
     private Airline airline;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
     private Plane plane;
 

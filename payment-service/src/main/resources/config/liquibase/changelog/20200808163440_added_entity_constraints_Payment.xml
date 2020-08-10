@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Payment.
     -->
-    <changeSet id="20200616122448-2" author="jhipster">
+    <changeSet id="20200808163440-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="invoice_id"
                                  baseTableName="payment"

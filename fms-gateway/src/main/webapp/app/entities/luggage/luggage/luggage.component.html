@@ -16,11 +16,12 @@
             <thead>
                 <tr>
                     <th scope="col" ><span>ID</span></th>
-                    <th scope="col" ><span>Role</span></th>
+                    <th scope="col" ><span>Type</span></th>
                     <th scope="col" ><span>Luggage Number</span></th>
                     <th scope="col" ><span>Flight Number</span></th>
+                    <th scope="col" ><span>Booking Number</span></th>
                     <th scope="col" ><span>Passenger Id</span></th>
-                    <th scope="col" ><span>Weight</span></th>
+                    <th scope="col" ><span>Weight Category</span></th>
                     <th scope="col" ><span>Rfid Tag</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -28,11 +29,12 @@
             <tbody>
                 <tr *ngFor="let luggage of luggages ;trackBy: trackId">
                     <td><a [routerLink]="['/luggage', luggage.id, 'view']">{{ luggage.id }}</a></td>
-                    <td>{{ luggage.role }}</td>
+                    <td>{{ luggage.type }}</td>
                     <td>{{ luggage.luggageNumber }}</td>
                     <td>{{ luggage.flightNumber }}</td>
+                    <td>{{ luggage.bookingNumber }}</td>
                     <td>{{ luggage.passengerId }}</td>
-                    <td>{{ luggage.weight }}</td>
+                    <td>{{ luggage.weightCategory }}</td>
                     <td>{{ luggage.rfidTag }}</td>
                     <td class="text-right">
                         <div class="btn-group">

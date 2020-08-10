@@ -49,6 +49,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "airport",
       "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
       "relationshipName": "origin",
       "otherEntityField": "id"
     },
@@ -56,6 +57,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "airport",
       "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
       "relationshipName": "destination",
       "otherEntityField": "id"
     },
@@ -63,6 +65,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "airline",
       "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
       "relationshipName": "airline",
       "otherEntityField": "id"
     },
@@ -70,6 +73,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "plane",
       "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
       "relationshipName": "plane",
       "otherEntityField": "id"
     }

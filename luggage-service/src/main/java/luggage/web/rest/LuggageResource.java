@@ -2,7 +2,6 @@ package luggage.web.rest;
 
 import luggage.domain.Luggage;
 import luggage.repository.LuggageRepository;
-import luggage.security.SecurityUtils;
 import luggage.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,17 +88,7 @@ public class LuggageResource {
     @GetMapping("/luggages")
     public List<Luggage> getAllLuggages() {
         log.debug("REST request to get all Luggages");
-
-        List<Luggage> resultingLuggage = new ArrayList<>();
-        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-
-        for(Luggage l:luggageRepository.findAll()) {
-            if(userLogin.isPresent() && userLogin.get().equals(l.getPassengerId())) {
-                resultingLuggage.add(l);
-            }
-        }
-
-        return resultingLuggage;
+        return luggageRepository.findAll();
     }
 
     /**

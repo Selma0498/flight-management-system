@@ -58,6 +58,7 @@ export const luggageRoute: Routes = [
   },
   {
     path: 'new',
+      /*/booking-number/:bookingNumber/flight-number/:flightNumber',*/
     component: LuggageUpdateComponent,
     resolve: {
       luggage: LuggageResolve,

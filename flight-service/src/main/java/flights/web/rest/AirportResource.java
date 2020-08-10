@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class AirportResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/airports")
-    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport) throws URISyntaxException {
+    public ResponseEntity<Airport> createAirport(@Valid @RequestBody Airport airport) throws URISyntaxException {
         log.debug("REST request to save Airport : {}", airport);
         if (airport.getId() != null) {
             throw new BadRequestAlertException("A new airport cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class AirportResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/airports")
-    public ResponseEntity<Airport> updateAirport(@RequestBody Airport airport) throws URISyntaxException {
+    public ResponseEntity<Airport> updateAirport(@Valid @RequestBody Airport airport) throws URISyntaxException {
         log.debug("REST request to update Airport : {}", airport);
         if (airport.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

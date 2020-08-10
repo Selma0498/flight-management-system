@@ -1,11 +1,11 @@
-id;role;luggage_number;flight_number;passenger_id;weight;rfid_tag
-1;CABIN_BAG_10KG;18145;Data;Forward Manors;64554;synthesize Buckinghamshire
-2;CARGO_BAG_30KG;37577;Identity productize;channels;37039;orange Norwegian Krone HTTP
-3;CARGO_BAG_30KG;60480;firewall;River;67042;demand-driven sexy Soft
-4;CABIN_BAG_10KG;21393;synthesize cutting-edge;Cheese black;96335;ROI Concrete Ergonomic
-5;CABIN_BAG_10KG;64286;Intelligent;Pizza zero tolerance empowering;50876;Generic cohesive
-6;CARGO_BAG_20KG;72309;Versatile withdrawal innovative;Credit Card Account Leone Cambridgeshire;72137;protocol
-7;CARRY_ON;25308;plum THX Principal;Assistant;7564;Future pixel
-8;CARRY_ON;98953;connecting Pants;Buckinghamshire Chicken;95349;Bulgarian Lev Personal Loan Account Frozen
-9;CARGO_BAG_20KG;93496;Auto Loan Account;Fantastic Concrete Pants Cheese Mouse;31165;web services Plastic bypass
-10;CARGO_BAG_20KG;1757;architectures;Lakes HTTP wireless;83542;matrices Up-sized Fantastic Wooden Bike
+id;type;luggage_number;flight_number;booking_number;passenger_id;weight_category;rfid_tag
+1;CABIN_BAG_10KG;18145;Data;41772;connect Borders disintermediate;51977;cross-platform deploy
+2;CABIN_BAG_10KG;46998;24/365 Implementation channels;37039;orange Norwegian Krone HTTP;40742;program cyan Money Market Account
+3;CABIN_BAG_10KG;26253;British Indian Ocean Territory (Chagos Archipelago) bluetooth;95710;Coordinator;35125;Buckinghamshire
+4;CABIN_BAG_10KG;96335;ROI Concrete Ergonomic;59022;technologies data-warehouse deposit;10748;panel
+5;CARRY_ON;59406;tan;23394;Infrastructure Qatar overriding;96080;Berkshire Soft
+6;CARGO_BAG_30KG;72137;protocol;4447;Crossroad Robust plum;88841;Principal well-modulated
+7;CABIN_BAG_10KG;56670;Ball;22829;Stream Christmas Island bleeding-edge;50865;Chicken Assurance Bulgarian Lev
+8;CARRY_ON;6681;Designer Integration;61505;Senior sticky e-business;77279;Gloves
+9;CABIN_BAG_10KG;42190;Alabama;23556;Oklahoma Lakes;86891;wireless
+10;CABIN_BAG_10KG;10146;program;77700;empowering Facilitator Buckinghamshire;81133;generating wireless mobile

@@ -3,19 +3,31 @@
   "fields": [
     {
       "fieldName": "airportCode",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "airportName",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "countryName",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "cityName",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "postalCode",

@@ -17,16 +17,16 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="airport_code" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="airport_name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="country_name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="city_name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="postal_code" type="varchar(255)">
                 <constraints nullable="true" />

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
 import { InvoiceService } from './invoice.service';
-import {UserManagementComponent} from "app/admin/user-management/user-management.component";
+import {UserManagementUpdateComponent} from "app/admin/user-management/user-management-update.component";
 
 @Component({
   selector: 'jhi-invoice-update',
@@ -36,8 +36,8 @@ export class InvoiceUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: invoice.id,
       invoiceNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
-      amount: this.activatedRoute.snapshot.paramMap.get('toPay'),
-      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      amount: this.activatedRoute.snapshot.paramMap.get('price'),
+      passengerId: UserManagementUpdateComponent.prototype.getUserLogin(),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }

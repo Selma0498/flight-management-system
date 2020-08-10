@@ -38,10 +38,10 @@ export class FlightUpdateComponent implements OnInit {
     pilot: [],
     price: [null, [Validators.required]],
     flightHandler: [],
-    origin: [],
-    destination: [],
-    airline: [],
-    plane: [],
+    origin: [null, Validators.required],
+    destination: [null, Validators.required],
+    airline: [null, Validators.required],
+    plane: [null, Validators.required],
   });
 
   constructor(

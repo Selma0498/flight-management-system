@@ -46,5 +46,4 @@ export class FlightComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(FlightDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.flight = flight;
   }
-
 }

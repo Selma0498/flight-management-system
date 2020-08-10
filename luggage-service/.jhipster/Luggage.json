@@ -2,7 +2,7 @@
   "name": "Luggage",
   "fields": [
     {
-      "fieldName": "role",
+      "fieldName": "type",
       "fieldType": "ELuggageType",
       "fieldValues": "CARRY_ON,CABIN_BAG_10KG,CARGO_BAG_20KG,CARGO_BAG_30KG",
       "fieldValidateRules": [
@@ -24,6 +24,13 @@
       ]
     },
     {
+      "fieldName": "bookingNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "passengerId",
       "fieldType": "String",
       "fieldValidateRules": [
@@ -31,8 +38,8 @@
       ]
     },
     {
-      "fieldName": "weight",
-      "fieldType": "Double",
+      "fieldName": "weightCategory",
+      "fieldType": "Integer",
       "fieldValidateRules": [
         "required"
       ]
