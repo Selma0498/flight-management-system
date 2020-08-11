@@ -2,6 +2,7 @@ package luggage.web.rest;
 
 import luggage.domain.Luggage;
 import luggage.repository.LuggageRepository;
+import luggage.security.SecurityUtils;
 import luggage.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +90,18 @@ public class LuggageResource {
     @GetMapping("/luggages")
     public List<Luggage> getAllLuggages() {
         log.debug("REST request to get all Luggages");
-        return luggageRepository.findAll();
+
+        List<Luggage> resultingLuggage = new ArrayList<>();
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+        for(Luggage l: luggageRepository.findAll()) {
+            if(userLogin.isPresent() && userLogin.get().equals(l.getPassengerId())) {
+                resultingLuggage.add(l);
+            }
+        }
+
+        return resultingLuggage;
     }
 
     /**
@@ -101,7 +114,16 @@ public class LuggageResource {
     public ResponseEntity<Luggage> getLuggage(@PathVariable Long id) {
         log.debug("REST request to get Luggage : {}", id);
         Optional<Luggage> luggage = luggageRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(luggage);
+
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(luggage.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(luggage.get().getPassengerId())) {
+            return ResponseUtil.wrapOrNotFound(luggage);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -114,7 +136,17 @@ public class LuggageResource {
     public ResponseEntity<Void> deleteLuggage(@PathVariable Long id) {
         log.debug("REST request to delete Luggage : {}", id);
 
-        luggageRepository.deleteById(id);
+        Optional<Luggage> luggage = luggageRepository.findById(id);
+
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(luggage.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(luggage.get().getPassengerId())) {
+            luggageRepository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

@@ -2,6 +2,7 @@ package payments.web.rest;
 
 import payments.domain.Payment;
 import payments.repository.PaymentRepository;
+import payments.security.SecurityUtils;
 import payments.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +90,17 @@ public class PaymentResource {
     @GetMapping("/payments")
     public List<Payment> getAllPayments() {
         log.debug("REST request to get all Payments");
-        return paymentRepository.findAll();
+        List<Payment> resultingPayments = new ArrayList<>();
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+        for(Payment p: paymentRepository.findAll()) {
+            if(userLogin.isPresent() && userLogin.get().equals(p.getPassengerId())) {
+                resultingPayments.add(p);
+            }
+        }
+
+        return resultingPayments;
     }
 
     /**
@@ -101,7 +113,15 @@ public class PaymentResource {
     public ResponseEntity<Payment> getPayment(@PathVariable Long id) {
         log.debug("REST request to get Payment : {}", id);
         Optional<Payment> payment = paymentRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(payment);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(payment.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(payment.get().getPassengerId())) {
+            return ResponseUtil.wrapOrNotFound(payment);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -113,8 +133,17 @@ public class PaymentResource {
     @DeleteMapping("/payments/{id}")
     public ResponseEntity<Void> deletePayment(@PathVariable Long id) {
         log.debug("REST request to delete Payment : {}", id);
+        Optional<Payment> payment = paymentRepository.findById(id);
 
-        paymentRepository.deleteById(id);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(payment.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(payment.get().getPassengerId())) {
+            paymentRepository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
