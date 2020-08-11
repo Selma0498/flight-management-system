@@ -1,4 +1,4 @@
-id;type;luggage_number;flight_number;booking_number;passenger_id;weight_category;rfid_tag
+id;luggage_type;luggage_number;flight_number;booking_number;passenger_id;weight_category;rfid_tag
 1;CABIN_BAG_10KG;18145;Data;41772;connect Borders disintermediate;51977;cross-platform deploy
 2;CABIN_BAG_10KG;46998;24/365 Implementation channels;37039;orange Norwegian Krone HTTP;40742;program cyan Money Market Account
 3;CABIN_BAG_10KG;26253;British Indian Ocean Territory (Chagos Archipelago) bluetooth;95710;Coordinator;35125;Buckinghamshire

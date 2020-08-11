@@ -26,8 +26,8 @@ public class Luggage implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private ELuggageType type;
+    @Column(name = "luggage_type", nullable = false)
+    private ELuggageType luggageType;
 
     @NotNull
     @Column(name = "luggage_number", nullable = false)
@@ -61,17 +61,17 @@ public class Luggage implements Serializable {
         this.id = id;
     }
 
-    public ELuggageType getType() {
-        return type;
+    public ELuggageType getLuggageType() {
+        return luggageType;
     }
 
-    public Luggage type(ELuggageType type) {
-        this.type = type;
+    public Luggage luggageType(ELuggageType luggageType) {
+        this.luggageType = luggageType;
         return this;
     }
 
-    public void setType(ELuggageType type) {
-        this.type = type;
+    public void setLuggageType(ELuggageType luggageType) {
+        this.luggageType = luggageType;
     }
 
     public Integer getLuggageNumber() {
@@ -174,7 +174,7 @@ public class Luggage implements Serializable {
     public String toString() {
         return "Luggage{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", luggageType='" + getLuggageType() + "'" +
             ", luggageNumber=" + getLuggageNumber() +
             ", flightNumber='" + getFlightNumber() + "'" +
             ", bookingNumber=" + getBookingNumber() +

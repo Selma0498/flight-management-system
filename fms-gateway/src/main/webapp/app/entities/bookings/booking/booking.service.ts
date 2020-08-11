@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import {Booking, IBooking} from 'app/shared/model/bookings/booking.model';
-import {BookingResolve} from "app/entities/bookings/booking/booking.route";
+import {IBooking} from 'app/shared/model/bookings/booking.model';
 
 type EntityResponseType = HttpResponse<IBooking>;
 type EntityArrayResponseType = HttpResponse<IBooking[]>;

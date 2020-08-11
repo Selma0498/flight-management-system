@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IBooking, Booking } from 'app/shared/model/bookings/booking.model';
 import { BookingService } from './booking.service';
-import {UserManagementUpdateComponent} from "app/admin/user-management/user-management-update.component";
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-booking-update',
@@ -36,7 +36,7 @@ export class BookingUpdateComponent implements OnInit {
       id: booking.id,
       bookingNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
-      passengerId: UserManagementUpdateComponent.prototype.getUserLogin(),
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
     });
   }
 
@@ -91,7 +91,7 @@ export class BookingUpdateComponent implements OnInit {
     return this.editForm.get(['bookingNumber'])!.value;
   }
 
-  public getFlightNumber(): number {
+  public getFlightNumber(): string {
     return this.editForm.get(['flightNumber'])!.value;
   }
 

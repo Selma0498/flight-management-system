@@ -30,8 +30,8 @@ import luggage.domain.enumeration.ELuggageType;
 @WithMockUser
 public class LuggageResourceIT {
 
-    private static final ELuggageType DEFAULT_TYPE = ELuggageType.CARRY_ON;
-    private static final ELuggageType UPDATED_TYPE = ELuggageType.CABIN_BAG_10KG;
+    private static final ELuggageType DEFAULT_LUGGAGE_TYPE = ELuggageType.CARRY_ON;
+    private static final ELuggageType UPDATED_LUGGAGE_TYPE = ELuggageType.CABIN_BAG_10KG;
 
     private static final Integer DEFAULT_LUGGAGE_NUMBER = 1;
     private static final Integer UPDATED_LUGGAGE_NUMBER = 2;
@@ -70,7 +70,7 @@ public class LuggageResourceIT {
      */
     public static Luggage createEntity(EntityManager em) {
         Luggage luggage = new Luggage()
-            .type(DEFAULT_TYPE)
+            .luggageType(DEFAULT_LUGGAGE_TYPE)
             .luggageNumber(DEFAULT_LUGGAGE_NUMBER)
             .flightNumber(DEFAULT_FLIGHT_NUMBER)
             .bookingNumber(DEFAULT_BOOKING_NUMBER)
@@ -87,7 +87,7 @@ public class LuggageResourceIT {
      */
     public static Luggage createUpdatedEntity(EntityManager em) {
         Luggage luggage = new Luggage()
-            .type(UPDATED_TYPE)
+            .luggageType(UPDATED_LUGGAGE_TYPE)
             .luggageNumber(UPDATED_LUGGAGE_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
             .bookingNumber(UPDATED_BOOKING_NUMBER)
@@ -116,7 +116,7 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeCreate + 1);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        assertThat(testLuggage.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testLuggage.getLuggageType()).isEqualTo(DEFAULT_LUGGAGE_TYPE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(DEFAULT_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(DEFAULT_FLIGHT_NUMBER);
         assertThat(testLuggage.getBookingNumber()).isEqualTo(DEFAULT_BOOKING_NUMBER);
@@ -147,10 +147,10 @@ public class LuggageResourceIT {
 
     @Test
     @Transactional
-    public void checkTypeIsRequired() throws Exception {
+    public void checkLuggageTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = luggageRepository.findAll().size();
         // set the field null
-        luggage.setType(null);
+        luggage.setLuggageType(null);
 
         // Create the Luggage, which fails.
 
@@ -270,7 +270,7 @@ public class LuggageResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(luggage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].luggageType").value(hasItem(DEFAULT_LUGGAGE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].luggageNumber").value(hasItem(DEFAULT_LUGGAGE_NUMBER)))
             .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(DEFAULT_FLIGHT_NUMBER)))
             .andExpect(jsonPath("$.[*].bookingNumber").value(hasItem(DEFAULT_BOOKING_NUMBER)))
@@ -290,7 +290,7 @@ public class LuggageResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(luggage.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.luggageType").value(DEFAULT_LUGGAGE_TYPE.toString()))
             .andExpect(jsonPath("$.luggageNumber").value(DEFAULT_LUGGAGE_NUMBER))
             .andExpect(jsonPath("$.flightNumber").value(DEFAULT_FLIGHT_NUMBER))
             .andExpect(jsonPath("$.bookingNumber").value(DEFAULT_BOOKING_NUMBER))
@@ -319,7 +319,7 @@ public class LuggageResourceIT {
         // Disconnect from session so that the updates on updatedLuggage are not directly saved in db
         em.detach(updatedLuggage);
         updatedLuggage
-            .type(UPDATED_TYPE)
+            .luggageType(UPDATED_LUGGAGE_TYPE)
             .luggageNumber(UPDATED_LUGGAGE_NUMBER)
             .flightNumber(UPDATED_FLIGHT_NUMBER)
             .bookingNumber(UPDATED_BOOKING_NUMBER)
@@ -336,7 +336,7 @@ public class LuggageResourceIT {
         List<Luggage> luggageList = luggageRepository.findAll();
         assertThat(luggageList).hasSize(databaseSizeBeforeUpdate);
         Luggage testLuggage = luggageList.get(luggageList.size() - 1);
-        assertThat(testLuggage.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testLuggage.getLuggageType()).isEqualTo(UPDATED_LUGGAGE_TYPE);
         assertThat(testLuggage.getLuggageNumber()).isEqualTo(UPDATED_LUGGAGE_NUMBER);
         assertThat(testLuggage.getFlightNumber()).isEqualTo(UPDATED_FLIGHT_NUMBER);
         assertThat(testLuggage.getBookingNumber()).isEqualTo(UPDATED_BOOKING_NUMBER);

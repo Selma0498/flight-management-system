@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
 import { InvoiceService } from './invoice.service';
-import {UserManagementUpdateComponent} from "app/admin/user-management/user-management-update.component";
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-invoice-update',
@@ -37,7 +37,7 @@ export class InvoiceUpdateComponent implements OnInit {
       id: invoice.id,
       invoiceNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       amount: this.activatedRoute.snapshot.paramMap.get('price'),
-      passengerId: UserManagementUpdateComponent.prototype.getUserLogin(),
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }

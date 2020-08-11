@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th scope="col" ><span>ID</span></th>
-                    <th scope="col" ><span>Type</span></th>
+                    <th scope="col" ><span>Luggage Type</span></th>
                     <th scope="col" ><span>Luggage Number</span></th>
                     <th scope="col" ><span>Flight Number</span></th>
                     <th scope="col" ><span>Booking Number</span></th>
@@ -29,7 +29,7 @@
             <tbody>
                 <tr *ngFor="let luggage of luggages ;trackBy: trackId">
                     <td><a [routerLink]="['/luggage', luggage.id, 'view']">{{ luggage.id }}</a></td>
-                    <td>{{ luggage.type }}</td>
+                    <td>{{ luggage.luggageType }}</td>
                     <td>{{ luggage.luggageNumber }}</td>
                     <td>{{ luggage.flightNumber }}</td>
                     <td>{{ luggage.bookingNumber }}</td>

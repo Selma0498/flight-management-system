@@ -12,16 +12,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                    <label class="form-control-label" for="field_luggageType">Luggage Type</label>
+                    <select class="form-control" name="luggageType" formControlName="luggageType" id="field_luggageType">
                         <option value="CARRY_ON">CARRY_ON</option>
                         <option value="CABIN_BAG_10KG">CABIN_BAG_10KG</option>
                         <option value="CARGO_BAG_20KG">CARGO_BAG_20KG</option>
                         <option value="CARGO_BAG_30KG">CARGO_BAG_30KG</option>
                     </select>
-                    <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+                    <div *ngIf="editForm.get('luggageType')!.invalid && (editForm.get('luggageType')!.dirty || editForm.get('luggageType')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('type')?.errors?.required">
+                               *ngIf="editForm.get('luggageType')?.errors?.required">
                         This field is required.
                         </small>
                     </div>

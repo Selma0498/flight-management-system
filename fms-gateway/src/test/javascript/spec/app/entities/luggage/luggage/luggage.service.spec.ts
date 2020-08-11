@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should update a Luggage', () => {
         const returnedFromService = Object.assign(
           {
-            type: 'BBBBBB',
+            luggageType: 'BBBBBB',
             luggageNumber: 1,
             flightNumber: 'BBBBBB',
             bookingNumber: 1,
@@ -78,7 +78,7 @@ describe('Service Tests', () => {
       it('should return a list of Luggage', () => {
         const returnedFromService = Object.assign(
           {
-            type: 'BBBBBB',
+            luggageType: 'BBBBBB',
             luggageNumber: 1,
             flightNumber: 'BBBBBB',
             bookingNumber: 1,

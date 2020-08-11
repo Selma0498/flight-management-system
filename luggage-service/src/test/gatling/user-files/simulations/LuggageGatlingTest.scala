@@ -72,7 +72,7 @@ class LuggageGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "type":"CARRY_ON"
+                , "luggageType":"CARRY_ON"
                 , "luggageNumber":"0"
                 , "flightNumber":"SAMPLE_TEXT"
                 , "bookingNumber":"0"

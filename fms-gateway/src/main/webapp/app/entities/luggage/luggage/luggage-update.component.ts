@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 
 import { ILuggage, Luggage } from 'app/shared/model/luggage/luggage.model';
 import { LuggageService } from './luggage.service';
-import {ELuggageType} from "app/shared/model/enumerations/e-luggage-type.model";
-import {UserManagementUpdateComponent} from "app/admin/user-management/user-management-update.component";
+import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-luggage-update',
@@ -19,7 +18,7 @@ export class LuggageUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    type: [null, [Validators.required]],
+    luggageType: [null, [Validators.required]],
     luggageNumber: [null, [Validators.required]],
     flightNumber: [null, [Validators.required]],
     bookingNumber: [null, [Validators.required]],
@@ -38,12 +37,13 @@ export class LuggageUpdateComponent implements OnInit {
 
   updateForm(luggage: ILuggage): void {
     this.editForm.patchValue({
-      type: luggage.type,
+      id: luggage.id,
+      luggageType: luggage.luggageType,
       luggageNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
-      passengerId: UserManagementUpdateComponent.prototype.getUserLogin(),
-      weightCategory: this.getWeightCategory(),
+      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      weightCategory: luggage.weightCategory,
       rfidTag: this.getRandomString("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./;[])(*&^%$#@!~"),
     });
   }
@@ -65,7 +65,8 @@ export class LuggageUpdateComponent implements OnInit {
   private createFromForm(): ILuggage {
     return {
       ...new Luggage(),
-      type: this.editForm.get(['type'])!.value,
+      id: this.editForm.get(['id'])!.value,
+      luggageType: this.editForm.get(['luggageType'])!.value,
       luggageNumber: this.editForm.get(['luggageNumber'])!.value,
       flightNumber: this.editForm.get(['flightNumber'])!.value,
       bookingNumber: this.editForm.get(['bookingNumber'])!.value,
@@ -101,17 +102,4 @@ export class LuggageUpdateComponent implements OnInit {
     return result;
   }
 
-  private getWeightCategory(): number {
-    switch (this.editForm.get(['type'])!.value) {
-      case ELuggageType.CABIN_BAG_10KG:
-        return 10;
-      case ELuggageType.CARGO_BAG_20KG:
-        return 20;
-      case ELuggageType.CARGO_BAG_30KG:
-        return 30;
-      case ELuggageType.CARRY_ON:
-        return 8;
-    }
-    return 0;
-  }
 }
