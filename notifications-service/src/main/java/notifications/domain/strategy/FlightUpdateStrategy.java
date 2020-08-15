@@ -1,27 +1,20 @@
 package notifications.domain.strategy;
 
 import notifications.domain.Notification;
-import notifications.domain.enumeration.ENotificationState;
 import notifications.domain.enumeration.ENotificationType;
-import notifications.web.converters.FlightData;
 
 public class FlightUpdateStrategy implements NotificationStrategy {
 
-    private FlightData subjectToChange;
+    private String notificationMesage = "";
 
-    //TODO Check if subject to change casting to local object is valid
-
-    public FlightUpdateStrategy(FlightData subjectToChange) {
-        this.subjectToChange = subjectToChange;
+    public FlightUpdateStrategy() {
+        this.notificationMesage = "Notification type: " + ENotificationType.FLIGHT_UPDATED.toString() +
+            " Message: The information for the flight has been updated. Please check for the new information in the Flight overview.";;
     }
 
     @Override
-    public Notification createNotification() {
-
-        //TODO add description based on the flight number
-        String description = "";
-
-        return new Notification(ENotificationType.FLIGHT_UPDATED, ENotificationState.PENDING, description);
+    public Notification getNotification() {
+        return new Notification(ENotificationType.FLIGHT_UPDATED, this.notificationMesage);
     }
 
 }

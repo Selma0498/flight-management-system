@@ -90,6 +90,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/flight/new").hasAuthority(AuthoritiesConstants.ADMIN) // new line
             .antMatchers("/api/flight/delete").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/flight/edit").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/notification/new").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/notification/edit").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/notification/delete").hasAuthority(AuthoritiesConstants.ADMIN)
             .and()
             .apply(securityConfigurerAdapter());
         // @formatter:on

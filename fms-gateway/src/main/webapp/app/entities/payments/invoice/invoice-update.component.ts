@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
-import { InvoiceService } from './invoice.service';
+import {IInvoice, Invoice} from 'app/shared/model/payments/invoice.model';
+import {InvoiceService} from './invoice.service';
 import {UserManagementComponent} from "app/admin/user-management/user-management.component";
+import {NotificationService} from "app/entities/notifications/notification/notification.service";
+import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 
 @Component({
   selector: 'jhi-invoice-update',
   templateUrl: './invoice-update.component.html',
+  providers: [NotificationService,]
 })
 export class InvoiceUpdateComponent implements OnInit {
   isSaving = false;
@@ -24,7 +27,12 @@ export class InvoiceUpdateComponent implements OnInit {
     bookingNumber: [null, [Validators.required]],
   });
 
-  constructor(protected invoiceService: InvoiceService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected invoiceService: InvoiceService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private notificationService: NotificationService,
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ invoice }) => {
@@ -74,13 +82,20 @@ export class InvoiceUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
-    // TODO ADD AN ACTUAL NOTIFICATION CREATION HERE
-    window.confirm("Booking Successful!");
+    this.notificationService.getNotification(ENotificationType.BOOKING_CONFIRMED)
+      .subscribe(notification => {
+        if(notification.description !== undefined) {
+          window.confirm(notification.description);
+        } else {
+          window.confirm("undefined");
+        }
+      });
   }
 
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
 }

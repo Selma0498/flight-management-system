@@ -1,27 +1,21 @@
 package notifications.domain.strategy;
 
 import notifications.domain.Notification;
-import notifications.domain.enumeration.ENotificationState;
 import notifications.domain.enumeration.ENotificationType;
-import notifications.web.converters.BookingData;
 
 public class BookingConfirmationStrategy implements NotificationStrategy {
 
-    private BookingData subjectToChange;
+    private String notificationMesage = "";
 
-    //TODO Check if subject to change casting to local object is valid
+    public BookingConfirmationStrategy() {
 
+        this.notificationMesage =  "Notification type: " + ENotificationType.BOOKING_CONFIRMED.toString() +
+            " Message: The flight has been booked successfully. You can see your booking any time under the booking overview section. Safe travels! :)";
 
-    public BookingConfirmationStrategy(BookingData subjectToChange) {
-        this.subjectToChange = subjectToChange;
     }
 
     @Override
-    public Notification createNotification() {
-
-        //TODO add description based on booking number
-        String description = "";
-
-        return new Notification(ENotificationType.BOOKING_CONFIRMED, ENotificationState.PENDING, description);
+    public Notification getNotification() {
+        return new Notification(ENotificationType.BOOKING_CONFIRMED, this.notificationMesage);
     }
 }

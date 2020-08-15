@@ -2,19 +2,15 @@
   "name": "Notification",
   "fields": [
     {
-      "fieldName": "notificationType",
+      "fieldName": "type",
       "fieldType": "ENotificationType",
-      "fieldValues": "FLIGHT_UPDATED,FLIGHT_CANCELLED,BOOKING_CONFIRMED,BOOKING_CANCELLED",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValues": "INFO,URGENT,ERROR",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],
@@ -29,5 +25,7 @@
   "embedded": false,
   "clientRootFolder": "notifications",
   "applications": "*",
-  "microserviceName": "notifications"
+  "microserviceName": "notifications",
+  "searchEngine": false,
+  "databaseType": "sql"
 }

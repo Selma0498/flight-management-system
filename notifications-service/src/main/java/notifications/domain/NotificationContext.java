@@ -10,8 +10,8 @@ public class NotificationContext {
         this.strategy = strategy;
     }
 
-    public Notification createNotification() {
-        return strategy.createNotification();
+    public Notification getNotification() {
+        return strategy.getNotification();
     }
 
 }

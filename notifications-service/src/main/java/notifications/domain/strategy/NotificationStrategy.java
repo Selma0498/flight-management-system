@@ -4,5 +4,5 @@ import notifications.domain.Notification;
 
 public interface NotificationStrategy {
 
-    Notification createNotification();
+    Notification getNotification();
 }
