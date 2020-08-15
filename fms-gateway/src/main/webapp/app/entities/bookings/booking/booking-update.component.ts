@@ -93,5 +93,4 @@ export class BookingUpdateComponent implements OnInit {
   public getFlightNumber(): string {
     return this.editForm.get(['flightNumber'])!.value;
   }
-
 }
