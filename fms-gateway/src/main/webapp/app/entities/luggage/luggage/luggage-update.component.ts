@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { ILuggage, Luggage } from 'app/shared/model/luggage/luggage.model';
 import { LuggageService } from './luggage.service';
-import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-luggage-update',
@@ -42,7 +41,7 @@ export class LuggageUpdateComponent implements OnInit {
       luggageNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       flightNumber: this.activatedRoute.snapshot.paramMap.get('flightNumber'),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
-      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      passengerId: luggage.passengerId,
       weightCategory: luggage.weightCategory,
       rfidTag: this.getRandomString("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./;[])(*&^%$#@!~"),
     });

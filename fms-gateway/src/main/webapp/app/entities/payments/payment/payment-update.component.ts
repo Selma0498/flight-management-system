@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { IPayment, Payment } from 'app/shared/model/payments/payment.model';
 import { PaymentService } from './payment.service';
 import { IInvoice } from 'app/shared/model/payments/invoice.model';
-import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 
 @Component({
   selector: 'jhi-payment-update',
@@ -40,7 +39,7 @@ export class PaymentUpdateComponent implements OnInit {
   updateForm(payment: IPayment): void {
     this.editForm.patchValue({
       id: payment.id,
-      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      passengerId: payment.passengerId,
       toPay: this.activatedRoute.snapshot.paramMap.get('price'),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });

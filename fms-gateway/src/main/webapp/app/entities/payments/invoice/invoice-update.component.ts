@@ -7,7 +7,6 @@ import {Observable} from 'rxjs';
 
 import {IInvoice, Invoice} from 'app/shared/model/payments/invoice.model';
 import {InvoiceService} from './invoice.service';
-import {UserManagementComponent} from "app/admin/user-management/user-management.component";
 import {NotificationService} from "app/entities/notifications/notification/notification.service";
 import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 
@@ -31,7 +30,7 @@ export class InvoiceUpdateComponent implements OnInit {
     protected invoiceService: InvoiceService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +44,7 @@ export class InvoiceUpdateComponent implements OnInit {
       id: invoice.id,
       invoiceNumber: Math.floor(Math.random() * (9999 - 1000)) + 1000,
       amount: this.activatedRoute.snapshot.paramMap.get('price'),
-      passengerId: UserManagementComponent.prototype.getUserLogin(),
+      passengerId: invoice.passengerId,
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }
@@ -92,6 +91,7 @@ export class InvoiceUpdateComponent implements OnInit {
           window.confirm("undefined");
         }
       });
+    window.history.go(-3);
   }
 
   protected onSaveError(): void {

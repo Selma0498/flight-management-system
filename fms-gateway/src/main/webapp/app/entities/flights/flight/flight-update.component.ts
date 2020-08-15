@@ -16,6 +16,8 @@ import { IAirline } from 'app/shared/model/flights/airline.model';
 import { AirlineService } from 'app/entities/flights/airline/airline.service';
 import { IPlane } from 'app/shared/model/flights/plane.model';
 import { PlaneService } from 'app/entities/flights/plane/plane.service';
+import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
+import {NotificationService} from "app/entities/notifications/notification/notification.service";
 
 type SelectableEntity = IFlightHandling | IAirport | IAirline | IPlane;
 
@@ -51,7 +53,8 @@ export class FlightUpdateComponent implements OnInit {
     protected airlineService: AirlineService,
     protected planeService: PlaneService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +147,14 @@ export class FlightUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
+    this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
+      .subscribe(notification => {
+        if(notification.description !== undefined) {
+          window.confirm(notification.description);
+        } else {
+          window.confirm("undefined");
+        }
+      });
     this.previousState();
   }
 
