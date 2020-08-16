@@ -1,14 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div>
-            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-luggage"
-                    [routerLink]="['/luggage/new/flight', this.getFlightNumber(), 'booking', this.getBookingNumber()]">
-                <fa-icon icon="plus"></fa-icon>
-                <span>
-                    Add Luggage
-                </span>
-            </button>
-        </div>
+
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-booking-heading">Create or edit a Booking</h2>
 
@@ -67,7 +59,8 @@
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
-                        [routerLink]="['/payment/new', this.getFlightPrice().toString(), this.getBookingNumber()]">
+                        [routerLink]="['/luggage/new/flight', this.getFlightNumber(), 'booking', this.getBookingNumber(), 'price', this.getFlightPrice()]">
+                    {{this.onSaveSuccess()}}
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

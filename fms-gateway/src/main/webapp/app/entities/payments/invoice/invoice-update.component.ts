@@ -91,7 +91,7 @@ export class InvoiceUpdateComponent implements OnInit {
           window.confirm("undefined");
         }
       });
-    window.history.go(-3);
+    window.history.go(-4);
   }
 
   protected onSaveError(): void {

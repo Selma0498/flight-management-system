@@ -82,9 +82,8 @@ export class LuggageUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
   }
 
   protected onSaveError(): void {
@@ -99,6 +98,18 @@ export class LuggageUpdateComponent implements OnInit {
       result += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return result;
+  }
+
+  public getBookingNumber(): number {
+    return this.editForm.get(['bookingNumber'])!.value;
+  }
+
+  public getFlightPrice(): string {
+    const result = this.activatedRoute.snapshot.paramMap.get('flightPrice');
+    if(result !== null) {
+      return result;
+    }
+    return "null";
   }
 
 }

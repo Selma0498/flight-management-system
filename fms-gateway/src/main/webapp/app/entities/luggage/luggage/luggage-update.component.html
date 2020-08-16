@@ -111,7 +111,9 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
+                        [routerLink]="['/payment/new/booking', this.getBookingNumber(), 'flight-price', this.getFlightPrice()]">
+                    {{this.onSaveSuccess()}}
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

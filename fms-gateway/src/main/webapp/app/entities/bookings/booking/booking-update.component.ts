@@ -70,7 +70,7 @@ export class BookingUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
   }
 
@@ -80,7 +80,7 @@ export class BookingUpdateComponent implements OnInit {
 
   public getFlightPrice(): string {
     const result = this.activatedRoute.snapshot.paramMap.get('price');
-    if(result != null) {
+    if(result !== null) {
       return result;
     }
     return "null";

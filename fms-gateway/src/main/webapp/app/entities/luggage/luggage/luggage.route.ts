@@ -57,7 +57,7 @@ export const luggageRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new/flight/:flightNumber/booking/:bookingNumber',
+    path: 'new/flight/:flightNumber/booking/:bookingNumber/price/:flightPrice',
     component: LuggageUpdateComponent,
     resolve: {
       luggage: LuggageResolve,

@@ -57,7 +57,7 @@ export const invoiceRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new/booking-number/:bookingNumber/price/:price',
+    path: 'new/booking/:bookingNumber/price/:price',
     component: InvoiceUpdateComponent,
     resolve: {
       invoice: InvoiceResolve,

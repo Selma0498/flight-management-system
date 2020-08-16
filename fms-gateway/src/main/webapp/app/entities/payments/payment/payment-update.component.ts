@@ -40,7 +40,7 @@ export class PaymentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: payment.id,
       passengerId: payment.passengerId,
-      toPay: this.activatedRoute.snapshot.paramMap.get('price'),
+      toPay: this.activatedRoute.snapshot.paramMap.get('fprice'),
       bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
     });
   }
@@ -92,7 +92,7 @@ export class PaymentUpdateComponent implements OnInit {
     return this.editForm.get(['bookingNumber'])!.value;
   }
 
-  public getFlightPrice(): number {
+  public getFlightPrice(): string {
     return this.editForm.get(['toPay'])!.value;
   }
 }

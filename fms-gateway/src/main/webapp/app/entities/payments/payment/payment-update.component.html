@@ -46,11 +46,9 @@
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
-                        [routerLink]="['/invoice/new/booking-number', this.getBookingNumber(), 'price', this.getFlightPrice()]">
+                        [routerLink]="['/invoice/new/booking', this.getBookingNumber(), 'price', this.getFlightPrice()]">
+                    {{this.onSaveSuccess()}}
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
-                    <!--<div *ngIf="onSaveSuccess()"
-                        [routerLink]="['/invoice/new', this.getBookingNumber(), '/amount', this.getFlightPrice()]">
-                    </div>-->
                 </button>
             </div>
         </form>
