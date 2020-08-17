@@ -50,10 +50,6 @@ public class Plane implements Serializable {
         return this;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
     public String getModelNumber() {
         return modelNumber;
     }
@@ -61,10 +57,6 @@ public class Plane implements Serializable {
     public Plane modelNumber(String modelNumber) {
         this.modelNumber = modelNumber;
         return this;
-    }
-
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
     }
 
     public String getRegistrationNumber() {

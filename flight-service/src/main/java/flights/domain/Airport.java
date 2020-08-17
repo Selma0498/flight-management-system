@@ -110,10 +110,6 @@ public class Airport implements Serializable {
         this.postalCode = postalCode;
         return this;
     }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

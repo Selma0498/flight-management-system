@@ -42,9 +42,6 @@ public class Airline implements Serializable {
         return this;
     }
 
-    public void setAirlineName(String airlineName) {
-        this.airlineName = airlineName;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

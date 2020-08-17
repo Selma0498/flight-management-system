@@ -60,11 +60,6 @@ public class FlightHandling implements Serializable {
         return this;
     }
 
-    public void setDelay(Double delay) {
-        this.delay = delay;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -148,9 +148,6 @@ public class Luggage implements Serializable {
         return this;
     }
 
-    public void setRfidTag(String rfidTag) {
-        this.rfidTag = rfidTag;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

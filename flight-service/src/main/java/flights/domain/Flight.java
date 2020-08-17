@@ -129,10 +129,6 @@ public class Flight implements Serializable {
         return this;
     }
 
-    public void setPilot(String pilot) {
-        this.pilot = pilot;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -146,39 +142,8 @@ public class Flight implements Serializable {
         this.price = price;
     }
 
-    public FlightHandling getFlightHandler() {
-        return flightHandler;
-    }
-
-    public Flight flightHandler(FlightHandling flightHandling) {
-        this.flightHandler = flightHandling;
-        return this;
-    }
-
-    public void setFlightHandler(FlightHandling flightHandling) {
-        this.flightHandler = flightHandling;
-    }
-
-    public Airport getOrigin() {
-        return origin;
-    }
-
-    public Flight origin(Airport airport) {
-        this.origin = airport;
-        return this;
-    }
-
     public void setOrigin(Airport airport) {
         this.origin = airport;
-    }
-
-    public Airport getDestination() {
-        return destination;
-    }
-
-    public Flight destination(Airport airport) {
-        this.destination = airport;
-        return this;
     }
 
     public void setDestination(Airport airport) {
