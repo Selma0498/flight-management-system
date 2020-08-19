@@ -1,9 +1,0 @@
-export const enum ELuggageType {
-  CARRY_ON = 'CARRY_ON',
-
-  CABIN_BAG_10KG = 'CABIN_BAG_10KG',
-
-  CARGO_BAG_20KG = 'CARGO_BAG_20KG',
-
-  CARGO_BAG_30KG = 'CARGO_BAG_30KG',
-}
