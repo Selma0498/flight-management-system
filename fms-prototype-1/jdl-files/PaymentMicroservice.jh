@@ -1,0 +1,27 @@
+entity Invoice {
+	invoiceNumber Integer required,
+    amount Double required,
+    passengerId String required,
+    bookingNumber Integer required
+}
+
+entity CreditCard {
+	cardType ECardType required,
+    cvc Integer required,
+    cardNumber Integer required,
+    validityDate LocalDate required
+}
+
+entity Payment {
+	passengerId String required, 
+    toPay Double required,
+    bookingNumber Integer required
+}
+
+enum ECardType {
+	MASTERCARD, VISA, MAESTRO
+}
+
+relationship OneToOne {
+	Payment to Invoice
+}

@@ -1,0 +1,10 @@
+
+enum ENotificationType {
+	FLIGHT_UPDATED, FLIGHT_CANCELLED, BOOKING_CONFIRMED, BOOKING_CANCELLED
+}
+
+entity Notification {
+	notificationType ENotificationType required,
+    description String required
+}
+

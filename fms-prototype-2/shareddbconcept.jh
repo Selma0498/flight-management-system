@@ -1,0 +1,111 @@
+entity Booking{
+	bookingNumber Integer required,
+    flightNumber String required,
+    passengerId String required,
+}
+
+entity Flight {
+	flightNumber String required,
+    flightType EFlightType required,
+    fareType EFareType required,
+    pilot String,
+    price Double required
+}
+
+entity Airport {
+	airportCode String required, 
+    airportName String required,
+    countryName String required, 
+    cityName String required,
+    postalCode String
+}
+
+entity Airline {
+	airlineName String
+}
+
+entity Plane {
+	manufacturer String,
+    modelNumber String,
+    registrationNumber String required
+}
+
+enum EFareType {
+	ECONOMY, BUSINESS
+}
+
+enum EFlightType {
+	ONE_WAY, RETURN_TRIP
+} 
+
+entity FlightHandling {
+	boardingGate Integer required, 
+    delay Double
+}
+
+entity Luggage {
+	luggageType ELuggageType required,
+    luggageNumber Integer required,
+    flightNumber String required,
+    bookingNumber Integer required,
+    passengerId String required,
+    weightCategory Integer required,
+    rfidTag String
+}
+
+enum ELuggageType {
+	CARRY_ON, CABIN_BAG_10KG, CARGO_BAG_20KG, CARGO_BAG_30KG
+}
+
+entity Passenger {
+	username String required,
+	password String required,
+	name String required,
+    surname String required,
+    email String required
+}
+
+entity Invoice {
+	invoiceNumber Integer required,
+    amount Double required,
+    passengerId String required,
+    bookingNumber Integer required
+}
+
+entity CreditCard {
+	cardType ECardType required,
+    cvc Integer required,
+    cardNumber Integer required,
+    validityDate LocalDate required
+}
+
+entity Payment {
+	passengerId String required, 
+    toPay Double required,
+    bookingNumber Integer required
+}
+
+enum ECardType {
+	MASTERCARD, VISA, MAESTRO
+}
+
+relationship OneToOne {
+	Flight{flightHandler} to FlightHandling,
+	Luggage{booking} to Booking,
+	Payment to Invoice,
+	Invoice{booking} to Booking
+}
+
+relationship ManyToOne {
+	Flight{origin required} to Airport,
+    Flight{destination required} to Airport,
+    Flight{airline required} to Airline,
+    Flight{plane required} to Plane,
+    Booking{flight} to Flight,
+    Luggage{flight} to Flight
+}
+
+relationship ManyToMany {
+	Booking{passenger} to Passenger{booking}
+}
+
