@@ -1,0 +1,33 @@
+{
+  "name": "Notification",
+  "fields": [
+    {
+      "fieldName": "notificationType",
+      "fieldType": "ENotificationType",
+      "fieldValues": "FLIGHT_UPDATED,FLIGHT_CANCELLED,BOOKING_CONFIRMED,BOOKING_CANCELLED",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200616122728",
+  "entityTableName": "notification",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "notifications",
+  "applications": "*",
+  "microserviceName": "notifications"
+}
