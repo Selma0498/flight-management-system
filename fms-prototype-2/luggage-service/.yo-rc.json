@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "luggage"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "luggage",
+    "packageName": "luggage",
+    "packageFolder": "luggage",
+    "serverPort": "8084",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MTIxODFiNTkyMzY0Yzg2YWRkNWUzYjM0MzdkODgwMzljYzIxMzlkOTJlYjVlMGE2MmY3YjJhN2IxZWUwYmMwNmIzYjRiMGUyYmMyMWI3MDc5YTliMjkwNmE4NzNjMWI2OWU3MTJiYTZiYTkyMGU4NWRjODE4NGI0NzA1YjZjN2Y=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1597876700826,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
