@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "gateway",
+      "microservicePath": "C:\\Users\\USER\\Desktop\\Bachelorarbeit\\flight-management-system\\flight-management-system\\notifications-service\\"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "gateway",
+    "baseName": "gateway",
+    "packageName": "gateway",
+    "packageFolder": "gateway",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NTU1ZmZkYTUxNDc1NGM3NjU0ZGUxOWU1YjhiNjg5OTYxNTUyNDMzMWJjMmRjNDZhYTNjZjVmZmI1YTVhOTliZTkzYzNkYWUwYzY1NjY3NjQ5Yjg1YTcyZmE2MGI2YjE1MmJkNTRjMWJlYTQ2YzJhMmU1ODI0NzRkMDVjOWM3NmI=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1594596340109,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}

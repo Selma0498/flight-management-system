@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "payments"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "payments",
+    "packageName": "payments",
+    "packageFolder": "payments",
+    "serverPort": "8085",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NDEzZjMzZGJhZmI1ODk0ZTE5NDRjNGI4M2VkMTkyNzExYzMxN2U5ODJlN2IxYjI5NzhhMDViNjc4YmY1OTMxZmM5ZmU5YzEyMzkwYjFlN2IzOGJhZjI4OTBlNTkxMTg5OTBkMTNmMGFiOTg5ODcyMTg1ODFiZThjZDNjODM2Zjk=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1596904187505,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

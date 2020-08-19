@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "passengers"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "passengers",
+    "packageName": "passengers",
+    "packageFolder": "passengers",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NTJhYmJlYTNmMDY2OGJhMWUyZDhhNjA5ZjgxNjNkMzgxZjVkYjNiNDZiZDRiNzliM2FjMGZkNzBlYmVhZjk4OWEzMjJlN2FhZmUwNmY2OWZmYjA4NWEwMDFhMWUxZThhNzA5MzViYWE3OTY1OTc5OGNkMGIyZDg3NjBiMTQyZmE=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1594735012037,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
