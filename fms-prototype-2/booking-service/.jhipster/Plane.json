@@ -1,0 +1,33 @@
+{
+  "name": "Plane",
+  "fields": [
+    {
+      "fieldName": "manufacturer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modelNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200819220344",
+  "entityTableName": "plane",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "bookings",
+  "applications": "*",
+  "microserviceName": "bookings"
+}

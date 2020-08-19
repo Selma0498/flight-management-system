@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "bookings"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "bookings",
+    "packageName": "bookings",
+    "packageFolder": "bookings",
+    "serverPort": "8083",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZTE4MmZkY2MzZjFjMTE4YmRhNzI2YjYzZDM4ZDJhMzJhNTMxODkxZjgwNGNjOTZhNjc0YjI0NTVhNDlmOGRmNDIxNWQxMmI0ZjJlOTBhZTEyYTA0OGZmZDY5Mzg5NGRmY2U1MmMwM2NiOThiZmIyNGUyZDA2ZjUzODY2OGM5MzQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1597873931760,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

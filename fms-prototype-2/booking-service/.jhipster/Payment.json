@@ -1,0 +1,48 @@
+{
+  "name": "Payment",
+  "fields": [
+    {
+      "fieldName": "passengerId",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "toPay",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "bookingNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "payment",
+      "relationshipName": "invoice",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200819220944",
+  "entityTableName": "payment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "bookings",
+  "applications": "*",
+  "microserviceName": "bookings"
+}
