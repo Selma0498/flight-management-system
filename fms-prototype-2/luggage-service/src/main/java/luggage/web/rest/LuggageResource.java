@@ -1,8 +1,8 @@
-package bookings.web.rest;
+package luggage.web.rest;
 
-import bookings.domain.Luggage;
-import bookings.repository.LuggageRepository;
-import bookings.web.rest.errors.BadRequestAlertException;
+import luggage.domain.Luggage;
+import luggage.repository.LuggageRepository;
+import luggage.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing {@link bookings.domain.Luggage}.
+ * REST controller for managing {@link luggage.domain.Luggage}.
  */
 @RestController
 @RequestMapping("/api")
@@ -29,7 +29,7 @@ public class LuggageResource {
 
     private final Logger log = LoggerFactory.getLogger(LuggageResource.class);
 
-    private static final String ENTITY_NAME = "bookingsLuggage";
+    private static final String ENTITY_NAME = "luggageLuggage";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

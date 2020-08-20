@@ -1,4 +1,4 @@
-package bookings.domain;
+package luggage.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
-import bookings.domain.enumeration.ELuggageType;
+import luggage.domain.enumeration.ELuggageType;
 
 /**
  * A Luggage.

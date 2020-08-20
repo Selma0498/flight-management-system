@@ -1,6 +1,6 @@
-package bookings.repository;
+package luggage.repository;
 
-import bookings.domain.Luggage;
+import luggage.domain.Luggage;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

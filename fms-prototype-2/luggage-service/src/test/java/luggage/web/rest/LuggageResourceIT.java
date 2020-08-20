@@ -1,8 +1,8 @@
-package bookings.web.rest;
+package luggage.web.rest;
 
-import bookings.BookingsApp;
-import bookings.domain.Luggage;
-import bookings.repository.LuggageRepository;
+import luggage.LuggageApp;
+import luggage.domain.Luggage;
+import luggage.repository.LuggageRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,11 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import bookings.domain.enumeration.ELuggageType;
+import luggage.domain.enumeration.ELuggageType;
 /**
  * Integration tests for the {@link LuggageResource} REST controller.
  */
-@SpringBootTest(classes = BookingsApp.class)
+@SpringBootTest(classes = LuggageApp.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class LuggageResourceIT {

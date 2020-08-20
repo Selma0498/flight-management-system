@@ -1,4 +1,4 @@
-package bookings.domain.enumeration;
+package luggage.domain.enumeration;
 
 /**
  * The ELuggageType enumeration.

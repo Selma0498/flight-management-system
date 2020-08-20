@@ -50,7 +50,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200820210122",
+  "changelogDate": "20200820213008",
   "entityTableName": "luggage",
   "dto": "no",
   "pagination": "no",
@@ -59,7 +59,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "clientRootFolder": "flights",
+  "clientRootFolder": "luggage",
   "applications": "*",
-  "microserviceName": "flights"
+  "microserviceName": "luggage"
 }
