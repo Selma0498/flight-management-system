@@ -33,21 +33,13 @@
   "relationships": [
     {
       "relationshipType": "one-to-one",
-      "otherEntityName": "booking",
-      "otherEntityRelationshipName": "invoice",
-      "relationshipName": "booking",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "one-to-one",
       "otherEntityName": "payment",
       "otherEntityRelationshipName": "invoice",
       "relationshipName": "payment",
       "ownerSide": false
     }
   ],
-  "changelogDate": "20200819220744",
+  "changelogDate": "20200820205422",
   "entityTableName": "invoice",
   "dto": "no",
   "pagination": "no",

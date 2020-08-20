@@ -1,6 +1,5 @@
 package bookings.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Booking.
@@ -36,17 +33,6 @@ public class Booking implements Serializable {
     @NotNull
     @Column(name = "passenger_id", nullable = false)
     private String passengerId;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "bookings", allowSetters = true)
-    private Flight flight;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "booking_passenger",
-               joinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "passenger_id", referencedColumnName = "id"))
-    private Set<Passenger> passengers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -94,44 +80,6 @@ public class Booking implements Serializable {
 
     public void setPassengerId(String passengerId) {
         this.passengerId = passengerId;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public Booking flight(Flight flight) {
-        this.flight = flight;
-        return this;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    public Set<Passenger> getPassengers() {
-        return passengers;
-    }
-
-    public Booking passengers(Set<Passenger> passengers) {
-        this.passengers = passengers;
-        return this;
-    }
-
-    public Booking addPassenger(Passenger passenger) {
-        this.passengers.add(passenger);
-        passenger.getBookings().add(this);
-        return this;
-    }
-
-    public Booking removePassenger(Passenger passenger) {
-        this.passengers.remove(passenger);
-        passenger.getBookings().remove(this);
-        return this;
-    }
-
-    public void setPassengers(Set<Passenger> passengers) {
-        this.passengers = passengers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

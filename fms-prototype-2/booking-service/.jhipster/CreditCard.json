@@ -32,7 +32,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200819220844",
+  "changelogDate": "20200820205522",
   "entityTableName": "credit_card",
   "dto": "no",
   "pagination": "no",

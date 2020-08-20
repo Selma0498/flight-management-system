@@ -6,25 +6,18 @@ import bookings.repository.BookingRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link BookingResource} REST controller.
  */
 @SpringBootTest(classes = BookingsApp.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class BookingResourceIT {
@@ -48,9 +40,6 @@ public class BookingResourceIT {
 
     @Autowired
     private BookingRepository bookingRepository;
-
-    @Mock
-    private BookingRepository bookingRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -204,26 +193,6 @@ public class BookingResourceIT {
             .andExpect(jsonPath("$.[*].passengerId").value(hasItem(DEFAULT_PASSENGER_ID)));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllBookingsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(bookingRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restBookingMockMvc.perform(get("/api/bookings?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(bookingRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllBookingsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(bookingRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restBookingMockMvc.perform(get("/api/bookings?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(bookingRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getBooking() throws Exception {

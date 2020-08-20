@@ -1,6 +1,5 @@
 package bookings.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Passenger.
@@ -44,11 +41,6 @@ public class Passenger implements Serializable {
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
-
-    @ManyToMany(mappedBy = "passengers")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
-    private Set<Booking> bookings = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -122,31 +114,6 @@ public class Passenger implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
-
-    public Passenger bookings(Set<Booking> bookings) {
-        this.bookings = bookings;
-        return this;
-    }
-
-    public Passenger addBooking(Booking booking) {
-        this.bookings.add(booking);
-        booking.getPassengers().add(this);
-        return this;
-    }
-
-    public Passenger removeBooking(Booking booking) {
-        this.bookings.remove(booking);
-        booking.getPassengers().remove(this);
-        return this;
-    }
-
-    public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -23,24 +23,8 @@
       ]
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "flight",
-      "otherEntityRelationshipName": "booking",
-      "relationshipName": "flight",
-      "otherEntityField": "id"
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "passenger",
-      "otherEntityRelationshipName": "booking",
-      "relationshipName": "passenger",
-      "otherEntityField": "id",
-      "ownerSide": true
-    }
-  ],
-  "changelogDate": "20200819215944",
+  "relationships": [],
+  "changelogDate": "20200820204622",
   "entityTableName": "booking",
   "dto": "no",
   "pagination": "no",

@@ -49,24 +49,8 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "booking",
-      "otherEntityRelationshipName": "luggage",
-      "relationshipName": "booking",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "flight",
-      "otherEntityRelationshipName": "luggage",
-      "relationshipName": "flight",
-      "otherEntityField": "id"
-    }
-  ],
-  "changelogDate": "20200819220544",
+  "relationships": [],
+  "changelogDate": "20200820205222",
   "entityTableName": "luggage",
   "dto": "no",
   "pagination": "no",

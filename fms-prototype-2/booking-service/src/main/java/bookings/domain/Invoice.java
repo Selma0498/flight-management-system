@@ -39,10 +39,6 @@ public class Invoice implements Serializable {
     @Column(name = "booking_number", nullable = false)
     private Integer bookingNumber;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Booking booking;
-
     @OneToOne(mappedBy = "invoice")
     @JsonIgnore
     private Payment payment;
@@ -106,19 +102,6 @@ public class Invoice implements Serializable {
 
     public void setBookingNumber(Integer bookingNumber) {
         this.bookingNumber = bookingNumber;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public Invoice booking(Booking booking) {
-        this.booking = booking;
-        return this;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
     }
 
     public Payment getPayment() {

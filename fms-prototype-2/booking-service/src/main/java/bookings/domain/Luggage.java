@@ -1,6 +1,5 @@
 package bookings.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -52,14 +51,6 @@ public class Luggage implements Serializable {
 
     @Column(name = "rfid_tag")
     private String rfidTag;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Booking booking;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "luggages", allowSetters = true)
-    private Flight flight;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -159,32 +150,6 @@ public class Luggage implements Serializable {
 
     public void setRfidTag(String rfidTag) {
         this.rfidTag = rfidTag;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public Luggage booking(Booking booking) {
-        this.booking = booking;
-        return this;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public Luggage flight(Flight flight) {
-        this.flight = flight;
-        return this;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

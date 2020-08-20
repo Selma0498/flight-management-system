@@ -37,17 +37,8 @@
       ]
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "booking",
-      "otherEntityRelationshipName": "passenger",
-      "relationshipName": "booking",
-      "otherEntityField": "id",
-      "ownerSide": false
-    }
-  ],
-  "changelogDate": "20200819220644",
+  "relationships": [],
+  "changelogDate": "20200820205322",
   "entityTableName": "passenger",
   "dto": "no",
   "pagination": "no",

@@ -83,13 +83,12 @@ public class BookingResource {
     /**
      * {@code GET  /bookings} : get all the bookings.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bookings in body.
      */
     @GetMapping("/bookings")
-    public List<Booking> getAllBookings(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Booking> getAllBookings() {
         log.debug("REST request to get all Bookings");
-        return bookingRepository.findAllWithEagerRelationships();
+        return bookingRepository.findAll();
     }
 
     /**
@@ -101,7 +100,7 @@ public class BookingResource {
     @GetMapping("/bookings/{id}")
     public ResponseEntity<Booking> getBooking(@PathVariable Long id) {
         log.debug("REST request to get Booking : {}", id);
-        Optional<Booking> booking = bookingRepository.findOneWithEagerRelationships(id);
+        Optional<Booking> booking = bookingRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(booking);
     }
 

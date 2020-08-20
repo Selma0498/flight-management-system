@@ -1,0 +1,65 @@
+{
+  "name": "Luggage",
+  "fields": [
+    {
+      "fieldName": "luggageType",
+      "fieldType": "ELuggageType",
+      "fieldValues": "CARRY_ON,CABIN_BAG_10KG,CARGO_BAG_20KG,CARGO_BAG_30KG",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "luggageNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "flightNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "bookingNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "passengerId",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "weightCategory",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "rfidTag",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200820210122",
+  "entityTableName": "luggage",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "flights",
+  "applications": "*",
+  "microserviceName": "flights"
+}

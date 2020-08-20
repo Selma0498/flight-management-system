@@ -78,7 +78,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200819220044",
+  "changelogDate": "20200820204722",
   "entityTableName": "flight",
   "dto": "no",
   "pagination": "no",

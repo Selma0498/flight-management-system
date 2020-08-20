@@ -91,21 +91,12 @@ enum ECardType {
 
 relationship OneToOne {
 	Flight{flightHandler} to FlightHandling,
-	Luggage{booking} to Booking,
-	Payment to Invoice,
-	Invoice{booking} to Booking
+	Payment to Invoice
 }
 
 relationship ManyToOne {
 	Flight{origin required} to Airport,
     Flight{destination required} to Airport,
     Flight{airline required} to Airline,
-    Flight{plane required} to Plane,
-    Booking{flight} to Flight,
-    Luggage{flight} to Flight
+    Flight{plane required} to Plane
 }
-
-relationship ManyToMany {
-	Booking{passenger} to Passenger{booking}
-}
-
