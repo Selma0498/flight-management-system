@@ -78,6 +78,11 @@ spring:
         size: 1
   thymeleaf:
     mode: HTML
+  spring:
+    h2:
+      console:
+        settings:
+          web-allow-others=true
 
 server:
   port: 10344
