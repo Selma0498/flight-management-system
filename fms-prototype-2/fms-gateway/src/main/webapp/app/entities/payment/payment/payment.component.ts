@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPayment } from 'app/shared/model/payments/payment.model';
+import { IPayment } from 'app/shared/model/payment/payment.model';
 import { PaymentService } from './payment.service';
 import { PaymentDeleteDialogComponent } from './payment-delete-dialog.component';
 

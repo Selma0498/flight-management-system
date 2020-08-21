@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IInvoice } from 'app/shared/model/payments/invoice.model';
+import { IInvoice } from 'app/shared/model/payment/invoice.model';
 import { InvoiceService } from './invoice.service';
 import { InvoiceDeleteDialogComponent } from './invoice-delete-dialog.component';
 

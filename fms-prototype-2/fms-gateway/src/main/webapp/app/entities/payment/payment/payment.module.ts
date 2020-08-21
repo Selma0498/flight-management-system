@@ -13,4 +13,4 @@ import { paymentRoute } from './payment.route';
   declarations: [PaymentComponent, PaymentDetailComponent, PaymentUpdateComponent, PaymentDeleteDialogComponent],
   entryComponents: [PaymentDeleteDialogComponent],
 })
-export class PaymentsPaymentModule {}
+export class PaymentPaymentModule {}

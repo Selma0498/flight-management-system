@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IInvoice } from 'app/shared/model/payments/invoice.model';
+import { IInvoice } from 'app/shared/model/payment/invoice.model';
 
 type EntityResponseType = HttpResponse<IInvoice>;
 type EntityArrayResponseType = HttpResponse<IInvoice[]>;
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
-  public resourceUrl = SERVER_API_URL + 'services/payments/api/invoices';
+  public resourceUrl = SERVER_API_URL + 'services/payment/api/invoices';
 
   constructor(protected http: HttpClient) {}
 

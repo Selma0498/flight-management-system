@@ -18,10 +18,10 @@
                     <div *ngIf="editForm.get('invoiceNumber')!.invalid && (editForm.get('invoiceNumber')!.dirty || editForm.get('invoiceNumber')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('invoiceNumber')?.errors?.required">
-                        This field is required.
+                            This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('invoiceNumber')?.errors?.number">
+                               [hidden]="!editForm.get('invoiceNumber')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -34,10 +34,10 @@
                     <div *ngIf="editForm.get('amount')!.invalid && (editForm.get('amount')!.dirty || editForm.get('amount')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('amount')?.errors?.required">
-                        This field is required.
+                            This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('amount')?.errors?.number">
+                               [hidden]="!editForm.get('amount')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -50,7 +50,7 @@
                     <div *ngIf="editForm.get('passengerId')!.invalid && (editForm.get('passengerId')!.dirty || editForm.get('passengerId')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('passengerId')?.errors?.required">
-                        This field is required.
+                            This field is required.
                         </small>
                     </div>
                 </div>
@@ -62,10 +62,10 @@
                     <div *ngIf="editForm.get('bookingNumber')!.invalid && (editForm.get('bookingNumber')!.dirty || editForm.get('bookingNumber')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('bookingNumber')?.errors?.required">
-                        This field is required.
+                            This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('bookingNumber')?.errors?.number">
+                               [hidden]="!editForm.get('bookingNumber')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>

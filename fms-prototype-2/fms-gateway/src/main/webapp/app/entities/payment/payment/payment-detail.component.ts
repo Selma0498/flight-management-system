@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IPayment } from 'app/shared/model/payments/payment.model';
+import { IPayment } from 'app/shared/model/payment/payment.model';
 
 @Component({
   selector: 'jhi-payment-detail',

@@ -1,4 +1,4 @@
-import { IPayment } from 'app/shared/model/payments/payment.model';
+import { IPayment } from 'app/shared/model/payment/payment.model';
 
 export interface IInvoice {
   id?: number;

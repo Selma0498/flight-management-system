@@ -5,7 +5,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {IInvoice, Invoice} from 'app/shared/model/payments/invoice.model';
+import {IInvoice, Invoice} from 'app/shared/model/payment/invoice.model';
 import {InvoiceService} from './invoice.service';
 import {NotificationService} from "app/entities/notifications/notification/notification.service";
 import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";

@@ -13,4 +13,4 @@ import { invoiceRoute } from './invoice.route';
   declarations: [InvoiceComponent, InvoiceDetailComponent, InvoiceUpdateComponent, InvoiceDeleteDialogComponent],
   entryComponents: [InvoiceDeleteDialogComponent],
 })
-export class PaymentsInvoiceModule {}
+export class PaymentInvoiceModule {}

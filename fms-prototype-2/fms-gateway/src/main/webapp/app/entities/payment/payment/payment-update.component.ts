@@ -5,9 +5,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { IPayment, Payment } from 'app/shared/model/payments/payment.model';
+import { IPayment, Payment } from 'app/shared/model/payment/payment.model';
 import { PaymentService } from './payment.service';
-import { IInvoice } from 'app/shared/model/payments/invoice.model';
+import { IInvoice } from 'app/shared/model/payment/invoice.model';
 
 @Component({
   selector: 'jhi-payment-update',

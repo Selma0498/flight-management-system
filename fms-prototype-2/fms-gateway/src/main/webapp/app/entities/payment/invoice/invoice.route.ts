@@ -6,7 +6,7 @@ import { flatMap } from 'rxjs/operators';
 
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
+import { IInvoice, Invoice } from 'app/shared/model/payment/invoice.model';
 import { InvoiceService } from './invoice.service';
 import { InvoiceComponent } from './invoice.component';
 import { InvoiceDetailComponent } from './invoice-detail.component';

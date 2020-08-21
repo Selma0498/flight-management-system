@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IPayment } from 'app/shared/model/payments/payment.model';
+import { IPayment } from 'app/shared/model/payment/payment.model';
 import { PaymentService } from './payment.service';
 
 @Component({
