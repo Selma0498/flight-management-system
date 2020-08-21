@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "notifications"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "notifications",
+    "packageName": "notifications",
+    "packageFolder": "notifications",
+    "serverPort": "8086",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NjNhNDRlOTIwYmFmMGUzNzdhYjUyYjIyODU0Njc0NTRjMGM4YWU4MWQ4NWFlNTI5ZjBmOGE3MmFiNTRjZWNmOWEwMzkzMzYwMjdiODY1MmZlNDU2MDZhNmQ2OTkwZDYzZGE4YzljNzg5MTc3NzFiM2JlYjU5NGMxYjk4NjgzMDc=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1598045031556,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
