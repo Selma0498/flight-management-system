@@ -1,0 +1,29 @@
+{
+  "name": "FlightHandling",
+  "fields": [
+    {
+      "fieldName": "boardingGate",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "delay",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200717155308",
+  "entityTableName": "flight_handling",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "flights",
+  "applications": "*",
+  "microserviceName": "flights",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

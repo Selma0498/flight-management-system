@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="flight">
+            <h2><span>Flight</span> {{ flight.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Flight Number</span></dt>
+                <dd>
+                    <span>{{ flight.flightNumber }}</span>
+                </dd>
+                <dt><span>Flight Type</span></dt>
+                <dd>
+                    <span>{{ flight.flightType }}</span>
+                </dd>
+                <dt><span>Fare Type</span></dt>
+                <dd>
+                    <span>{{ flight.fareType }}</span>
+                </dd>
+                <dt><span>Pilot</span></dt>
+                <dd>
+                    <span>{{ flight.pilot }}</span>
+                </dd>
+                <dt><span>Price</span></dt>
+                <dd>
+                    <span>{{ flight.price }}</span>
+                </dd>
+                <dt><span>Flight Handler</span></dt>
+                <dd>
+                    <div *ngIf="flight.flightHandler">
+                        <a [routerLink]="['/flight-handling', flight.flightHandler?.id, 'view']">{{ flight.flightHandler?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Origin</span></dt>
+                <dd>
+                    <div *ngIf="flight.origin">
+                        <a [routerLink]="['/airport', flight.origin?.id, 'view']">{{ flight.origin?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Destination</span></dt>
+                <dd>
+                    <div *ngIf="flight.destination">
+                        <a [routerLink]="['/airport', flight.destination?.id, 'view']">{{ flight.destination?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Airline</span></dt>
+                <dd>
+                    <div *ngIf="flight.airline">
+                        <a [routerLink]="['/airline', flight.airline?.id, 'view']">{{ flight.airline?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Plane</span></dt>
+                <dd>
+                    <div *ngIf="flight.plane">
+                        <a [routerLink]="['/plane', flight.plane?.id, 'view']">{{ flight.plane?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/flight', flight.id, 'edit']"
+                    class="btn btn-primary" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
