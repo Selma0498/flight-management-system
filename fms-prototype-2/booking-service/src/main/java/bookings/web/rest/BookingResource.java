@@ -2,6 +2,7 @@ package bookings.web.rest;
 
 import bookings.domain.Booking;
 import bookings.repository.BookingRepository;
+import bookings.security.SecurityUtils;
 import bookings.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +90,17 @@ public class BookingResource {
     @GetMapping("/bookings")
     public List<Booking> getAllBookings() {
         log.debug("REST request to get all Bookings");
-        return bookingRepository.findAll();
+        List<Booking> resultingBookings = new ArrayList<>();
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+        for(Booking b: bookingRepository.findAll()) {
+            if(userLogin.isPresent() && userLogin.get().equals(b.getPassengerId())) {
+                resultingBookings.add(b);
+            }
+        }
+
+        return resultingBookings;
     }
 
     /**
@@ -101,7 +113,16 @@ public class BookingResource {
     public ResponseEntity<Booking> getBooking(@PathVariable Long id) {
         log.debug("REST request to get Booking : {}", id);
         Optional<Booking> booking = bookingRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(booking);
+
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(booking.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(booking.get().getPassengerId())) {
+            return ResponseUtil.wrapOrNotFound(booking);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -113,8 +134,17 @@ public class BookingResource {
     @DeleteMapping("/bookings/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         log.debug("REST request to delete Booking : {}", id);
+        Optional<Booking> booking = bookingRepository.findById(id);
 
-        bookingRepository.deleteById(id);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(booking.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(booking.get().getPassengerId())) {
+            bookingRepository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
