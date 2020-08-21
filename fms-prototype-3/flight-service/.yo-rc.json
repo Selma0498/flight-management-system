@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "flights"
+    },
+    "jhipsterVersion": "6.9.0",
+    "applicationType": "microservice",
+    "baseName": "flights",
+    "packageName": "flights",
+    "packageFolder": "flights",
+    "serverPort": "8082",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NGNmMmMwNjA4ZWY1OWE3MmZjNzMyOWYyODkxYjhhM2RhMzk0OWYwOGVhNzVmNjQyYzJjZDk2OWEzYzFiNTY5NWQxMGFmMjg2NTc0YTlmYzQ0M2M3M2MyODhjMDgyNmNiYmE0MDI5M2ViNDBlMGQ3MDY3MGZiMTJlNjI4ZmUyNTQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1598044651847,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
