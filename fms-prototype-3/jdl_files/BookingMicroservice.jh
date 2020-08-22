@@ -1,0 +1,6 @@
+entity Booking{
+	bookingNumber Integer required,
+    flightNumber String required,
+    passengerId String required
+}
+

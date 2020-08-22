@@ -1,0 +1,13 @@
+entity Luggage {
+	luggageType ELuggageType required,
+    luggageNumber Integer required,
+    flightNumber String required,
+    bookingNumber Integer required,
+    passengerId String required,
+    weightCategory Integer required,
+    rfidTag String
+}
+
+enum ELuggageType {
+	CARRY_ON, CABIN_BAG_10KG, CARGO_BAG_20KG, CARGO_BAG_30KG
+}

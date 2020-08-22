@@ -1,0 +1,7 @@
+entity Passenger {
+	username String required,
+	password String required,
+	name String required,
+    surname String required,
+    email String required
+}

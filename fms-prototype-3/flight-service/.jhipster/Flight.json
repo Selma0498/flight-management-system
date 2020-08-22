@@ -1,0 +1,93 @@
+{
+  "name": "Flight",
+  "fields": [
+    {
+      "fieldName": "flightNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "flightType",
+      "fieldType": "EFlightType",
+      "fieldValues": "ONE_WAY,RETURN_TRIP",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "fareType",
+      "fieldType": "EFareType",
+      "fieldValues": "ECONOMY,BUSINESS",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "pilot",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "flightHandling",
+      "otherEntityRelationshipName": "flight",
+      "relationshipName": "flightHandler",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airport",
+      "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
+      "relationshipName": "origin",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airport",
+      "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
+      "relationshipName": "destination",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "airline",
+      "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
+      "relationshipName": "airline",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "plane",
+      "otherEntityRelationshipName": "flight",
+      "relationshipValidateRules": "required",
+      "relationshipName": "plane",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200822083854",
+  "entityTableName": "flight",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "flights",
+  "applications": "*",
+  "microserviceName": "flights"
+}
