@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="plane">
+            <h2><span>Plane</span> {{ plane.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Manufacturer</span></dt>
+                <dd>
+                    <span>{{ plane.manufacturer }}</span>
+                </dd>
+                <dt><span>Model Number</span></dt>
+                <dd>
+                    <span>{{ plane.modelNumber }}</span>
+                </dd>
+                <dt><span>Registration Number</span></dt>
+                <dd>
+                    <span>{{ plane.registrationNumber }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/plane', plane.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

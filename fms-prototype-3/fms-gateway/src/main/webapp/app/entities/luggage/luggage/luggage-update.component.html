@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-luggage-heading">Create or edit a Luggage</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_luggageType">Luggage Type</label>
+                    <select class="form-control" name="luggageType" formControlName="luggageType" id="field_luggageType">
+                        <option value="CARRY_ON">CARRY_ON</option>
+                        <option value="CABIN_BAG_10KG">CABIN_BAG_10KG</option>
+                        <option value="CARGO_BAG_20KG">CARGO_BAG_20KG</option>
+                        <option value="CARGO_BAG_30KG">CARGO_BAG_30KG</option>
+                    </select>
+                    <div *ngIf="editForm.get('luggageType')!.invalid && (editForm.get('luggageType')!.dirty || editForm.get('luggageType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('luggageType')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_luggageNumber">Luggage Number</label>
+                    <input type="number" class="form-control" name="luggageNumber" id="field_luggageNumber"
+                           formControlName="luggageNumber"/>
+                    <div *ngIf="editForm.get('luggageNumber')!.invalid && (editForm.get('luggageNumber')!.dirty || editForm.get('luggageNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('luggageNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('luggageNumber')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_flightNumber">Flight Number</label>
+                    <input type="text" class="form-control" name="flightNumber" id="field_flightNumber"
+                           formControlName="flightNumber"/>
+                    <div *ngIf="editForm.get('flightNumber')!.invalid && (editForm.get('flightNumber')!.dirty || editForm.get('flightNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('flightNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bookingNumber">Booking Number</label>
+                    <input type="number" class="form-control" name="bookingNumber" id="field_bookingNumber"
+                           formControlName="bookingNumber"/>
+                    <div *ngIf="editForm.get('bookingNumber')!.invalid && (editForm.get('bookingNumber')!.dirty || editForm.get('bookingNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bookingNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('bookingNumber')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_passengerId">Passenger Id</label>
+                    <input type="text" class="form-control" name="passengerId" id="field_passengerId"
+                           formControlName="passengerId"/>
+                    <div *ngIf="editForm.get('passengerId')!.invalid && (editForm.get('passengerId')!.dirty || editForm.get('passengerId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('passengerId')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_weightCategory">Weight Category</label>
+                    <input type="number" class="form-control" name="weightCategory" id="field_weightCategory"
+                           formControlName="weightCategory"/>
+                    <div *ngIf="editForm.get('weightCategory')!.invalid && (editForm.get('weightCategory')!.dirty || editForm.get('weightCategory')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('weightCategory')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('weightCategory')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_rfidTag">Rfid Tag</label>
+                    <input type="text" class="form-control" name="rfidTag" id="field_rfidTag"
+                           formControlName="rfidTag"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
+                        [routerLink]="['/payment/new/booking', this.getBookingNumber(), 'flight-price', this.getFlightPrice()]">
+                    {{this.onSaveSuccess()}}
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
