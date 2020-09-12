@@ -31,9 +31,17 @@
       "relationshipName": "invoice",
       "otherEntityField": "id",
       "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "creditCard",
+      "otherEntityRelationshipName": "payment",
+      "relationshipName": "creditCard",
+      "otherEntityField": "id",
+      "ownerSide": true
     }
   ],
-  "changelogDate": "20200822084145",
+  "changelogDate": "20200912133156",
   "entityTableName": "payment",
   "dto": "no",
   "pagination": "no",

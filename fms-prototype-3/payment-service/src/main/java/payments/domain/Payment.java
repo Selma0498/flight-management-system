@@ -38,6 +38,10 @@ public class Payment implements Serializable {
     @JoinColumn(unique = true)
     private Invoice invoice;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private CreditCard creditCard;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -97,6 +101,19 @@ public class Payment implements Serializable {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public Payment creditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+        return this;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

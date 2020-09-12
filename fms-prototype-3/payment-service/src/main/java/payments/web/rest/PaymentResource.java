@@ -1,5 +1,7 @@
 package payments.web.rest;
 
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import payments.domain.CreditCard;
 import payments.domain.Payment;
 import payments.repository.PaymentRepository;
 import payments.web.rest.errors.BadRequestAlertException;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +55,13 @@ public class PaymentResource {
         log.debug("REST request to save Payment : {}", payment);
         if (payment.getId() != null) {
             throw new BadRequestAlertException("A new payment cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        try {
+            checkPayment(payment.getToPay());
+            creditCardValidityCheck(payment.getCreditCard());
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         Payment result = paymentRepository.save(payment);
         return ResponseEntity.created(new URI("/api/payments/" + result.getId()))
@@ -117,4 +127,17 @@ public class PaymentResource {
         paymentRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+
+    private void creditCardValidityCheck(CreditCard card) throws Exception {
+        if(card.getValidityDate().isBefore(LocalDate.now()) || card.getCardNumber() < 0 || card.getCvc() < 0){
+            throw new Exception("Credit Card Data is not correct");
+        }
+    }
+
+    private void checkPayment(Double toPay) throws Exception {
+        if(toPay == null || toPay < 0){
+            throw new Exception("Invalid amount to pay");
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package payments.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -41,6 +42,10 @@ public class CreditCard implements Serializable {
     @NotNull
     @Column(name = "validity_date", nullable = false)
     private LocalDate validityDate;
+
+    @OneToOne(mappedBy = "creditCard")
+    @JsonIgnore
+    private Payment payment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -101,6 +106,19 @@ public class CreditCard implements Serializable {
 
     public void setValidityDate(LocalDate validityDate) {
         this.validityDate = validityDate;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public CreditCard payment(Payment payment) {
+        this.payment = payment;
+        return this;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

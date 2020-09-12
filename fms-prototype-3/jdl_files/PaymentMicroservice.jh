@@ -23,5 +23,6 @@ enum ECardType {
 }
 
 relationship OneToOne {
-	Payment to Invoice
+	Payment to Invoice,
+	Payment to CreditCard
 }

@@ -6,13 +6,19 @@
     <!--
         Added the constraints for entity Payment.
     -->
-    <changeSet id="20200822084145-2" author="jhipster">
+    <changeSet id="20200912133156-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="invoice_id"
                                  baseTableName="payment"
                                  constraintName="fk_payment_invoice_id"
                                  referencedColumnNames="id"
                                  referencedTableName="invoice"/>
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_id"
+                                 baseTableName="payment"
+                                 constraintName="fk_payment_credit_card_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card"/>
 
     </changeSet>
 </databaseChangeLog>

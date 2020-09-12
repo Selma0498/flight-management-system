@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.testcontainers.containers.KafkaContainer;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -29,23 +28,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PaymentsKafkaResourceIT {
 
     private static boolean started = false;
-    private static KafkaContainer kafkaContainer;
 
     private MockMvc restMockMvc;
 
     @BeforeAll
     static void startServer() {
         if (!started) {
-            startTestcontainer();
             started = true;
         }
-    }
-
-    private static void startTestcontainer() {
-        // TODO: withNetwork will need to be removed soon
-        // See discussion at https://github.com/jhipster/generator-jhipster/issues/11544#issuecomment-609065206
-        kafkaContainer = new KafkaContainer("5.5.0").withNetwork(null);
-        kafkaContainer.start();
     }
 
     @BeforeEach
@@ -105,7 +95,7 @@ class PaymentsKafkaResourceIT {
         Map<String, String> producerProps = new HashMap<>();
         producerProps.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         producerProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        producerProps.put("bootstrap.servers", kafkaContainer.getBootstrapServers());
+        producerProps.put("bootstrap.servers", "localhost:9092");
         return producerProps;
     }
 
@@ -113,7 +103,7 @@ class PaymentsKafkaResourceIT {
         Map<String, String> consumerProps = new HashMap<>();
         consumerProps.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         consumerProps.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        consumerProps.put("bootstrap.servers", kafkaContainer.getBootstrapServers());
+        consumerProps.put("bootstrap.servers", "localhost:9092");
         consumerProps.put("auto.offset.reset", "earliest");
         consumerProps.put("group.id", group);
         return consumerProps;
