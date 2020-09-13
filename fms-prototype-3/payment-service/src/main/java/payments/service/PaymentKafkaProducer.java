@@ -17,7 +17,7 @@ import javax.annotation.PreDestroy;
 public class PaymentKafkaProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentKafkaProducer.class);
-    private static final String TOPIC_PAYMENT_SET = "topic_payment_set";
+    private static final String TOPIC_PAYMENT_SET = "payment_set";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final KafkaProperties kafkaProperties;
