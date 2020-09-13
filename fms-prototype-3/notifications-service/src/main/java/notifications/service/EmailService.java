@@ -4,7 +4,7 @@ import notifications.domain.enumeration.ENotificationType;
 import notifications.service.dto.BookingDTO;
 import notifications.service.dto.FlightDTO;
 import notifications.service.exceptions.EmailServiceException;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
+    @Autowired
     private JavaMailSender emailSender;
 
-    @Value("${notifications.mailing-list}")
-    private String mailingList;
-
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
@@ -38,7 +35,7 @@ public class EmailService {
         }
         try{
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(mailingList);
+            message.setTo("selmagolos@yahoo.com");
             message.setSubject("Booking Update: " + bookingDTO.getBookingNumber());
             message.setText(notificationMessage);
             message.setFrom("Notification Service");
@@ -62,7 +59,7 @@ public class EmailService {
         }
         try{
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(mailingList);
+            message.setTo("selmagolos@yahoo.com");
             message.setSubject("Flight Update: " + flightDTO.getFlightNumber());
             message.setText(notificationMessage);
             message.setFrom("Notification Service");

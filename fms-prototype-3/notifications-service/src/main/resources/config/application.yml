@@ -174,8 +174,6 @@ jhipster:
     contact-email:
     license:
     license-url:
-notifications:
-  mailing-list: {selmagolos@yahoo.com}
 kafka:
   bootstrap-servers: localhost:9092
   consumer:
@@ -196,3 +194,4 @@ kafka:
 # ===================================================================
 
 # application:
+
