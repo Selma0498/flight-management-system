@@ -33,16 +33,22 @@ management:
         enabled: false
 
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: {username}
+    password: {password}
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
   devtools:
     restart:
       enabled: false
     livereload:
       enabled: false
-  mail:
-    host: localhost
-    port: 25
-    username:
-    password:
   thymeleaf:
     cache: true
   sleuth:
