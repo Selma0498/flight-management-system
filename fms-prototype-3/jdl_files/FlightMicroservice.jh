@@ -3,7 +3,8 @@ entity Flight {
     flightType EFlightType required,
     fareType EFareType required,
     pilot String,
-    price Double required
+    price Double required, 
+    departureDate LocalDate required
 }
 
 entity Airport {
