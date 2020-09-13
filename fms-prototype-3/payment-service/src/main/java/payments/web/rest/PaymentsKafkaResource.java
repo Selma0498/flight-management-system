@@ -1,9 +1,5 @@
 package payments.web.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.context.event.EventListener;
 import payments.config.KafkaProperties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,13 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import payments.domain.CreditCard;
-import payments.domain.Payment;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -34,10 +26,6 @@ public class PaymentsKafkaResource {
 
     private final Logger log = LoggerFactory.getLogger(PaymentsKafkaResource.class);
 
-    private static final String TOPIC = "topic_payment";
-    private static final String PAYMENT_SET_TOPIC = "payment_set";
-    private static final String PROCESS_PAYMENT_TOPIC = "process_payment";
-
     private final KafkaProperties kafkaProperties;
     private KafkaProducer<String, String> producer;
     private ExecutorService sseExecutorService = Executors.newCachedThreadPool();
@@ -47,27 +35,25 @@ public class PaymentsKafkaResource {
         this.producer = new KafkaProducer<>(kafkaProperties.getProducerProps());
     }
 
-    @PostMapping("/publish")
-    public PublishResult publish(@RequestParam String message, @RequestParam(required = false) String key) throws ExecutionException, InterruptedException {
-        log.debug("REST request to send to Kafka topic {} with key {} the message : {}", TOPIC, key, message);
-        log.info("Producing message to {} : {}", TOPIC, message);
-        RecordMetadata metadata = producer.send(new ProducerRecord<>(TOPIC, key, message)).get();
+    @PostMapping("/publish/{topic}")
+    public PublishResult publish(@PathVariable String topic, @RequestParam String message, @RequestParam(required = false) String key) throws ExecutionException, InterruptedException {
+        log.debug("REST request to send to Kafka topic {} with key {} the message : {}", topic, key, message);
+        RecordMetadata metadata = producer.send(new ProducerRecord<>(topic, key, message)).get();
         return new PublishResult(metadata.topic(), metadata.partition(), metadata.offset(), Instant.ofEpochMilli(metadata.timestamp()));
     }
 
     @GetMapping("/consume")
-    public SseEmitter consume(@RequestParam("topic_payment") List<String> topics, @RequestParam Map<String, String> consumerParams) {
+    public SseEmitter consume(@RequestParam("topic") List<String> topics, @RequestParam Map<String, String> consumerParams) {
         log.debug("REST request to consume records from Kafka topics {}", topics);
         Map<String, Object> consumerProps = kafkaProperties.getConsumerProps();
         consumerProps.putAll(consumerParams);
-        consumerProps.remove("topic_payment");
+        consumerProps.remove("topic");
 
         SseEmitter emitter = new SseEmitter(0L);
         sseExecutorService.execute(() -> {
             KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerProps);
             emitter.onCompletion(consumer::close);
             consumer.subscribe(topics);
-
             boolean exitLoop = false;
             while(!exitLoop) {
                 try {
