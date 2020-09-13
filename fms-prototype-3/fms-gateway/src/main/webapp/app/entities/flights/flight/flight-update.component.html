@@ -74,7 +74,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_flightHandler">Boarding Gate</label>
+                    <label class="form-control-label" for="field_departureDate">Departure Date</label>
+                    <div class="input-group">
+                        <input id="field_departureDate" type="text" class="form-control" name="departureDate" ngbDatepicker #departureDateDp="ngbDatepicker" formControlName="departureDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="departureDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('departureDate')!.invalid && (editForm.get('departureDate')!.dirty || editForm.get('departureDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('departureDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_flightHandler">Flight Handler</label>
                     <select class="form-control" id="field_flightHandler" name="flightHandler" formControlName="flightHandler">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="flightHandlingOption.boardingGate === editForm.get('flightHandler')!.value.boardingGate ? editForm.get('flightHandler')!.value : flightHandlingOption" *ngFor="let flightHandlingOption of flighthandlers; trackBy: trackById">{{ flightHandlingOption.boardingGate }}</option>

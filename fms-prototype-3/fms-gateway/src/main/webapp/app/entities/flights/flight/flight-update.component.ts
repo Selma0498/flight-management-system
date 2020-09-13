@@ -31,6 +31,7 @@ export class FlightUpdateComponent implements OnInit {
   airports: IAirport[] = [];
   airlines: IAirline[] = [];
   planes: IPlane[] = [];
+  departureDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -39,6 +40,7 @@ export class FlightUpdateComponent implements OnInit {
     fareType: [null, [Validators.required]],
     pilot: [],
     price: [null, [Validators.required]],
+    departureDate: [null, [Validators.required]],
     flightHandler: [],
     origin: [null, Validators.required],
     destination: [null, Validators.required],
@@ -99,6 +101,7 @@ export class FlightUpdateComponent implements OnInit {
       fareType: flight.fareType,
       pilot: flight.pilot,
       price: flight.price,
+      departureDate: flight.departureDate,
       flightHandler: flight.flightHandler,
       origin: flight.origin,
       destination: flight.destination,
@@ -130,6 +133,7 @@ export class FlightUpdateComponent implements OnInit {
       fareType: this.editForm.get(['fareType'])!.value,
       pilot: this.editForm.get(['pilot'])!.value,
       price: this.editForm.get(['price'])!.value,
+      departureDate: this.editForm.get(['departureDate'])!.value,
       flightHandler: this.editForm.get(['flightHandler'])!.value,
       origin: this.editForm.get(['origin'])!.value,
       destination: this.editForm.get(['destination'])!.value,

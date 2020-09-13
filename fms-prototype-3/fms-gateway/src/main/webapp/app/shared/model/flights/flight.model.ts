@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IFlightHandling } from 'app/shared/model/flights/flight-handling.model';
 import { IAirport } from 'app/shared/model/flights/airport.model';
 import { IAirline } from 'app/shared/model/flights/airline.model';
@@ -12,6 +13,7 @@ export interface IFlight {
   fareType?: EFareType;
   pilot?: string;
   price?: number;
+  departureDate?: Moment;
   flightHandler?: IFlightHandling;
   origin?: IAirport;
   destination?: IAirport;
@@ -27,6 +29,7 @@ export class Flight implements IFlight {
     public fareType?: EFareType,
     public pilot?: string,
     public price?: number,
+    public departureDate?: Moment,
     public flightHandler?: IFlightHandling,
     public origin?: IAirport,
     public destination?: IAirport,

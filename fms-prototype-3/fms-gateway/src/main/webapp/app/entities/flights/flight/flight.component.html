@@ -28,6 +28,7 @@
                     <th scope="col" ><span>Fare Type</span></th>
                     <th scope="col" ><span>Pilot</span></th>
                     <th scope="col" ><span>Price</span></th>
+                    <th scope="col" ><span>Departure Date</span></th>
                     <th scope="col" ><span>Boarding Gate</span></th>
                     <th scope="col" ><span>Origin City</span></th>
                     <th scope="col" ><span>Destination City</span></th>
@@ -44,6 +45,7 @@
                     <td>{{ flight.fareType }}</td>
                     <td>{{ flight.pilot }}</td>
                     <td>{{ flight.price }}</td>
+                    <td>{{ flight.departureDate | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="flight.flightHandler">
                             <a [routerLink]="['/flight-handling', flight.flightHandler?.boardingGate, 'view']" >{{ flight.flightHandler?.boardingGate }}</a>
