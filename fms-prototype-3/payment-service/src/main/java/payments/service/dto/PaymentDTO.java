@@ -4,37 +4,37 @@ import payments.domain.Payment;
 
 public class PaymentDTO {
 
-    private Long id;
-    private Integer bookingNumber;
-    private Double toPay;
+    private String id;
+    private String bookingNumber;
+    private String toPay;
 
     public PaymentDTO(Payment payment) {
-        this.id = payment.getId();
-        this.bookingNumber = payment.getBookingNumber();
-        this.toPay = payment.getToPay();
+        this.id = payment.getId().toString();
+        this.bookingNumber = payment.getBookingNumber().toString();
+        this.toPay = payment.getToPay().toString();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getBookingNumber() {
+    public String getBookingNumber() {
         return bookingNumber;
     }
 
-    public void setBookingNumber(Integer bookingNumber) {
+    public void setBookingNumber(String bookingNumber) {
         this.bookingNumber = bookingNumber;
     }
 
-    public Double getToPay() {
+    public String getToPay() {
         return toPay;
     }
 
-    public void setToPay(Double toPay) {
+    public void setToPay(String toPay) {
         this.toPay = toPay;
     }
 }
