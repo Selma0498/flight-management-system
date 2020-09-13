@@ -1,7 +1,9 @@
 package bookings.web.rest;
 
 import bookings.domain.Booking;
+import bookings.domain.enumeration.ETopicType;
 import bookings.repository.BookingRepository;
+import bookings.service.BookingKafkaProducer;
 import bookings.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -35,9 +37,11 @@ public class BookingResource {
     private String applicationName;
 
     private final BookingRepository bookingRepository;
+    private final BookingKafkaProducer bookingKafkaProducer;
 
-    public BookingResource(BookingRepository bookingRepository) {
+    public BookingResource(BookingRepository bookingRepository, BookingKafkaProducer bookingKafkaProducer) {
         this.bookingRepository = bookingRepository;
+        this.bookingKafkaProducer = bookingKafkaProducer;
     }
 
     /**
@@ -53,7 +57,10 @@ public class BookingResource {
         if (booking.getId() != null) {
             throw new BadRequestAlertException("A new booking cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Booking result = bookingRepository.save(booking);
+        bookingKafkaProducer.sendBookingEvent(result, ETopicType.SET);
+
         return ResponseEntity.created(new URI("/api/bookings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,7 +81,10 @@ public class BookingResource {
         if (booking.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
         Booking result = bookingRepository.save(booking);
+        bookingKafkaProducer.sendBookingEvent(result, ETopicType.UPDATED);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, booking.getId().toString()))
             .body(result);
@@ -115,6 +125,8 @@ public class BookingResource {
         log.debug("REST request to delete Booking : {}", id);
 
         bookingRepository.deleteById(id);
+        bookingKafkaProducer.sendBookingEvent(bookingRepository.findById(id).get(), ETopicType.CANCELLED);
+
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
