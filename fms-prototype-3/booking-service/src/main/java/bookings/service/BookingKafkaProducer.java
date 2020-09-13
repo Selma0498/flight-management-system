@@ -19,7 +19,6 @@ import javax.annotation.PreDestroy;
 public class BookingKafkaProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(BookingKafkaProducer.class);
-    private static final String TOPIC_BOOKING_SET = "booking_set";
     private static final String TOPIC_BOOKING_UPDATED = "booking_updated";
     private static final String TOPIC_BOOKING_CANCELLED = "booking_cancelled";
 
@@ -45,9 +44,9 @@ public class BookingKafkaProducer {
             ProducerRecord<String, String> event = null;
 
             switch (topicType) {
-                case SET: event = new ProducerRecord<>(TOPIC_BOOKING_SET, message);
-                break;
-                case UPDATED: event = new ProducerRecord<>(TOPIC_BOOKING_UPDATED, message);
+                case SET:
+                case UPDATED:
+                    event = new ProducerRecord<>(TOPIC_BOOKING_UPDATED, message);
                 break;
                 case CANCELLED: event = new ProducerRecord<>(TOPIC_BOOKING_CANCELLED, message);
                 break;

@@ -4,21 +4,21 @@ import bookings.domain.Booking;
 
 public class BookingDTO {
 
-    private Integer bookingNumber;
+    private String bookingNumber;
     private String flightNumber;
     private String passengerId;
 
     public BookingDTO(Booking booking) {
-        this.bookingNumber = booking.getBookingNumber();
+        this.bookingNumber = booking.getBookingNumber().toString();
         this.flightNumber = booking.getFlightNumber();
         this.passengerId = booking.getPassengerId();
     }
 
-    public Integer getBookingNumber() {
+    public String getBookingNumber() {
         return bookingNumber;
     }
 
-    public void setBookingNumber(Integer bookingNumber) {
+    public void setBookingNumber(String bookingNumber) {
         this.bookingNumber = bookingNumber;
     }
 

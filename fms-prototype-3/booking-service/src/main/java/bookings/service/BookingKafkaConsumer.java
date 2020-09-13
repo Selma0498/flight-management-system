@@ -52,7 +52,7 @@ public class BookingKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         PaymentDTO paymentDTO = objectMapper.readValue(record.value(), PaymentDTO.class);
-                        if(bookingRepository.findBookingByBookingNumber(paymentDTO.getBookingNumber()) == null) {
+                        if(bookingRepository.findBookingByBookingNumber(Integer.valueOf(paymentDTO.getBookingNumber())) == null) {
                             throw new Exception("Payment successful for a booking that does not exist.");
                         }
                     }
