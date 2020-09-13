@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import payments.config.KafkaProperties;
 import payments.domain.Payment;
+import payments.service.dto.PaymentDTO;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -31,12 +32,13 @@ public class PaymentKafkaProducer {
     public void initialize() {
         this.producer = new KafkaProducer<>(kafkaProperties.getProducerProps());
         Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
-        logger.debug("Payment kafka producer intialized");
+        logger.debug("Payment kafka producer initialized.");
     }
 
     public void sendPaymentSuccess(Payment payment) {
         try{
-            String message = objectMapper.writeValueAsString(payment);
+            PaymentDTO paymentDTO = new PaymentDTO(payment);
+            String message = objectMapper.writeValueAsString(paymentDTO);
             ProducerRecord<String, String> event = new ProducerRecord<>(TOPIC_PAYMENT_SET, message);
             producer.send(event);
         } catch (JsonProcessingException e) {
