@@ -14,7 +14,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20200822084254",
+  "changelogDate": "20200913190857",
   "entityTableName": "flight_handling",
   "dto": "no",
   "pagination": "no",

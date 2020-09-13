@@ -1,7 +1,9 @@
 package flights.web.rest;
 
 import flights.domain.Flight;
+import flights.domain.enumeration.ETopicType;
 import flights.repository.FlightRepository;
+import flights.service.FlightKafkaProducer;
 import flights.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -35,9 +37,11 @@ public class FlightResource {
     private String applicationName;
 
     private final FlightRepository flightRepository;
+    private final FlightKafkaProducer flightKafkaProducer;
 
-    public FlightResource(FlightRepository flightRepository) {
+    public FlightResource(FlightRepository flightRepository, FlightKafkaProducer flightKafkaProducer) {
         this.flightRepository = flightRepository;
+        this.flightKafkaProducer = flightKafkaProducer;
     }
 
     /**
@@ -53,7 +57,10 @@ public class FlightResource {
         if (flight.getId() != null) {
             throw new BadRequestAlertException("A new flight cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Flight result = flightRepository.save(flight);
+        flightKafkaProducer.sendFlightEvent(result, ETopicType.SET);
+
         return ResponseEntity.created(new URI("/api/flights/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,7 +81,10 @@ public class FlightResource {
         if (flight.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
         Flight result = flightRepository.save(flight);
+        flightKafkaProducer.sendFlightEvent(result, ETopicType.UPDATED);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, flight.getId().toString()))
             .body(result);
@@ -115,6 +125,8 @@ public class FlightResource {
         log.debug("REST request to delete Flight : {}", id);
 
         flightRepository.deleteById(id);
+        flightKafkaProducer.sendFlightEvent(flightRepository.findById(id).get(), ETopicType.CANCELLED);
+
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

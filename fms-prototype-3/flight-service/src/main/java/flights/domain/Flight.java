@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import flights.domain.enumeration.EFlightType;
 
@@ -47,6 +48,10 @@ public class Flight implements Serializable {
     @NotNull
     @Column(name = "price", nullable = false)
     private Double price;
+
+    @NotNull
+    @Column(name = "departure_date", nullable = false)
+    private LocalDate departureDate;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -146,6 +151,19 @@ public class Flight implements Serializable {
         this.price = price;
     }
 
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public Flight departureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+        return this;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
     public FlightHandling getFlightHandler() {
         return flightHandler;
     }
@@ -238,6 +256,7 @@ public class Flight implements Serializable {
             ", fareType='" + getFareType() + "'" +
             ", pilot='" + getPilot() + "'" +
             ", price=" + getPrice() +
+            ", departureDate='" + getDepartureDate() + "'" +
             "}";
     }
 }

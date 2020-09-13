@@ -34,6 +34,13 @@
       "fieldValidateRules": [
         "required"
       ]
+    },
+    {
+      "fieldName": "departureDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
     }
   ],
   "relationships": [
@@ -78,7 +85,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200822083854",
+  "changelogDate": "20200913190457",
   "entityTableName": "flight",
   "dto": "no",
   "pagination": "no",

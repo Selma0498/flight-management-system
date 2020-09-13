@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Flight.
     -->
-    <changeSet id="20200822083854-2" author="jhipster">
+    <changeSet id="20200913190457-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="flight_handler_id"
                                  baseTableName="flight"
