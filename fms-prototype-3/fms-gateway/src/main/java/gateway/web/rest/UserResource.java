@@ -7,6 +7,7 @@ import gateway.repository.UserRepository;
 import gateway.security.AuthoritiesConstants;
 import gateway.service.MailService;
 import gateway.service.UserService;
+import gateway.service.dto.PassengerDTO;
 import gateway.service.dto.UserDTO;
 import gateway.web.rest.errors.BadRequestAlertException;
 import gateway.web.rest.errors.EmailAlreadyUsedException;
@@ -117,14 +118,9 @@ public class UserResource {
 
             // create the equivalent passenger in passenger microservice
             // set all necessary information in headers of HTTP request
-            //TODO TRY FIX AUTHORIZATION BUG - ASK MENTOR?
-            HttpHeaders headers = createAuthHeaders(newUser.getLogin(), newUser.getPassword());
-            headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-            HttpEntity<User> request = new HttpEntity<>(newUser, headers);
-
             ResponseEntity resultCode = restTemplate.postForObject(
-                passengerMicroserviceBaseURL+"/api/passengers/",
-                request,
+                passengerMicroserviceBaseURL+"/api/registerpassenger/",
+                new PassengerDTO(userDTO),
                 ResponseEntity.class
             );
 
@@ -162,14 +158,13 @@ public class UserResource {
         }
         Optional<UserDTO> updatedUser = userService.updateUser(userDTO);
 
-        // update passenger equivalent
-        ResponseEntity resultCode = restTemplate.exchange(
-            passengerMicroserviceBaseURL+"/api/passengers/",
-            HttpMethod.PUT,
-            new HttpEntity<>(updatedUser),
-            Void.class
+        // create the equivalent passenger in passenger microservice
+        // set all necessary information in headers of HTTP request
+        ResponseEntity resultCode = restTemplate.postForObject(
+            passengerMicroserviceBaseURL+"/api/registerpassenger/",
+            new PassengerDTO(userDTO),
+            ResponseEntity.class
         );
-
 
         if(!resultCode.getStatusCode().equals(HttpStatus.valueOf(200))) {
             log.error("Could not update the provided passenger. Please try again.");
@@ -213,7 +208,6 @@ public class UserResource {
      * @param login the login of the user to find.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login" user, or with status {@code 404 (Not Found)}.
      */
-    // TODO Automatically create passenger if login is for user, user, else check if passenger also exists with same login
     @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
@@ -262,7 +256,6 @@ public class UserResource {
      * @param login the login of the user to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    // TODO matching delete in passenger microservice
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {

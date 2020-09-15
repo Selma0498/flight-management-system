@@ -44,6 +44,14 @@ import { RouterModule } from '@angular/router';
         path: 'notification',
         loadChildren: () => import('./notifications/notification/notification.module').then(m => m.NotificationsNotificationModule),
       },
+      {
+        path: 'passenger',
+        loadChildren: () => import('./passengers/passenger/passenger.module').then(m => m.PassengersPassengerModule),
+      },
+      {
+        path: 'notification-repo',
+        loadChildren: () => import('./passengers/notification-repo/notification-repo.module').then(m => m.PassengersNotificationRepoModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
