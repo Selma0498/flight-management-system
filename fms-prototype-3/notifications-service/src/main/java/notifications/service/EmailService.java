@@ -15,12 +15,13 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
+    private String notificationMessage = "";
+
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 
     public void sendBookingInfo(BookingDTO bookingDTO, ENotificationType notificationType) {
-        String notificationMessage = "";
         if(notificationType.equals(ENotificationType.BOOKING_CANCELLED)) {
             notificationMessage = "This information is for a passenger with passenger id: " + bookingDTO.getPassengerId() + "" +
                 ". If this concerns you, please read on. " +
@@ -69,4 +70,7 @@ public class EmailService {
         }
     }
 
+    public String getNotificationMessage() {
+        return notificationMessage;
+    }
 }
