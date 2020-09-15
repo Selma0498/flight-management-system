@@ -5,3 +5,12 @@ entity Passenger {
     surname String required,
     email String required
 }
+
+entity NotificationRepo {
+	name String required,
+	description String required
+}
+
+relationship ManyToMany{
+	NotificationRepo to Passenger
+}
