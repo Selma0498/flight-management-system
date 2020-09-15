@@ -1,7 +1,10 @@
 package passengers.web.rest;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.validation.annotation.Validated;
 import passengers.domain.Passenger;
 import passengers.repository.PassengerRepository;
+import passengers.service.dto.PassengerDTO;
 import passengers.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -38,6 +41,24 @@ public class PassengerResource {
 
     public PassengerResource(PassengerRepository passengerRepository) {
         this.passengerRepository = passengerRepository;
+    }
+
+    /*
+     * Endpoint specifically for the case when a new JHI user registers and
+     * a corresponding passenger is supposed to be created.
+     */
+    @PostMapping("/registerpassenger")
+    public ResponseEntity<Void> registerPassenger(@Validated @RequestBody PassengerDTO passengerDTO) throws URISyntaxException {
+        log.debug("Registering a passenger equivalent to JHI User.");
+        if (passengerDTO == null) {
+            throw new BadRequestAlertException("A new passenger cannot be null", ENTITY_NAME, "");
+        }
+        Passenger passenger = PassengerDTO.convertToPassenger(passengerDTO);
+        ResponseEntity<Passenger> result = this.createPassenger(passenger);
+        if(result.getBody() != null) {
+            return ResponseEntity.noContent().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, passenger.getId().toString())).build();
+        }
+        return ResponseEntity.noContent().headers(HttpHeaders.EMPTY).build();
     }
 
     /**

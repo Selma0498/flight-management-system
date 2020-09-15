@@ -37,7 +37,16 @@
       ]
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "notificationRepo",
+      "otherEntityRelationshipName": "passenger",
+      "relationshipName": "notificationRepo",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
   "changelogDate": "20200822083831",
   "entityTableName": "passenger",
   "dto": "no",
