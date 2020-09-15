@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class BookingKafkaConsumer {
 
     private static final String TOPIC_PAYMENT_SET = "payment_set";
+    private static final Logger logger = LoggerFactory.getLogger(BookingKafkaConsumer.class);
 
-    private final Logger logger = LoggerFactory.getLogger(BookingKafkaConsumer.class);
     private final AtomicBoolean closed = new AtomicBoolean(false);
     private final KafkaProperties kafkaProperties;
     private final BookingRepository bookingRepository;
@@ -67,9 +67,6 @@ public class BookingKafkaConsumer {
         });
     }
 
-    public KafkaConsumer<String, String> getConsumer() {
-        return consumer;
-    }
 
     public void shutdown() {
         logger.info("Shutdown Kafka consumer");

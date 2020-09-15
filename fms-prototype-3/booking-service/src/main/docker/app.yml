@@ -21,7 +21,7 @@ services:
       service: kafka
     environment:
       - KAFKA_ADVERTISED_HOST_NAME=kafka
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
   zookeeper:
     extends:
       file: kafka.yml
