@@ -84,7 +84,7 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
-                        emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CONFIRMED);
+                        //emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CONFIRMED);
                         // send the notification for the passenger to subscribe for
                         notificationKafkaProducer.sendNotificationEvent(
                             new Notification(ENotificationType.BOOKING_CONFIRMED, emailService.getNotificationMessage())
@@ -96,7 +96,7 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
-                        emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CANCELLED);
+                        //emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CANCELLED);
                         // send the notification for the passenger to subscribe for
                         notificationKafkaProducer.sendNotificationEvent(
                             new Notification(ENotificationType.BOOKING_CANCELLED, emailService.getNotificationMessage())
@@ -107,7 +107,7 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
-                        emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_UPDATED);
+                        //emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_UPDATED);
                         // send the notification for the passenger to subscribe for
                         notificationKafkaProducer.sendNotificationEvent(
                             new Notification(ENotificationType.FLIGHT_UPDATED, emailService.getNotificationMessage())
@@ -118,7 +118,7 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
-                        emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_CANCELLED);
+                        //emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_CANCELLED);
                         // send the notification for the passenger to subscribe for
                         notificationKafkaProducer.sendNotificationEvent(
                             new Notification(ENotificationType.FLIGHT_CANCELLED, emailService.getNotificationMessage())
