@@ -3,8 +3,6 @@ package flights.web.rest;
 import flights.FlightsApp;
 import flights.domain.Flight;
 import flights.domain.Airport;
-import flights.domain.Airline;
-import flights.domain.Plane;
 import flights.repository.FlightRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -48,11 +46,20 @@ public class FlightResourceIT {
     private static final String DEFAULT_PILOT = "AAAAAAAAAA";
     private static final String UPDATED_PILOT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PLANE_MODEL_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_PLANE_MODEL_NUMBER = "BBBBBBBBBB";
+
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
 
     private static final LocalDate DEFAULT_DEPARTURE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DEPARTURE_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Integer DEFAULT_BOARDING_GATE = 1;
+    private static final Integer UPDATED_BOARDING_GATE = 2;
+
+    private static final String DEFAULT_AIRLINE_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_AIRLINE_NAME = "BBBBBBBBBB";
 
     @Autowired
     private FlightRepository flightRepository;
@@ -77,8 +84,11 @@ public class FlightResourceIT {
             .flightType(DEFAULT_FLIGHT_TYPE)
             .fareType(DEFAULT_FARE_TYPE)
             .pilot(DEFAULT_PILOT)
+            .planeModelNumber(DEFAULT_PLANE_MODEL_NUMBER)
             .price(DEFAULT_PRICE)
-            .departureDate(DEFAULT_DEPARTURE_DATE);
+            .departureDate(DEFAULT_DEPARTURE_DATE)
+            .boardingGate(DEFAULT_BOARDING_GATE)
+            .airlineName(DEFAULT_AIRLINE_NAME);
         // Add required entity
         Airport airport;
         if (TestUtil.findAll(em, Airport.class).isEmpty()) {
@@ -91,26 +101,6 @@ public class FlightResourceIT {
         flight.setOrigin(airport);
         // Add required entity
         flight.setDestination(airport);
-        // Add required entity
-        Airline airline;
-        if (TestUtil.findAll(em, Airline.class).isEmpty()) {
-            airline = AirlineResourceIT.createEntity(em);
-            em.persist(airline);
-            em.flush();
-        } else {
-            airline = TestUtil.findAll(em, Airline.class).get(0);
-        }
-        flight.setAirline(airline);
-        // Add required entity
-        Plane plane;
-        if (TestUtil.findAll(em, Plane.class).isEmpty()) {
-            plane = PlaneResourceIT.createEntity(em);
-            em.persist(plane);
-            em.flush();
-        } else {
-            plane = TestUtil.findAll(em, Plane.class).get(0);
-        }
-        flight.setPlane(plane);
         return flight;
     }
     /**
@@ -125,8 +115,11 @@ public class FlightResourceIT {
             .flightType(UPDATED_FLIGHT_TYPE)
             .fareType(UPDATED_FARE_TYPE)
             .pilot(UPDATED_PILOT)
+            .planeModelNumber(UPDATED_PLANE_MODEL_NUMBER)
             .price(UPDATED_PRICE)
-            .departureDate(UPDATED_DEPARTURE_DATE);
+            .departureDate(UPDATED_DEPARTURE_DATE)
+            .boardingGate(UPDATED_BOARDING_GATE)
+            .airlineName(UPDATED_AIRLINE_NAME);
         // Add required entity
         Airport airport;
         if (TestUtil.findAll(em, Airport.class).isEmpty()) {
@@ -139,26 +132,6 @@ public class FlightResourceIT {
         flight.setOrigin(airport);
         // Add required entity
         flight.setDestination(airport);
-        // Add required entity
-        Airline airline;
-        if (TestUtil.findAll(em, Airline.class).isEmpty()) {
-            airline = AirlineResourceIT.createUpdatedEntity(em);
-            em.persist(airline);
-            em.flush();
-        } else {
-            airline = TestUtil.findAll(em, Airline.class).get(0);
-        }
-        flight.setAirline(airline);
-        // Add required entity
-        Plane plane;
-        if (TestUtil.findAll(em, Plane.class).isEmpty()) {
-            plane = PlaneResourceIT.createUpdatedEntity(em);
-            em.persist(plane);
-            em.flush();
-        } else {
-            plane = TestUtil.findAll(em, Plane.class).get(0);
-        }
-        flight.setPlane(plane);
         return flight;
     }
 
@@ -185,8 +158,11 @@ public class FlightResourceIT {
         assertThat(testFlight.getFlightType()).isEqualTo(DEFAULT_FLIGHT_TYPE);
         assertThat(testFlight.getFareType()).isEqualTo(DEFAULT_FARE_TYPE);
         assertThat(testFlight.getPilot()).isEqualTo(DEFAULT_PILOT);
+        assertThat(testFlight.getPlaneModelNumber()).isEqualTo(DEFAULT_PLANE_MODEL_NUMBER);
         assertThat(testFlight.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testFlight.getDepartureDate()).isEqualTo(DEFAULT_DEPARTURE_DATE);
+        assertThat(testFlight.getBoardingGate()).isEqualTo(DEFAULT_BOARDING_GATE);
+        assertThat(testFlight.getAirlineName()).isEqualTo(DEFAULT_AIRLINE_NAME);
     }
 
     @Test
@@ -306,6 +282,25 @@ public class FlightResourceIT {
 
     @Test
     @Transactional
+    public void checkBoardingGateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = flightRepository.findAll().size();
+        // set the field null
+        flight.setBoardingGate(null);
+
+        // Create the Flight, which fails.
+
+
+        restFlightMockMvc.perform(post("/api/flights")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(flight)))
+            .andExpect(status().isBadRequest());
+
+        List<Flight> flightList = flightRepository.findAll();
+        assertThat(flightList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFlights() throws Exception {
         // Initialize the database
         flightRepository.saveAndFlush(flight);
@@ -319,8 +314,11 @@ public class FlightResourceIT {
             .andExpect(jsonPath("$.[*].flightType").value(hasItem(DEFAULT_FLIGHT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].fareType").value(hasItem(DEFAULT_FARE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].pilot").value(hasItem(DEFAULT_PILOT)))
+            .andExpect(jsonPath("$.[*].planeModelNumber").value(hasItem(DEFAULT_PLANE_MODEL_NUMBER)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].departureDate").value(hasItem(DEFAULT_DEPARTURE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].departureDate").value(hasItem(DEFAULT_DEPARTURE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].boardingGate").value(hasItem(DEFAULT_BOARDING_GATE)))
+            .andExpect(jsonPath("$.[*].airlineName").value(hasItem(DEFAULT_AIRLINE_NAME)));
     }
     
     @Test
@@ -338,8 +336,11 @@ public class FlightResourceIT {
             .andExpect(jsonPath("$.flightType").value(DEFAULT_FLIGHT_TYPE.toString()))
             .andExpect(jsonPath("$.fareType").value(DEFAULT_FARE_TYPE.toString()))
             .andExpect(jsonPath("$.pilot").value(DEFAULT_PILOT))
+            .andExpect(jsonPath("$.planeModelNumber").value(DEFAULT_PLANE_MODEL_NUMBER))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.departureDate").value(DEFAULT_DEPARTURE_DATE.toString()));
+            .andExpect(jsonPath("$.departureDate").value(DEFAULT_DEPARTURE_DATE.toString()))
+            .andExpect(jsonPath("$.boardingGate").value(DEFAULT_BOARDING_GATE))
+            .andExpect(jsonPath("$.airlineName").value(DEFAULT_AIRLINE_NAME));
     }
     @Test
     @Transactional
@@ -366,8 +367,11 @@ public class FlightResourceIT {
             .flightType(UPDATED_FLIGHT_TYPE)
             .fareType(UPDATED_FARE_TYPE)
             .pilot(UPDATED_PILOT)
+            .planeModelNumber(UPDATED_PLANE_MODEL_NUMBER)
             .price(UPDATED_PRICE)
-            .departureDate(UPDATED_DEPARTURE_DATE);
+            .departureDate(UPDATED_DEPARTURE_DATE)
+            .boardingGate(UPDATED_BOARDING_GATE)
+            .airlineName(UPDATED_AIRLINE_NAME);
 
         restFlightMockMvc.perform(put("/api/flights")
             .contentType(MediaType.APPLICATION_JSON)
@@ -382,8 +386,11 @@ public class FlightResourceIT {
         assertThat(testFlight.getFlightType()).isEqualTo(UPDATED_FLIGHT_TYPE);
         assertThat(testFlight.getFareType()).isEqualTo(UPDATED_FARE_TYPE);
         assertThat(testFlight.getPilot()).isEqualTo(UPDATED_PILOT);
+        assertThat(testFlight.getPlaneModelNumber()).isEqualTo(UPDATED_PLANE_MODEL_NUMBER);
         assertThat(testFlight.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testFlight.getDepartureDate()).isEqualTo(UPDATED_DEPARTURE_DATE);
+        assertThat(testFlight.getBoardingGate()).isEqualTo(UPDATED_BOARDING_GATE);
+        assertThat(testFlight.getAirlineName()).isEqualTo(UPDATED_AIRLINE_NAME);
     }
 
     @Test

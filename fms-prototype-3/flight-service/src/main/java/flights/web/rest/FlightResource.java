@@ -125,7 +125,9 @@ public class FlightResource {
         log.debug("REST request to delete Flight : {}", id);
 
         flightRepository.deleteById(id);
-        flightKafkaProducer.sendFlightEvent(flightRepository.findById(id).get(), ETopicType.CANCELLED);
+        if(flightRepository.findById(id).isPresent()) {
+            flightKafkaProducer.sendFlightEvent(flightRepository.findById(id).get(), ETopicType.CANCELLED);
+        }
 
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }

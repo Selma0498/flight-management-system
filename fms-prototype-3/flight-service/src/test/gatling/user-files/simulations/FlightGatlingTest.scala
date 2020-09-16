@@ -76,8 +76,11 @@ class FlightGatlingTest extends Simulation {
                 , "flightType":"ONE_WAY"
                 , "fareType":"ECONOMY"
                 , "pilot":"SAMPLE_TEXT"
+                , "planeModelNumber":"SAMPLE_TEXT"
                 , "price":null
                 , "departureDate":"2020-01-01T00:00:00.000Z"
+                , "boardingGate":"0"
+                , "airlineName":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_flight_url"))).exitHereIfFailed
