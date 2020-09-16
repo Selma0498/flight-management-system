@@ -1,10 +1,3 @@
-entity Invoice {
-	invoiceNumber Integer required,
-    amount Double required,
-    passengerId String required,
-    bookingNumber Integer required
-}
-
 entity CreditCard {
 	cardType ECardType required,
     cvc Integer required,
@@ -23,6 +16,5 @@ enum ECardType {
 }
 
 relationship OneToOne {
-	Payment to Invoice,
 	Payment to CreditCard
 }
