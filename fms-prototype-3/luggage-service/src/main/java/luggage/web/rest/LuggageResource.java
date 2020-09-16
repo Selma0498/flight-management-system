@@ -2,6 +2,8 @@ package luggage.web.rest;
 
 import luggage.domain.Luggage;
 import luggage.repository.LuggageRepository;
+import luggage.security.SecurityUtils;
+import luggage.service.LuggageKafkaProducer;
 import luggage.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +38,11 @@ public class LuggageResource {
     private String applicationName;
 
     private final LuggageRepository luggageRepository;
+    private final LuggageKafkaProducer luggageKafkaProducer;
 
-    public LuggageResource(LuggageRepository luggageRepository) {
+    public LuggageResource(LuggageRepository luggageRepository, LuggageKafkaProducer luggageKafkaProducer) {
         this.luggageRepository = luggageRepository;
+        this.luggageKafkaProducer = luggageKafkaProducer;
     }
 
     /**
@@ -53,7 +58,10 @@ public class LuggageResource {
         if (luggage.getId() != null) {
             throw new BadRequestAlertException("A new luggage cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Luggage result = luggageRepository.save(luggage);
+        luggageKafkaProducer.sendLuggageEvent(result);
+
         return ResponseEntity.created(new URI("/api/luggages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,7 +82,10 @@ public class LuggageResource {
         if (luggage.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
         Luggage result = luggageRepository.save(luggage);
+        luggageKafkaProducer.sendLuggageEvent(result);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, luggage.getId().toString()))
             .body(result);
@@ -88,8 +99,20 @@ public class LuggageResource {
     @GetMapping("/luggages")
     public List<Luggage> getAllLuggages() {
         log.debug("REST request to get all Luggages");
-        return luggageRepository.findAll();
+
+        List<Luggage> resultingLuggage = new ArrayList<>();
+
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+        for (Luggage l : luggageRepository.findAll()) {
+            if (userLogin.isPresent() && userLogin.get().equals(l.getPassengerId())) {
+                resultingLuggage.add(l);
+            }
+        }
+        return resultingLuggage;
     }
+
 
     /**
      * {@code GET  /luggages/:id} : get the "id" luggage.
@@ -101,7 +124,16 @@ public class LuggageResource {
     public ResponseEntity<Luggage> getLuggage(@PathVariable Long id) {
         log.debug("REST request to get Luggage : {}", id);
         Optional<Luggage> luggage = luggageRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(luggage);
+
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(luggage.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(luggage.get().getPassengerId())) {
+            return ResponseUtil.wrapOrNotFound(luggage);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -113,8 +145,17 @@ public class LuggageResource {
     @DeleteMapping("/luggages/{id}")
     public ResponseEntity<Void> deleteLuggage(@PathVariable Long id) {
         log.debug("REST request to delete Luggage : {}", id);
+        Optional<Luggage> luggage = luggageRepository.findById(id);
 
-        luggageRepository.deleteById(id);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(luggage.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(luggage.get().getPassengerId())) {
+            luggageRepository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
