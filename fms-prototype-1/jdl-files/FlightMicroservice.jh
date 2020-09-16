@@ -3,7 +3,11 @@ entity Flight {
     flightType EFlightType required,
     fareType EFareType required,
     pilot String,
-    price Double required
+    planeModelNumber String,
+    price Double required, 
+    departureDate LocalDate required,
+    boardingGate Integer required,
+    airlineName String
 }
 
 entity Airport {
@@ -14,16 +18,6 @@ entity Airport {
     postalCode String
 }
 
-entity Airline {
-	airlineName String
-}
-
-entity Plane {
-	manufacturer String,
-    modelNumber String,
-    registrationNumber String required
-}
-
 enum EFareType {
 	ECONOMY, BUSINESS
 }
@@ -32,19 +26,8 @@ enum EFlightType {
 	ONE_WAY, RETURN_TRIP
 } 
 
-entity FlightHandling {
-	boardingGate Integer required, 
-    delay Double
-}
-
-relationship OneToOne {
-	Flight{flightHandler} to FlightHandling
-}
-
 relationship ManyToOne {
 	Flight{origin required} to Airport,
-    Flight{destination required} to Airport,
-    Flight{airline required} to Airline,
-    Flight{plane required} to Plane
+    Flight{destination required} to Airport
 }
 

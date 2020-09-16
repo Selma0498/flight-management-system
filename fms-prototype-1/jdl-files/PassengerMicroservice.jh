@@ -1,7 +1,16 @@
 entity Passenger {
-	username String,
-	password String,
-	name String,
-    surname String,
-    email String
+	username String required,
+	password String required,
+	name String required,
+    surname String required,
+    email String required
+}
+
+entity NotificationRepo {
+	name String required,
+	description String required
+}
+
+relationship ManyToMany{
+	NotificationRepo to Passenger
 }
