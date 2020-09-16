@@ -3,6 +3,7 @@ package payments.web.rest;
 import payments.domain.CreditCard;
 import payments.domain.Payment;
 import payments.repository.PaymentRepository;
+import payments.security.SecurityUtils;
 import payments.service.PaymentKafkaProducer;
 import payments.web.rest.errors.BadRequestAlertException;
 
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,54 +60,19 @@ public class PaymentResource {
         if (payment.getId() != null) {
             throw new BadRequestAlertException("A new payment cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        try {
+
+        try{
             checkPayment(payment.getToPay());
             creditCardValidityCheck(payment.getCreditCard());
-
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         Payment result = paymentRepository.save(payment);
-
-        log.debug("SEND event for Payment: {}", payment);
         paymentKafkaProducer.sendPaymentSuccess(result);
 
         return ResponseEntity.created(new URI("/api/payments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * {@code PUT  /payments} : Updates an existing payment.
-     *
-     * @param payment the payment to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated payment,
-     * or with status {@code 400 (Bad Request)} if the payment is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the payment couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/payments")
-    public ResponseEntity<Payment> updatePayment(@Valid @RequestBody Payment payment) throws URISyntaxException {
-        log.debug("REST request to update Payment : {}", payment);
-        if (payment.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        try {
-            checkPayment(payment.getToPay());
-            creditCardValidityCheck(payment.getCreditCard());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Payment result = paymentRepository.save(payment);
-
-        log.debug("SEND event for Payment: {}", payment);
-        paymentKafkaProducer.sendPaymentSuccess(result);
-
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, payment.getId().toString()))
             .body(result);
     }
 
@@ -117,7 +84,17 @@ public class PaymentResource {
     @GetMapping("/payments")
     public List<Payment> getAllPayments() {
         log.debug("REST request to get all Payments");
-        return paymentRepository.findAll();
+        List<Payment> resultingPayments = new ArrayList<>();
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+        for(Payment p: paymentRepository.findAll()) {
+            if(userLogin.isPresent() && userLogin.get().equals(p.getPassengerId())) {
+                resultingPayments.add(p);
+            }
+        }
+
+        return resultingPayments;
     }
 
     /**
@@ -130,7 +107,15 @@ public class PaymentResource {
     public ResponseEntity<Payment> getPayment(@PathVariable Long id) {
         log.debug("REST request to get Payment : {}", id);
         Optional<Payment> payment = paymentRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(payment);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(payment.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(payment.get().getPassengerId())) {
+            return ResponseUtil.wrapOrNotFound(payment);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -142,20 +127,29 @@ public class PaymentResource {
     @DeleteMapping("/payments/{id}")
     public ResponseEntity<Void> deletePayment(@PathVariable Long id) {
         log.debug("REST request to delete Payment : {}", id);
+        Optional<Payment> payment = paymentRepository.findById(id);
 
-        paymentRepository.deleteById(id);
+        // Return 404 if the entity is not owned by the connected user
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if(payment.isPresent() &&
+            userLogin.isPresent() &&
+            userLogin.get().equals(payment.get().getPassengerId())) {
+            paymentRepository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
-    }
+   }
 
-    private void creditCardValidityCheck(CreditCard card) throws Exception {
-        if(card.getValidityDate().isBefore(LocalDate.now()) || card.getCardNumber() < 0 || card.getCvc() < 0){
+   private void creditCardValidityCheck(CreditCard card) throws Exception {
+        if(card.getValidityDate().isBefore(LocalDate.now()) || card.getCardNumber() < 0 || card.getCvc() <0) {
             throw new Exception("Credit Card Data is not correct");
         }
-    }
+   }
 
-    private void checkPayment(Double toPay) throws Exception {
-        if(toPay == null || toPay < 0){
+   private void checkPayment(Double toPay) throws Exception {
+        if(toPay == null || toPay < 0) {
             throw new Exception("Invalid amount to pay");
         }
-    }
+   }
 }
