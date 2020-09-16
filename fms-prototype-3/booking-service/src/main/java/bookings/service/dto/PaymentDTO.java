@@ -18,15 +18,4 @@ public class PaymentDTO {
         return bookingNumber;
     }
 
-    public void setBookingNumber(String bookingNumber) {
-        this.bookingNumber = bookingNumber;
-    }
-
-    public String getToPay() {
-        return toPay;
-    }
-
-    public void setToPay(String toPay) {
-        this.toPay = toPay;
-    }
 }

@@ -14,27 +14,4 @@ public class BookingDTO {
         this.passengerId = booking.getPassengerId();
     }
 
-    public String getBookingNumber() {
-        return bookingNumber;
-    }
-
-    public void setBookingNumber(String bookingNumber) {
-        this.bookingNumber = bookingNumber;
-    }
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public String getPassengerId() {
-        return passengerId;
-    }
-
-    public void setPassengerId(String passengerId) {
-        this.passengerId = passengerId;
-    }
 }
