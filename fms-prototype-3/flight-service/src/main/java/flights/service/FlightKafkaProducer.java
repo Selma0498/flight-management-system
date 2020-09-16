@@ -45,11 +45,17 @@ public class FlightKafkaProducer {
             ProducerRecord<String, String> event = null;
 
             switch (topicType) {
-                case SET: event = new ProducerRecord<>(TOPIC_FLIGHT_SET, message);
+                case SET:
+                    event = new ProducerRecord<>(TOPIC_FLIGHT_SET, message);
+                    logger.debug("Produced an event for topic {} : {}", TOPIC_FLIGHT_SET, event.value());
                     break;
-                case UPDATED: event = new ProducerRecord<>(TOPIC_FLIGHT_UPDATED, message);
+                case UPDATED:
+                    event = new ProducerRecord<>(TOPIC_FLIGHT_UPDATED, message);
+                    logger.debug("Produced an event for topic {} : {}", TOPIC_FLIGHT_UPDATED, event.value());
                     break;
-                case CANCELLED: event = new ProducerRecord<>(TOPIC_FLIGHT_CANCELLED, message);
+                case CANCELLED:
+                    event = new ProducerRecord<>(TOPIC_FLIGHT_CANCELLED, message);
+                    logger.debug("Produced an event for topic {} : {}", TOPIC_FLIGHT_CANCELLED, event.value());
                     break;
             }
 

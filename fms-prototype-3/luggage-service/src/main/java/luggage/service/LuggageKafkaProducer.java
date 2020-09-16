@@ -40,6 +40,7 @@ public class LuggageKafkaProducer {
             LuggageDTO luggageDTO = new LuggageDTO(luggage);
             String message = objectMapper.writeValueAsString(luggageDTO);
             ProducerRecord<String, String> event = new ProducerRecord<>(TOPIC_LUGGAGE_SET, message);
+            logger.debug("Produced an event for topic {} : {}", TOPIC_LUGGAGE_SET, event.value());
             producer.send(event);
         } catch (JsonProcessingException e) {
             logger.error(e.getMessage());

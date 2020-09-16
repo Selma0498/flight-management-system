@@ -110,7 +110,6 @@ export class PaymentUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    window.confirm("BLABLABLA");
     this.notificationService.getNotification(ENotificationType.BOOKING_CONFIRMED)
       .subscribe(notification => {
         if(notification.description !== undefined) {

@@ -47,9 +47,12 @@ public class BookingKafkaProducer {
                 case SET:
                 case UPDATED:
                     event = new ProducerRecord<>(TOPIC_BOOKING_UPDATED, message);
-                break;
-                case CANCELLED: event = new ProducerRecord<>(TOPIC_BOOKING_CANCELLED, message);
-                break;
+                    logger.debug("Produced an event for topic {} : {}", TOPIC_BOOKING_UPDATED, event.value());
+                    break;
+                case CANCELLED:
+                    event = new ProducerRecord<>(TOPIC_BOOKING_CANCELLED, message);
+                    logger.debug("Produced an event for topic {} : {}", TOPIC_BOOKING_CANCELLED, event.value());
+                    break;
             }
 
             producer.send(event);

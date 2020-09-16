@@ -55,7 +55,7 @@ public class BookingKafkaConsumer {
                     ConsumerRecords<String, String> luggageRecords = luggageConsumer.poll(Duration.ofSeconds(3));
 
                     for (ConsumerRecord<String, String> record : paymentRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_PAYMENT_SET, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_PAYMENT_SET, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         PaymentDTO paymentDTO = objectMapper.readValue(record.value(), PaymentDTO.class);
@@ -64,7 +64,7 @@ public class BookingKafkaConsumer {
                         }
                     }
                     for (ConsumerRecord<String, String> record : luggageRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_LUGGAGE_SET, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_LUGGAGE_SET, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         LuggageDTO luggageDTO = objectMapper.readValue(record.value(), LuggageDTO.class);
@@ -88,7 +88,7 @@ public class BookingKafkaConsumer {
 
 
     private void shutdown() {
-        logger.info("Shutdown Kafka consumer");
+        logger.debug("Shutdown Kafka consumer");
         closed.set(true);
         paymentConsumer.wakeup();
         luggageConsumer.wakeup();

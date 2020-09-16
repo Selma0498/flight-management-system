@@ -63,7 +63,7 @@ public class EmailService {
             message.setTo("selmagolos@yahoo.com");
             message.setSubject("Flight Update: " + flightDTO.getFlightNumber());
             message.setText(notificationMessage);
-            message.setFrom("Notification Service");
+            message.setFrom("notification@mail.com");
             emailSender.send(message);
         } catch (Exception e) {
             throw new EmailServiceException(e);

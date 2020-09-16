@@ -49,7 +49,7 @@ public class PassengerKafkaConsumer {
                 while (!closed.get()) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(3));
                     for (ConsumerRecord<String, String> record : records) {
-                        logger.info("Consumed message in {} : {}", TOPIC_NOTIFICATION_SET, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_NOTIFICATION_SET, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         NotificationDTO notificationDTO = objectMapper.readValue(record.value(), NotificationDTO.class);
@@ -70,7 +70,7 @@ public class PassengerKafkaConsumer {
 
 
     public void shutdown() {
-        logger.info("Shutdown Kafka consumer");
+        logger.debug("Shutdown Kafka consumer");
         closed.set(true);
         consumer.wakeup();
     }

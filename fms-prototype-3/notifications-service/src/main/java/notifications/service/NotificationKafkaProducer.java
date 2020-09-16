@@ -40,6 +40,7 @@ public class NotificationKafkaProducer {
             NotificationDTO notificationDTO = new NotificationDTO(notification);
             String message = objectMapper.writeValueAsString(notificationDTO);
             ProducerRecord<String, String> event = new ProducerRecord<>(TOPIC_NOTIFICATION_SET, message);
+            logger.debug("Produced an event for topic {} : {}", TOPIC_NOTIFICATION_SET, event.value());
             producer.send(event);
         } catch (JsonProcessingException e) {
             logger.error(e.getMessage());

@@ -40,6 +40,7 @@ public class PaymentKafkaProducer {
             PaymentDTO paymentDTO = new PaymentDTO(payment);
             String message = objectMapper.writeValueAsString(paymentDTO);
             ProducerRecord<String, String> event = new ProducerRecord<>(TOPIC_PAYMENT_SET, message);
+            logger.debug("Produced an event for topic {} : {}", TOPIC_PAYMENT_SET, event.value());
             producer.send(event);
         } catch (JsonProcessingException e) {
             logger.error(e.getMessage());

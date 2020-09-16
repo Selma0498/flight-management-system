@@ -80,7 +80,7 @@ public class NotificationKafkaConsumer {
                     ConsumerRecords<String, String> flightUpdateRecords = flightUpdateConsumer.poll(Duration.ofSeconds(3));
                     ConsumerRecords<String, String> flightCancellationRecords = flightCancellationConsumer.poll(Duration.ofSeconds(3));
                     for (ConsumerRecord<String, String> record : bookingUpdateRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_BOOKING_UPDATED, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_BOOKING_UPDATED, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
@@ -92,7 +92,7 @@ public class NotificationKafkaConsumer {
 
                     }
                     for (ConsumerRecord<String, String> record : bookingCancellationRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_BOOKING_CANCELLED, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_BOOKING_CANCELLED, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
@@ -103,7 +103,7 @@ public class NotificationKafkaConsumer {
                         );
                     }
                     for (ConsumerRecord<String, String> record : flightUpdateRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_FLIGHT_UPDATED, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_FLIGHT_UPDATED, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
@@ -114,7 +114,7 @@ public class NotificationKafkaConsumer {
                         );
                     }
                     for (ConsumerRecord<String, String> record : flightCancellationRecords) {
-                        logger.info("Consumed message in {} : {}", TOPIC_FLIGHT_CANCELLED, record.value());
+                        logger.debug("Consumed message in {} : {}", TOPIC_FLIGHT_CANCELLED, record.value());
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
@@ -142,7 +142,7 @@ public class NotificationKafkaConsumer {
     }
 
     public void shutdown() {
-        logger.info("Shutdown Kafka consumer");
+        logger.debug("Shutdown Kafka consumer");
         closed.set(true);
         bookingUpdateConsumer.wakeup();
         bookingCancellationConsumer.wakeup();
