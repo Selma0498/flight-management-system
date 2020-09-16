@@ -3,27 +3,51 @@
   "fields": [
     {
       "fieldName": "username",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "password",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "surname",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "email",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     }
   ],
-  "relationships": [],
-  "changelogDate": "20200714140428",
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "notificationRepo",
+      "otherEntityRelationshipName": "passenger",
+      "relationshipName": "notificationRepo",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200916232418",
   "entityTableName": "passenger",
   "dto": "no",
   "pagination": "no",

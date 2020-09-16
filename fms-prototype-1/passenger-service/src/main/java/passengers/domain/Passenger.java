@@ -1,11 +1,15 @@
 package passengers.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Passenger.
@@ -21,25 +25,32 @@ public class Passenger implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @NotNull
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @NotNull
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @NotNull
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "email")
+    @NotNull
+    @Column(name = "email", nullable = false)
     private String email;
 
-    public Passenger() {
-    }
+    @ManyToMany(mappedBy = "passengers")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<NotificationRepo> notificationRepos = new HashSet<>();
 
-    public Passenger(String username, String name, String surname, String email) {
+    public Passenger(@NotNull String username, @NotNull String name, @NotNull String surname, @NotNull String email) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -118,6 +129,31 @@ public class Passenger implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<NotificationRepo> getNotificationRepos() {
+        return notificationRepos;
+    }
+
+    public Passenger notificationRepos(Set<NotificationRepo> notificationRepos) {
+        this.notificationRepos = notificationRepos;
+        return this;
+    }
+
+    public Passenger addNotificationRepo(NotificationRepo notificationRepo) {
+        this.notificationRepos.add(notificationRepo);
+        notificationRepo.getPassengers().add(this);
+        return this;
+    }
+
+    public Passenger removeNotificationRepo(NotificationRepo notificationRepo) {
+        this.notificationRepos.remove(notificationRepo);
+        notificationRepo.getPassengers().remove(this);
+        return this;
+    }
+
+    public void setNotificationRepos(Set<NotificationRepo> notificationRepos) {
+        this.notificationRepos = notificationRepos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

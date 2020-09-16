@@ -134,6 +134,101 @@ public class PassengerResourceIT {
 
     @Test
     @Transactional
+    public void checkUsernameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passengerRepository.findAll().size();
+        // set the field null
+        passenger.setUsername(null);
+
+        // Create the Passenger, which fails.
+
+
+        restPassengerMockMvc.perform(post("/api/passengers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(passenger)))
+            .andExpect(status().isBadRequest());
+
+        List<Passenger> passengerList = passengerRepository.findAll();
+        assertThat(passengerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPasswordIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passengerRepository.findAll().size();
+        // set the field null
+        passenger.setPassword(null);
+
+        // Create the Passenger, which fails.
+
+
+        restPassengerMockMvc.perform(post("/api/passengers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(passenger)))
+            .andExpect(status().isBadRequest());
+
+        List<Passenger> passengerList = passengerRepository.findAll();
+        assertThat(passengerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passengerRepository.findAll().size();
+        // set the field null
+        passenger.setName(null);
+
+        // Create the Passenger, which fails.
+
+
+        restPassengerMockMvc.perform(post("/api/passengers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(passenger)))
+            .andExpect(status().isBadRequest());
+
+        List<Passenger> passengerList = passengerRepository.findAll();
+        assertThat(passengerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSurnameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passengerRepository.findAll().size();
+        // set the field null
+        passenger.setSurname(null);
+
+        // Create the Passenger, which fails.
+
+
+        restPassengerMockMvc.perform(post("/api/passengers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(passenger)))
+            .andExpect(status().isBadRequest());
+
+        List<Passenger> passengerList = passengerRepository.findAll();
+        assertThat(passengerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passengerRepository.findAll().size();
+        // set the field null
+        passenger.setEmail(null);
+
+        // Create the Passenger, which fails.
+
+
+        restPassengerMockMvc.perform(post("/api/passengers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(passenger)))
+            .andExpect(status().isBadRequest());
+
+        List<Passenger> passengerList = passengerRepository.findAll();
+        assertThat(passengerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPassengers() throws Exception {
         // Initialize the database
         passengerRepository.saveAndFlush(passenger);
