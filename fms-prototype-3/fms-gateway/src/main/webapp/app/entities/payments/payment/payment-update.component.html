@@ -59,7 +59,7 @@
                     <label class="form-control-label" for="field_creditCard">Credit Card</label>
                     <select class="form-control" id="field_creditCard" name="creditCard" formControlName="creditCard">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="creditCardOption.id === editForm.get('creditCard')!.value?.id ? editForm.get('creditCard')!.value : creditCardOption" *ngFor="let creditCardOption of creditcards; trackBy: trackById">{{ creditCardOption.id }}</option>
+                        <option [ngValue]="creditCardOption.id === editForm.get('creditCard')!.value?.id ? editForm.get('creditCard')!.value : creditCardOption" *ngFor="let creditCardOption of creditcards; trackBy: trackById">{{ creditCardOption.cardNumber }}</option>
                     </select>
                 </div>
             </div>

@@ -68,4 +68,16 @@ export const paymentRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
+  {
+    path: ':id/edit',
+    component: PaymentUpdateComponent,
+    resolve: {
+      payment: PaymentResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'Payments',
+    },
+    canActivate: [UserRouteAccessService],
+  },
 ];

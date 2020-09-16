@@ -31,7 +31,7 @@
                     <td>{{ payment.bookingNumber }}</td>
                     <td>
                         <div *ngIf="payment.creditCard">
-                            <a [routerLink]="['/credit-card', payment.creditCard?.id, 'view']" >{{ payment.creditCard?.id }}</a>
+                            <a [routerLink]="['/credit-card', payment.creditCard?.id, 'view']" >{{ payment.creditCard?.cardNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">

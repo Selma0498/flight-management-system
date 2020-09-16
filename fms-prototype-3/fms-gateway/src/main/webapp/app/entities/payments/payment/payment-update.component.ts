@@ -70,8 +70,8 @@ export class PaymentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: payment.id,
       passengerId: payment.passengerId,
-      toPay: payment.toPay,
-      bookingNumber: payment.bookingNumber,
+      toPay: this.activatedRoute.snapshot.paramMap.get('fprice'),
+      bookingNumber: this.activatedRoute.snapshot.paramMap.get('bookingNumber'),
       creditCard: payment.creditCard,
     });
   }
