@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import flights.domain.enumeration.EFlightType;
 
@@ -44,13 +45,23 @@ public class Flight implements Serializable {
     @Column(name = "pilot")
     private String pilot;
 
+    @Column(name = "plane_model_number")
+    private String planeModelNumber;
+
     @NotNull
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private FlightHandling flightHandler;
+    @NotNull
+    @Column(name = "departure_date", nullable = false)
+    private LocalDate departureDate;
+
+    @NotNull
+    @Column(name = "boarding_gate", nullable = false)
+    private Integer boardingGate;
+
+    @Column(name = "airline_name")
+    private String airlineName;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -61,16 +72,6 @@ public class Flight implements Serializable {
     @NotNull
     @JsonIgnoreProperties(value = "flights", allowSetters = true)
     private Airport destination;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    @JsonIgnoreProperties(value = "flights", allowSetters = true)
-    private Airline airline;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    @JsonIgnoreProperties(value = "flights", allowSetters = true)
-    private Plane plane;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -129,6 +130,23 @@ public class Flight implements Serializable {
         return this;
     }
 
+    public void setPilot(String pilot) {
+        this.pilot = pilot;
+    }
+
+    public String getPlaneModelNumber() {
+        return planeModelNumber;
+    }
+
+    public Flight planeModelNumber(String planeModelNumber) {
+        this.planeModelNumber = planeModelNumber;
+        return this;
+    }
+
+    public void setPlaneModelNumber(String planeModelNumber) {
+        this.planeModelNumber = planeModelNumber;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -142,38 +160,69 @@ public class Flight implements Serializable {
         this.price = price;
     }
 
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public Flight departureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+        return this;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Integer getBoardingGate() {
+        return boardingGate;
+    }
+
+    public Flight boardingGate(Integer boardingGate) {
+        this.boardingGate = boardingGate;
+        return this;
+    }
+
+    public void setBoardingGate(Integer boardingGate) {
+        this.boardingGate = boardingGate;
+    }
+
+    public String getAirlineName() {
+        return airlineName;
+    }
+
+    public Flight airlineName(String airlineName) {
+        this.airlineName = airlineName;
+        return this;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
+    }
+
+    public Airport getOrigin() {
+        return origin;
+    }
+
+    public Flight origin(Airport airport) {
+        this.origin = airport;
+        return this;
+    }
+
     public void setOrigin(Airport airport) {
         this.origin = airport;
     }
 
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public Flight destination(Airport airport) {
+        this.destination = airport;
+        return this;
+    }
+
     public void setDestination(Airport airport) {
         this.destination = airport;
-    }
-
-    public Airline getAirline() {
-        return airline;
-    }
-
-    public Flight airline(Airline airline) {
-        this.airline = airline;
-        return this;
-    }
-
-    public void setAirline(Airline airline) {
-        this.airline = airline;
-    }
-
-    public Plane getPlane() {
-        return plane;
-    }
-
-    public Flight plane(Plane plane) {
-        this.plane = plane;
-        return this;
-    }
-
-    public void setPlane(Plane plane) {
-        this.plane = plane;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -202,7 +251,11 @@ public class Flight implements Serializable {
             ", flightType='" + getFlightType() + "'" +
             ", fareType='" + getFareType() + "'" +
             ", pilot='" + getPilot() + "'" +
+            ", planeModelNumber='" + getPlaneModelNumber() + "'" +
             ", price=" + getPrice() +
+            ", departureDate='" + getDepartureDate() + "'" +
+            ", boardingGate=" + getBoardingGate() +
+            ", airlineName='" + getAirlineName() + "'" +
             "}";
     }
 }

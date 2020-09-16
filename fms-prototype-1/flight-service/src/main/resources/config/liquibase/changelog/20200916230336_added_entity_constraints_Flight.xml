@@ -6,14 +6,8 @@
     <!--
         Added the constraints for entity Flight.
     -->
-    <changeSet id="20200717154908-2" author="jhipster">
+    <changeSet id="20200916230336-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="flight_handler_id"
-                                 baseTableName="flight"
-                                 constraintName="fk_flight_flight_handler_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="flight_handling"/>
-
         <addForeignKeyConstraint baseColumnNames="origin_id"
                                  baseTableName="flight"
                                  constraintName="fk_flight_origin_id"
@@ -25,18 +19,6 @@
                                  constraintName="fk_flight_destination_id"
                                  referencedColumnNames="id"
                                  referencedTableName="airport"/>
-
-        <addForeignKeyConstraint baseColumnNames="airline_id"
-                                 baseTableName="flight"
-                                 constraintName="fk_flight_airline_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="airline"/>
-
-        <addForeignKeyConstraint baseColumnNames="plane_id"
-                                 baseTableName="flight"
-                                 constraintName="fk_flight_plane_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="plane"/>
 
     </changeSet>
 </databaseChangeLog>
