@@ -16,5 +16,5 @@ enum ECardType {
 }
 
 relationship OneToOne {
-	Payment to CreditCard
+	Payment{creditCard(cardNumber)} to CreditCard{payment(passengerId)}
 }

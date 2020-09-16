@@ -77,6 +77,36 @@ public class PaymentResource {
     }
 
     /**
+     * {@code PUT  /payments} : Updates an existing payment.
+     *
+     * @param payment the payment to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated payment,
+     * or with status {@code 400 (Bad Request)} if the payment is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the payment couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/payments")
+    public ResponseEntity<Payment> updatePayment(@Valid @RequestBody Payment payment) throws URISyntaxException {
+        log.debug("REST request to update Payment : {}", payment);
+        if (payment.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        try{
+            checkPayment(payment.getToPay());
+            creditCardValidityCheck(payment.getCreditCard());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        Payment result = paymentRepository.save(payment);
+        paymentKafkaProducer.sendPaymentSuccess(result);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, payment.getId().toString()))
+            .body(result);
+    }
+
+    /**
      * {@code GET  /payments} : get all the payments.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of payments in body.
@@ -142,7 +172,7 @@ public class PaymentResource {
    }
 
    private void creditCardValidityCheck(CreditCard card) throws Exception {
-        if(card.getValidityDate().isBefore(LocalDate.now()) || card.getCardNumber() < 0 || card.getCvc() <0) {
+        if(card.getValidityDate() == null || card.getCardNumber() < 0 || card.getCvc() <0) {
             throw new Exception("Credit Card Data is not correct");
         }
    }

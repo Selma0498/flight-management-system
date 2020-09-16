@@ -29,7 +29,7 @@
       "otherEntityName": "creditCard",
       "otherEntityRelationshipName": "payment",
       "relationshipName": "creditCard",
-      "otherEntityField": "id",
+      "otherEntityField": "cardNumber",
       "ownerSide": true
     }
   ],
