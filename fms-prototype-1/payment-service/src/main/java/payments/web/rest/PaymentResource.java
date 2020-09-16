@@ -1,5 +1,6 @@
 package payments.web.rest;
 
+import payments.domain.CreditCard;
 import payments.domain.Payment;
 import payments.repository.PaymentRepository;
 import payments.security.SecurityUtils;
@@ -55,6 +56,13 @@ public class PaymentResource {
         if (payment.getId() != null) {
             throw new BadRequestAlertException("A new payment cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        try{
+            checkPayment(payment.getToPay());
+            creditCardValidityCheck(payment.getCreditCard());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
         Payment result = paymentRepository.save(payment);
         return ResponseEntity.created(new URI("/api/payments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -76,6 +84,13 @@ public class PaymentResource {
         if (payment.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        try{
+            checkPayment(payment.getToPay());
+            creditCardValidityCheck(payment.getCreditCard());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
         Payment result = paymentRepository.save(payment);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, payment.getId().toString()))
@@ -145,5 +160,17 @@ public class PaymentResource {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    private void creditCardValidityCheck(CreditCard card) throws Exception {
+        if(card.getValidityDate() == null || card.getCardNumber() < 0 || card.getCvc() <0) {
+            throw new Exception("Credit Card Data is not correct");
+        }
+    }
+
+    private void checkPayment(Double toPay) throws Exception {
+        if(toPay == null || toPay < 0) {
+            throw new Exception("Invalid amount to pay");
+        }
     }
 }
