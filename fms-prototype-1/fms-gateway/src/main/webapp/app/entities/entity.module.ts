@@ -29,20 +29,20 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./bookings/booking/booking.module').then(m => m.BookingsBookingModule),
       },
       {
-        path: 'payment',
-        loadChildren: () => import('./payments/payment/payment.module').then(m => m.PaymentsPaymentModule),
-      },
-      {
-        path: 'invoice',
-        loadChildren: () => import('./payments/invoice/invoice.module').then(m => m.PaymentsInvoiceModule),
-      },
-      {
         path: 'luggage',
         loadChildren: () => import('./luggage/luggage/luggage.module').then(m => m.LuggageLuggageModule),
       },
       {
         path: 'notification',
         loadChildren: () => import('./notifications/notification/notification.module').then(m => m.NotificationsNotificationModule),
+      },
+      {
+        path: 'payment',
+        loadChildren: () => import('./payments/payment/payment.module').then(m => m.PaymentsPaymentModule),
+      },
+      {
+        path: 'credit-card',
+        loadChildren: () => import('./payments/credit-card/credit-card.module').then(m => m.PaymentsCreditCardModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

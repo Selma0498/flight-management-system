@@ -38,6 +38,30 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bookingNumber">Booking Number</label>
+                    <input type="number" class="form-control" name="bookingNumber" id="field_bookingNumber"
+                           formControlName="bookingNumber"/>
+                    <div *ngIf="editForm.get('bookingNumber')!.invalid && (editForm.get('bookingNumber')!.dirty || editForm.get('bookingNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bookingNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('bookingNumber')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_creditCard">Credit Card</label>
+                    <select class="form-control" id="field_creditCard" name="creditCard" formControlName="creditCard">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="creditCardOption.id === editForm.get('creditCard')!.value?.id ? editForm.get('creditCard')!.value : creditCardOption" *ngFor="let creditCardOption of creditcards; trackBy: trackById">{{ creditCardOption.cardNumber }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>
@@ -45,9 +69,7 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary"
-                        [routerLink]="['/invoice/new/booking', this.getBookingNumber(), 'price', this.getFlightPrice()]">
-                    {{this.onSaveSuccess()}}
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

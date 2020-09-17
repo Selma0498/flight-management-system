@@ -1,11 +1,11 @@
-import { IInvoice } from 'app/shared/model/payments/invoice.model';
+import { ICreditCard } from 'app/shared/model/payments/credit-card.model';
 
 export interface IPayment {
   id?: number;
   passengerId?: string;
   toPay?: number;
   bookingNumber?: number;
-  invoice?: IInvoice;
+  creditCard?: ICreditCard;
 }
 
 export class Payment implements IPayment {
@@ -14,6 +14,6 @@ export class Payment implements IPayment {
     public passengerId?: string,
     public toPay?: number,
     public bookingNumber?: number,
-    public invoice?: IInvoice
+    public creditCard?: ICreditCard
   ) {}
 }

@@ -16,6 +16,16 @@
                 <dd>
                     <span>{{ payment.toPay }}</span>
                 </dd>
+                <dt><span>Booking Number</span></dt>
+                <dd>
+                    <span>{{ payment.bookingNumber }}</span>
+                </dd>
+                <dt><span>Credit Card</span></dt>
+                <dd>
+                    <div *ngIf="payment.creditCard">
+                        <a [routerLink]="['/credit-card', payment.creditCard?.id, 'view']">{{ payment.creditCard?.cardNumber }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

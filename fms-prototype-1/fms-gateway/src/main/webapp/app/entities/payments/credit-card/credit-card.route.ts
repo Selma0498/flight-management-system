@@ -6,23 +6,23 @@ import { flatMap } from 'rxjs/operators';
 
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IInvoice, Invoice } from 'app/shared/model/payments/invoice.model';
-import { InvoiceService } from './invoice.service';
-import { InvoiceComponent } from './invoice.component';
-import { InvoiceDetailComponent } from './invoice-detail.component';
-import { InvoiceUpdateComponent } from './invoice-update.component';
+import { ICreditCard, CreditCard } from 'app/shared/model/payments/credit-card.model';
+import { CreditCardService } from './credit-card.service';
+import { CreditCardComponent } from './credit-card.component';
+import { CreditCardDetailComponent } from './credit-card-detail.component';
+import { CreditCardUpdateComponent } from './credit-card-update.component';
 
 @Injectable({ providedIn: 'root' })
-export class InvoiceResolve implements Resolve<IInvoice> {
-  constructor(private service: InvoiceService, private router: Router) {}
+export class CreditCardResolve implements Resolve<ICreditCard> {
+  constructor(private service: CreditCardService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IInvoice> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<ICreditCard> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        flatMap((invoice: HttpResponse<Invoice>) => {
-          if (invoice.body) {
-            return of(invoice.body);
+        flatMap((creditCard: HttpResponse<CreditCard>) => {
+          if (creditCard.body) {
+            return of(creditCard.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -30,53 +30,53 @@ export class InvoiceResolve implements Resolve<IInvoice> {
         })
       );
     }
-    return of(new Invoice());
+    return of(new CreditCard());
   }
 }
 
-export const invoiceRoute: Routes = [
+export const creditCardRoute: Routes = [
   {
     path: '',
-    component: InvoiceComponent,
+    component: CreditCardComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'Invoices',
+      pageTitle: 'CreditCards',
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: InvoiceDetailComponent,
+    component: CreditCardDetailComponent,
     resolve: {
-      invoice: InvoiceResolve,
+      creditCard: CreditCardResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'Invoices',
+      pageTitle: 'CreditCards',
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new/booking/:bookingNumber/price/:price',
-    component: InvoiceUpdateComponent,
+    path: 'new',
+    component: CreditCardUpdateComponent,
     resolve: {
-      invoice: InvoiceResolve,
+      creditCard: CreditCardResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'Invoices',
+      pageTitle: 'CreditCards',
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: InvoiceUpdateComponent,
+    component: CreditCardUpdateComponent,
     resolve: {
-      invoice: InvoiceResolve,
+      creditCard: CreditCardResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'Invoices',
+      pageTitle: 'CreditCards',
     },
     canActivate: [UserRouteAccessService],
   },

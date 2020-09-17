@@ -6,27 +6,27 @@ import { JhiEventManager } from 'ng-jhipster';
 import { GatewayTestModule } from '../../../../test.module';
 import { MockEventManager } from '../../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../../helpers/mock-active-modal.service';
-import { InvoiceDeleteDialogComponent } from 'app/entities/payments/invoice/invoice-delete-dialog.component';
-import { InvoiceService } from 'app/entities/payments/invoice/invoice.service';
+import { CreditCardDeleteDialogComponent } from 'app/entities/payments/credit-card/credit-card-delete-dialog.component';
+import { CreditCardService } from 'app/entities/payments/credit-card/credit-card.service';
 
 describe('Component Tests', () => {
-  describe('Invoice Management Delete Component', () => {
-    let comp: InvoiceDeleteDialogComponent;
-    let fixture: ComponentFixture<InvoiceDeleteDialogComponent>;
-    let service: InvoiceService;
+  describe('CreditCard Management Delete Component', () => {
+    let comp: CreditCardDeleteDialogComponent;
+    let fixture: ComponentFixture<CreditCardDeleteDialogComponent>;
+    let service: CreditCardService;
     let mockEventManager: MockEventManager;
     let mockActiveModal: MockActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [GatewayTestModule],
-        declarations: [InvoiceDeleteDialogComponent],
+        declarations: [CreditCardDeleteDialogComponent],
       })
-        .overrideTemplate(InvoiceDeleteDialogComponent, '')
+        .overrideTemplate(CreditCardDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(InvoiceDeleteDialogComponent);
+      fixture = TestBed.createComponent(CreditCardDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(InvoiceService);
+      service = fixture.debugElement.injector.get(CreditCardService);
       mockEventManager = TestBed.get(JhiEventManager);
       mockActiveModal = TestBed.get(NgbActiveModal);
     });

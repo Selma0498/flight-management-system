@@ -4,34 +4,34 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { GatewayTestModule } from '../../../../test.module';
-import { InvoiceUpdateComponent } from 'app/entities/payments/invoice/invoice-update.component';
-import { InvoiceService } from 'app/entities/payments/invoice/invoice.service';
-import { Invoice } from 'app/shared/model/payments/invoice.model';
+import { CreditCardUpdateComponent } from 'app/entities/payments/credit-card/credit-card-update.component';
+import { CreditCardService } from 'app/entities/payments/credit-card/credit-card.service';
+import { CreditCard } from 'app/shared/model/payments/credit-card.model';
 
 describe('Component Tests', () => {
-  describe('Invoice Management Update Component', () => {
-    let comp: InvoiceUpdateComponent;
-    let fixture: ComponentFixture<InvoiceUpdateComponent>;
-    let service: InvoiceService;
+  describe('CreditCard Management Update Component', () => {
+    let comp: CreditCardUpdateComponent;
+    let fixture: ComponentFixture<CreditCardUpdateComponent>;
+    let service: CreditCardService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [GatewayTestModule],
-        declarations: [InvoiceUpdateComponent],
+        declarations: [CreditCardUpdateComponent],
         providers: [FormBuilder],
       })
-        .overrideTemplate(InvoiceUpdateComponent, '')
+        .overrideTemplate(CreditCardUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(InvoiceUpdateComponent);
+      fixture = TestBed.createComponent(CreditCardUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(InvoiceService);
+      service = fixture.debugElement.injector.get(CreditCardService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Invoice(123);
+        const entity = new CreditCard(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -45,7 +45,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Invoice();
+        const entity = new CreditCard();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

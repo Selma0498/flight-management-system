@@ -18,6 +18,9 @@
                     <th scope="col" ><span>ID</span></th>
                     <th scope="col" ><span>Passenger Id</span></th>
                     <th scope="col" ><span>To Pay</span></th>
+                    <th scope="col" ><span>Booking Number</span></th>
+                    <th scope="col" ><span>Credit Card</span></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +28,12 @@
                     <td><a [routerLink]="['/payment', payment.id, 'view']">{{ payment.id }}</a></td>
                     <td>{{ payment.passengerId }}</td>
                     <td>{{ payment.toPay }}</td>
+                    <td>{{ payment.bookingNumber }}</td>
+                    <td>
+                        <div *ngIf="payment.creditCard">
+                            <a [routerLink]="['/credit-card', payment.creditCard?.id, 'view']" >{{ payment.creditCard?.cardNumber }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

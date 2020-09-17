@@ -3,27 +3,27 @@ import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { GatewayTestModule } from '../../../../test.module';
-import { InvoiceComponent } from 'app/entities/payments/invoice/invoice.component';
-import { InvoiceService } from 'app/entities/payments/invoice/invoice.service';
-import { Invoice } from 'app/shared/model/payments/invoice.model';
+import { CreditCardComponent } from 'app/entities/payments/credit-card/credit-card.component';
+import { CreditCardService } from 'app/entities/payments/credit-card/credit-card.service';
+import { CreditCard } from 'app/shared/model/payments/credit-card.model';
 
 describe('Component Tests', () => {
-  describe('Invoice Management Component', () => {
-    let comp: InvoiceComponent;
-    let fixture: ComponentFixture<InvoiceComponent>;
-    let service: InvoiceService;
+  describe('CreditCard Management Component', () => {
+    let comp: CreditCardComponent;
+    let fixture: ComponentFixture<CreditCardComponent>;
+    let service: CreditCardService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [GatewayTestModule],
-        declarations: [InvoiceComponent],
+        declarations: [CreditCardComponent],
       })
-        .overrideTemplate(InvoiceComponent, '')
+        .overrideTemplate(CreditCardComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(InvoiceComponent);
+      fixture = TestBed.createComponent(CreditCardComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(InvoiceService);
+      service = fixture.debugElement.injector.get(CreditCardService);
     });
 
     it('Should call load all on init', () => {
@@ -32,7 +32,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Invoice(123)],
+            body: [new CreditCard(123)],
             headers,
           })
         )
@@ -43,7 +43,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.invoices && comp.invoices[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.creditCards && comp.creditCards[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
   });
 });
