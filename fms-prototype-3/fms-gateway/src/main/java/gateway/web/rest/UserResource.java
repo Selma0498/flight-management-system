@@ -100,7 +100,6 @@ public class UserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      * @throws BadRequestAlertException {@code 400 (Bad Request)} if the login or email is already in use.
      */
-    // TODO Each time a user is created by an admin on the JHI Admin side, create an equivalent passenger in passenger microservice.
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
@@ -143,7 +142,6 @@ public class UserResource {
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already in use.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already in use.
      */
-    // TODO Update the passenger equivalent at the passenger microservice side
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
@@ -229,8 +227,7 @@ public class UserResource {
             // if the user is logged in for the first time with username 'user' register a passenger at the passenger microservice
             if(login.equals("user") && result == null) {
 
-                log.debug("MY PRE SENDING TO PASENGER MS USER IS   " + userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new).toString());
-                ResponseEntity resultCode = restTemplate.postForObject(
+               ResponseEntity resultCode = restTemplate.postForObject(
                     passengerMicroserviceBaseURL+"/api/passengers/",
                     userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new),
                     ResponseEntity.class

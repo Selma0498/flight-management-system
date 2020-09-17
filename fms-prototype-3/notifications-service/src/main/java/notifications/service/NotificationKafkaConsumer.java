@@ -42,7 +42,6 @@ public class NotificationKafkaConsumer {
     private final Logger logger = LoggerFactory.getLogger(NotificationKafkaConsumer.class);
     private final AtomicBoolean closed = new AtomicBoolean(false);
     private final KafkaProperties kafkaProperties;
-    private final EmailService emailService;
     private final NotificationKafkaProducer notificationKafkaProducer;
 
     private KafkaConsumer<String, String> bookingUpdateConsumer;
@@ -50,10 +49,10 @@ public class NotificationKafkaConsumer {
     private KafkaConsumer<String, String> flightUpdateConsumer;
     private KafkaConsumer<String, String> flightCancellationConsumer;
     private ExecutorService executorService = Executors.newCachedThreadPool();
+    private String notificationMessage = "";
 
-    public NotificationKafkaConsumer(KafkaProperties kafkaProperties, EmailService emailService, NotificationKafkaProducer notificationKafkaProducer) {
+    public NotificationKafkaConsumer(KafkaProperties kafkaProperties, NotificationKafkaProducer notificationKafkaProducer) {
         this.kafkaProperties = kafkaProperties;
-        this.emailService = emailService;
         this.notificationKafkaProducer = notificationKafkaProducer;
     }
 
@@ -84,10 +83,14 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
-                        //emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CONFIRMED);
                         // send the notification for the passenger to subscribe for
+                        this.notificationMessage = "This information is for a passenger with passenger id: " + bookingDTO.getPassengerId() + "" +
+                            ". If this concerns you, please read on. " +
+                            "Dear Sir/Madam, the booking with booking number: " + bookingDTO.getBookingNumber() +
+                            " for flight with flight number: " + bookingDTO.getFlightNumber() +
+                            " has been confirmed. Safe travels and best regards!";
                         notificationKafkaProducer.sendNotificationEvent(
-                            new Notification(ENotificationType.BOOKING_CONFIRMED, emailService.getNotificationMessage())
+                            new Notification(ENotificationType.BOOKING_CONFIRMED, notificationMessage)
                         );
 
                     }
@@ -96,10 +99,14 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         BookingDTO bookingDTO = objectMapper.readValue(record.value(), BookingDTO.class);
-                        //emailService.sendBookingInfo(bookingDTO, ENotificationType.BOOKING_CANCELLED);
                         // send the notification for the passenger to subscribe for
+                        this.notificationMessage = "This information is for a passenger with passenger id: " + bookingDTO.getPassengerId() + "" +
+                            ". If this concerns you, please read on. " +
+                            "Dear Sir/Madam, the booking with booking number: " + bookingDTO.getBookingNumber() +
+                            " for flight with flight number: " + bookingDTO.getFlightNumber() + " has been cancelled. Best regards!";
+
                         notificationKafkaProducer.sendNotificationEvent(
-                            new Notification(ENotificationType.BOOKING_CANCELLED, emailService.getNotificationMessage())
+                            new Notification(ENotificationType.BOOKING_CANCELLED, notificationMessage)
                         );
                     }
                     for (ConsumerRecord<String, String> record : flightUpdateRecords) {
@@ -107,10 +114,14 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
-                        //emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_UPDATED);
                         // send the notification for the passenger to subscribe for
+                        this.notificationMessage = "Dear Sir/Madam, the flight with flight number: " + flightDTO.getFlightNumber() +
+                            " for origin: " + flightDTO.getOrigin() + " and destination: " + flightDTO.getDestination() +
+                            " with departure date on: " + flightDTO.getDepartureDate() +
+                            " has been updated. Safe travels and best regards!";
+
                         notificationKafkaProducer.sendNotificationEvent(
-                            new Notification(ENotificationType.FLIGHT_UPDATED, emailService.getNotificationMessage())
+                            new Notification(ENotificationType.FLIGHT_UPDATED, notificationMessage)
                         );
                     }
                     for (ConsumerRecord<String, String> record : flightCancellationRecords) {
@@ -118,10 +129,13 @@ public class NotificationKafkaConsumer {
 
                         ObjectMapper objectMapper = new ObjectMapper();
                         FlightDTO flightDTO = objectMapper.readValue(record.value(), FlightDTO.class);
-                        //emailService.sendFlightInfo(flightDTO, ENotificationType.FLIGHT_CANCELLED);
-                        // send the notification for the passenger to subscribe for
+                       // send the notification for the passenger to subscribe for
+                        this.notificationMessage = "Dear Sir/Madam, the flight with flight number: " + flightDTO.getFlightNumber() +
+                            " for origin: " + flightDTO.getOrigin() + " and destination: " + flightDTO.getDestination() +
+                            " with departure date on: " + flightDTO.getDepartureDate() + " has been cancelled. Best regards!";
+
                         notificationKafkaProducer.sendNotificationEvent(
-                            new Notification(ENotificationType.FLIGHT_CANCELLED, emailService.getNotificationMessage())
+                            new Notification(ENotificationType.FLIGHT_CANCELLED, notificationMessage)
                         );
                     }
                 }
