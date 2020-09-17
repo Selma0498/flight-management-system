@@ -11,7 +11,6 @@ import { IAirport } from 'app/shared/model/flights/airport.model';
 import { AirportService } from 'app/entities/flights/airport/airport.service';
 import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 import {NotificationService} from "app/entities/notifications/notification/notification.service";
-import {NotificationRepo} from "app/shared/model/passengers/notification-repo.model";
 import {NotificationRepoService} from "app/entities/passengers/notification-repo/notification-repo.service";
 
 @Component({
@@ -44,7 +43,6 @@ export class FlightUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private notificationService: NotificationService,
-    private notificationRepo: NotificationRepo,
     private notificationRepoService: NotificationRepoService
   ) {}
 
@@ -115,9 +113,8 @@ export class FlightUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
     //save notification in notification repo for passengers to see
-    this.notificationRepo.name = "FLIGHT UPDATED";
-    this.notificationRepo.description = "Flight with id= " + this.editForm.get(['flightNumber'])!.value + " has been updated. Please view flight details for more information.";
-    this.notificationRepoService.updateNotificationRepo(this.notificationRepo);
+    //save notification in notification repo for passengers to see
+    this.notificationRepoService.updateNotificationRepo(ENotificationType.FLIGHT_CANCELLED, this.editForm.get(['flightNumber'])!.value);
 
     this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
       .subscribe(notification => {

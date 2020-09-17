@@ -120,8 +120,8 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_origin">Origin City</label>
                     <select class="form-control" id="field_origin" name="origin" formControlName="origin">
-                        <option *ngIf="!editForm.get('origin')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="airportOption.id === editForm.get('origin')!.value?.id ? editForm.get('origin')!.value : airportOption" *ngFor="let airportOption of airports; trackBy: trackById">{{ airportOption.id }}</option>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="airportOption.cityName === editForm.get('origin')!.value?.cityName ? editForm.get('origin')!.value : airportOption" *ngFor="let airportOption of airports; trackBy: trackById">{{ airportOption.cityName }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('origin')!.invalid && (editForm.get('origin')!.dirty || editForm.get('origin')!.touched)">
@@ -134,8 +134,8 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_destination">Destination City</label>
                     <select class="form-control" id="field_destination" name="destination" formControlName="destination">
-                        <option *ngIf="!editForm.get('destination')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="airportOption.id === editForm.get('destination')!.value?.id ? editForm.get('destination')!.value : airportOption" *ngFor="let airportOption of airports; trackBy: trackById">{{ airportOption.id }}</option>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="airportOption.cityName === editForm.get('destination')!.value?.cityName ? editForm.get('destination')!.value : airportOption" *ngFor="let airportOption of airports; trackBy: trackById">{{ airportOption.cityName }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('destination')!.invalid && (editForm.get('destination')!.dirty || editForm.get('destination')!.touched)">

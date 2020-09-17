@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import {INotificationRepo, NotificationRepo} from 'app/shared/model/passengers/notification-repo.model';
+import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 
 type EntityResponseType = HttpResponse<INotificationRepo>;
 type EntityArrayResponseType = HttpResponse<INotificationRepo[]>;
@@ -34,7 +35,9 @@ export class NotificationRepoService {
     return this.http.get<INotificationRepo[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  public updateNotificationRepo(notificationRepo: NotificationRepo): void {
-    this.http.post(this.saveNotificationUrl, notificationRepo);
+  public updateNotificationRepo(notificationType: ENotificationType, id: number): Observable<EntityResponseType> {
+    return this.http.post(this.saveNotificationUrl,
+      new NotificationRepo(undefined, "FLIGHT CANCELLED", "Flight with id= " + id + " has been cancelled."),
+      { observe: 'response' });
   }
 }

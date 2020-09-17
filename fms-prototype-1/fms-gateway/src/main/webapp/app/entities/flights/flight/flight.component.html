@@ -31,9 +31,9 @@
                     <th scope="col" ><span>Price</span></th>
                     <th scope="col" ><span>Departure Date</span></th>
                     <th scope="col" ><span>Boarding Gate</span></th>
+                    <th scope="col" ><span>Airline Name</span></th>
                     <th scope="col" ><span>Origin City</span></th>
                     <th scope="col" ><span>Destination City</span></th>
-                    <th scope="col" ><span>Airline Name</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -51,12 +51,12 @@
                     <td>{{ flight.airlineName }}</td>
                     <td>
                         <div *ngIf="flight.origin">
-                            <a [routerLink]="['/airport', flight.origin?.id, 'view']" >{{ flight.origin?.id }}</a>
+                            <a [routerLink]="['/airport', flight.origin?.cityName, 'view']" >{{ flight.origin?.cityName }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="flight.destination">
-                            <a [routerLink]="['/airport', flight.destination?.id, 'view']" >{{ flight.destination?.id }}</a>
+                            <a [routerLink]="['/airport', flight.destination?.cityName, 'view']" >{{ flight.destination?.cityName }}</a>
                         </div>
                     </td>
                     <td class="text-right">
