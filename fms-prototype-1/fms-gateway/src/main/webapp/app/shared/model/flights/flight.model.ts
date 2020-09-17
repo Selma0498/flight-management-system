@@ -1,7 +1,5 @@
-import { IFlightHandling } from 'app/shared/model/flights/flight-handling.model';
+import { Moment } from 'moment';
 import { IAirport } from 'app/shared/model/flights/airport.model';
-import { IAirline } from 'app/shared/model/flights/airline.model';
-import { IPlane } from 'app/shared/model/flights/plane.model';
 import { EFlightType } from 'app/shared/model/enumerations/e-flight-type.model';
 import { EFareType } from 'app/shared/model/enumerations/e-fare-type.model';
 
@@ -11,12 +9,13 @@ export interface IFlight {
   flightType?: EFlightType;
   fareType?: EFareType;
   pilot?: string;
+  planeModelNumber?: string;
   price?: number;
-  flightHandler?: IFlightHandling;
+  departureDate?: Moment;
+  boardingGate?: number;
+  airlineName?: string;
   origin?: IAirport;
   destination?: IAirport;
-  airline?: IAirline;
-  plane?: IPlane;
 }
 
 export class Flight implements IFlight {
@@ -26,11 +25,12 @@ export class Flight implements IFlight {
     public flightType?: EFlightType,
     public fareType?: EFareType,
     public pilot?: string,
+    public planeModelNumber?: string,
     public price?: number,
-    public flightHandler?: IFlightHandling,
+    public departureDate?: Moment,
+    public boardingGate?: number,
+    public airlineName?: string,
     public origin?: IAirport,
-    public destination?: IAirport,
-    public airline?: IAirline,
-    public plane?: IPlane
+    public destination?: IAirport
   ) {}
 }

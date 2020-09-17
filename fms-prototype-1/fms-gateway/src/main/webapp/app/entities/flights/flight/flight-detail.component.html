@@ -24,15 +24,25 @@
                 <dd>
                     <span>{{ flight.pilot }}</span>
                 </dd>
+                <dt><span>Plane Model Number</span></dt>
+                <dd>
+                    <span>{{ flight.planeModelNumber }}</span>
+                </dd>
                 <dt><span>Price</span></dt>
                 <dd>
                     <span>{{ flight.price }}</span>
                 </dd>
-                <dt><span>Flight Handler</span></dt>
+                <dt><span>Departure Date</span></dt>
                 <dd>
-                    <div *ngIf="flight.flightHandler">
-                        <a [routerLink]="['/flight-handling', flight.flightHandler?.id, 'view']">{{ flight.flightHandler?.id }}</a>
-                    </div>
+                    <span>{{ flight.departureDate }}</span>
+                </dd>
+                <dt><span>Boarding Gate</span></dt>
+                <dd>
+                    <span>{{ flight.boardingGate }}</span>
+                </dd>
+                <dt><span>Airline Name</span></dt>
+                <dd>
+                    <span>{{ flight.airlineName }}</span>
                 </dd>
                 <dt><span>Origin</span></dt>
                 <dd>
@@ -44,18 +54,6 @@
                 <dd>
                     <div *ngIf="flight.destination">
                         <a [routerLink]="['/airport', flight.destination?.id, 'view']">{{ flight.destination?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span>Airline</span></dt>
-                <dd>
-                    <div *ngIf="flight.airline">
-                        <a [routerLink]="['/airline', flight.airline?.id, 'view']">{{ flight.airline?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span>Plane</span></dt>
-                <dd>
-                    <div *ngIf="flight.plane">
-                        <a [routerLink]="['/plane', flight.plane?.id, 'view']">{{ flight.plane?.id }}</a>
                     </div>
                 </dd>
             </dl>

@@ -1,5 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { FlightService } from 'app/entities/flights/flight/flight.service';
 import { IFlight, Flight } from 'app/shared/model/flights/flight.model';
 import { EFlightType } from 'app/shared/model/enumerations/e-flight-type.model';
@@ -12,6 +14,7 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IFlight;
     let expectedResult: IFlight | IFlight[] | boolean | null;
+    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -21,13 +24,19 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(FlightService);
       httpMock = injector.get(HttpTestingController);
+      currentDate = moment();
 
-      elemDefault = new Flight(0, 'AAAAAAA', EFlightType.ONE_WAY, EFareType.ECONOMY, 'AAAAAAA', 0);
+      elemDefault = new Flight(0, 'AAAAAAA', EFlightType.ONE_WAY, EFareType.ECONOMY, 'AAAAAAA', 'AAAAAAA', 0, currentDate, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            departureDate: currentDate.format(DATE_FORMAT),
+          },
+          elemDefault
+        );
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -40,11 +49,17 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
+            departureDate: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            departureDate: currentDate,
+          },
+          returnedFromService
+        );
 
         service.create(new Flight()).subscribe(resp => (expectedResult = resp.body));
 
@@ -60,12 +75,21 @@ describe('Service Tests', () => {
             flightType: 'BBBBBB',
             fareType: 'BBBBBB',
             pilot: 'BBBBBB',
+            planeModelNumber: 'BBBBBB',
             price: 1,
+            departureDate: currentDate.format(DATE_FORMAT),
+            boardingGate: 1,
+            airlineName: 'BBBBBB',
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            departureDate: currentDate,
+          },
+          returnedFromService
+        );
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -81,12 +105,21 @@ describe('Service Tests', () => {
             flightType: 'BBBBBB',
             fareType: 'BBBBBB',
             pilot: 'BBBBBB',
+            planeModelNumber: 'BBBBBB',
             price: 1,
+            departureDate: currentDate.format(DATE_FORMAT),
+            boardingGate: 1,
+            airlineName: 'BBBBBB',
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            departureDate: currentDate,
+          },
+          returnedFromService
+        );
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 
