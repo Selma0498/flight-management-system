@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { PaymentService } from 'app/entities/payment/payment/payment.service';
-import { IPayment, Payment } from 'app/shared/model/payment/payment.model';
+import { PaymentService } from 'app/entities/payments/payment/payment.service';
+import { IPayment, Payment } from 'app/shared/model/payments/payment.model';
 
 describe('Service Tests', () => {
   describe('Payment Service', () => {

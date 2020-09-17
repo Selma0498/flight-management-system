@@ -26,14 +26,14 @@
   "relationships": [
     {
       "relationshipType": "one-to-one",
-      "otherEntityName": "invoice",
+      "otherEntityName": "creditCard",
       "otherEntityRelationshipName": "payment",
-      "relationshipName": "invoice",
-      "otherEntityField": "id",
+      "relationshipName": "creditCard",
+      "otherEntityField": "cardNumber",
       "ownerSide": true
     }
   ],
-  "changelogDate": "20200820215446",
+  "changelogDate": "20200916231258",
   "entityTableName": "payment",
   "dto": "no",
   "pagination": "no",
@@ -42,7 +42,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "clientRootFolder": "payment",
+  "clientRootFolder": "payments",
   "applications": "*",
-  "microserviceName": "payment"
+  "microserviceName": "payments"
 }

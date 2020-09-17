@@ -1,5 +1,6 @@
 package passengers.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Passenger.
@@ -41,6 +44,21 @@ public class Passenger implements Serializable {
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToMany(mappedBy = "passengers")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<NotificationRepo> notificationRepos = new HashSet<>();
+
+    public Passenger() {
+    }
+
+    public Passenger(@NotNull String username, @NotNull String name, @NotNull String surname, @NotNull String email) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -114,6 +132,31 @@ public class Passenger implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<NotificationRepo> getNotificationRepos() {
+        return notificationRepos;
+    }
+
+    public Passenger notificationRepos(Set<NotificationRepo> notificationRepos) {
+        this.notificationRepos = notificationRepos;
+        return this;
+    }
+
+    public Passenger addNotificationRepo(NotificationRepo notificationRepo) {
+        this.notificationRepos.add(notificationRepo);
+        notificationRepo.getPassengers().add(this);
+        return this;
+    }
+
+    public Passenger removeNotificationRepo(NotificationRepo notificationRepo) {
+        this.notificationRepos.remove(notificationRepo);
+        notificationRepo.getPassengers().remove(this);
+        return this;
+    }
+
+    public void setNotificationRepos(Set<NotificationRepo> notificationRepos) {
+        this.notificationRepos = notificationRepos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

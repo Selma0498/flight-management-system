@@ -6,8 +6,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { GatewayTestModule } from '../../../../test.module';
 import { MockEventManager } from '../../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../../helpers/mock-active-modal.service';
-import { PaymentDeleteDialogComponent } from 'app/entities/payment/payment/payment-delete-dialog.component';
-import { PaymentService } from 'app/entities/payment/payment/payment.service';
+import { PaymentDeleteDialogComponent } from 'app/entities/payments/payment/payment-delete-dialog.component';
+import { PaymentService } from 'app/entities/payments/payment/payment.service';
 
 describe('Component Tests', () => {
   describe('Payment Management Delete Component', () => {

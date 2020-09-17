@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { GatewayTestModule } from '../../../../test.module';
-import { PaymentDetailComponent } from 'app/entities/payment/payment/payment-detail.component';
-import { Payment } from 'app/shared/model/payment/payment.model';
+import { PaymentDetailComponent } from 'app/entities/payments/payment/payment-detail.component';
+import { Payment } from 'app/shared/model/payments/payment.model';
 
 describe('Component Tests', () => {
   describe('Payment Management Detail Component', () => {

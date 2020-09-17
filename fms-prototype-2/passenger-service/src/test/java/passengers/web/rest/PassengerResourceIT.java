@@ -62,7 +62,7 @@ public class PassengerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Passenger createEntity(EntityManager em) {
-        Passenger passenger = new Passenger()
+        Passenger passenger = new Passenger("test", "test", "test", "test")
             .username(DEFAULT_USERNAME)
             .password(DEFAULT_PASSWORD)
             .name(DEFAULT_NAME)
@@ -77,7 +77,7 @@ public class PassengerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Passenger createUpdatedEntity(EntityManager em) {
-        Passenger passenger = new Passenger()
+        Passenger passenger = new Passenger("test", "test", "test", "test")
             .username(UPDATED_USERNAME)
             .password(UPDATED_PASSWORD)
             .name(UPDATED_NAME)

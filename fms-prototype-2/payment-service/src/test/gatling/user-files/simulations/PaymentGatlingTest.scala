@@ -63,12 +63,12 @@ class PaymentGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all payments")
-            .get("/services/payment/api/payments")
+            .get("/services/payments/api/payments")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new payment")
-            .post("/services/payment/api/payments")
+            .post("/services/payments/api/payments")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
@@ -81,12 +81,12 @@ class PaymentGatlingTest extends Simulation {
             .pause(10)
             .repeat(5) {
                 exec(http("Get created payment")
-                .get("/services/payment${new_payment_url}")
+                .get("/services/payments${new_payment_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
             .exec(http("Delete created payment")
-            .delete("/services/payment${new_payment_url}")
+            .delete("/services/payments${new_payment_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

@@ -31,8 +31,16 @@
       ]
     }
   ],
-  "relationships": [],
-  "changelogDate": "20200820220214",
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "payment",
+      "otherEntityRelationshipName": "creditCard",
+      "relationshipName": "payment",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200916231158",
   "entityTableName": "credit_card",
   "dto": "no",
   "pagination": "no",
@@ -41,7 +49,7 @@
   "fluentMethods": true,
   "readOnly": false,
   "embedded": false,
-  "clientRootFolder": "payment",
+  "clientRootFolder": "payments",
   "applications": "*",
-  "microserviceName": "payment"
+  "microserviceName": "payments"
 }

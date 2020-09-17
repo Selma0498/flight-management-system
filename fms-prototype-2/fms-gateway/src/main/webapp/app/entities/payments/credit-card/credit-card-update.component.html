@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-credit-card-heading">Create or edit a Credit Card</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cardType">Card Type</label>
+                    <select class="form-control" name="cardType" formControlName="cardType" id="field_cardType">
+                        <option value="MASTERCARD">MASTERCARD</option>
+                        <option value="VISA">VISA</option>
+                        <option value="MAESTRO">MAESTRO</option>
+                    </select>
+                    <div *ngIf="editForm.get('cardType')!.invalid && (editForm.get('cardType')!.dirty || editForm.get('cardType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cardType')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cvc">Cvc</label>
+                    <input type="number" class="form-control" name="cvc" id="field_cvc"
+                           formControlName="cvc"/>
+                    <div *ngIf="editForm.get('cvc')!.invalid && (editForm.get('cvc')!.dirty || editForm.get('cvc')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cvc')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('cvc')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cardNumber">Card Number</label>
+                    <input type="number" class="form-control" name="cardNumber" id="field_cardNumber"
+                           formControlName="cardNumber"/>
+                    <div *ngIf="editForm.get('cardNumber')!.invalid && (editForm.get('cardNumber')!.dirty || editForm.get('cardNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cardNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('cardNumber')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_validityDate">Validity Date</label>
+                    <div class="input-group">
+                        <input id="field_validityDate" type="text" class="form-control" name="validityDate" ngbDatepicker #validityDateDp="ngbDatepicker" formControlName="validityDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="validityDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('validityDate')!.invalid && (editForm.get('validityDate')!.dirty || editForm.get('validityDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('validityDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

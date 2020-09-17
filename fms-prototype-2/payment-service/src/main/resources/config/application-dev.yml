@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    payment: DEBUG
+    payments: DEBUG
 
 eureka:
   instance:
@@ -44,8 +44,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/payment;DB_CLOSE_DELAY=-1
-    username: payment
+    url: jdbc:h2:file:./target/h2db/db/payments;DB_CLOSE_DELAY=-1
+    username: payments
     password:
     hikari:
       poolName: Hikari
@@ -108,7 +108,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: Yzk4NDgyZDYyYjk3OTFjNWY2MTIxMjdkZWQ3Nzk5N2Q1MDY1ZDk5NDIwZDUwOTZiZTMxYmFjMDJkMTVjZmMwOTlmNWI5MGM4Y2UwZjFlNmI0YjgwNzE1MWVjMjFmN2U1OGNjZmI2NWI4OTk4MTg2M2EwZGIwZTE1ODUxNzNkMzk=
+        base64-secret: MDI1YjI3NDAxOWJkODJlMDA4NmU0OWE3ZjZhNDgyNmFhMzI0NmI4YmQ5MTg4MWI4Y2FkNGRhMTViMzExNTVhMWY3MDIwODUyN2M5Y2NiMjA1MTk4NDFiZTM5OWNjNzcwZWNkNTE3ZjkyN2FmN2NmN2U4NWMyNTRiY2U1NjZmN2E=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

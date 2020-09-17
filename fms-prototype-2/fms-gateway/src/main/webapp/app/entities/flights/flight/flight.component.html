@@ -27,12 +27,13 @@
                     <th scope="col" ><span>Flight Type</span></th>
                     <th scope="col" ><span>Fare Type</span></th>
                     <th scope="col" ><span>Pilot</span></th>
+                    <th scope="col" ><span>Plane Model Number</span></th>
                     <th scope="col" ><span>Price</span></th>
+                    <th scope="col" ><span>Departure Date</span></th>
                     <th scope="col" ><span>Boarding Gate</span></th>
+                    <th scope="col" ><span>Airline Name</span></th>
                     <th scope="col" ><span>Origin City</span></th>
                     <th scope="col" ><span>Destination City</span></th>
-                    <th scope="col" ><span>Airline Name</span></th>
-                    <th scope="col" ><span>Plane Model Number</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -43,12 +44,11 @@
                     <td>{{ flight.flightType }}</td>
                     <td>{{ flight.fareType }}</td>
                     <td>{{ flight.pilot }}</td>
+                    <td>{{ flight.planeModelNumber }}</td>
                     <td>{{ flight.price }}</td>
-                    <td>
-                        <div *ngIf="flight.flightHandler">
-                            <a [routerLink]="['/flight-handling', flight.flightHandler?.boardingGate, 'view']" >{{ flight.flightHandler?.boardingGate }}</a>
-                        </div>
-                    </td>
+                    <td>{{ flight.departureDate | date:'mediumDate' }}</td>
+                    <td>{{ flight.boardingGate }}</td>
+                    <td>{{ flight.airlineName }}</td>
                     <td>
                         <div *ngIf="flight.origin">
                             <a [routerLink]="['/airport', flight.origin?.cityName, 'view']" >{{ flight.origin?.cityName }}</a>
@@ -57,16 +57,6 @@
                     <td>
                         <div *ngIf="flight.destination">
                             <a [routerLink]="['/airport', flight.destination?.cityName, 'view']" >{{ flight.destination?.cityName }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="flight.airline">
-                            <a [routerLink]="['/airline', flight.airline?.airlineName, 'view']" >{{ flight.airline?.airlineName }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="flight.plane">
-                            <a [routerLink]="['/plane', flight.plane?.modelNumber, 'view']" >{{ flight.plane?.modelNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">

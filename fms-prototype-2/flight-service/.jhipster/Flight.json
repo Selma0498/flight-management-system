@@ -29,22 +29,36 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "planeModelNumber",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "price",
       "fieldType": "Double",
       "fieldValidateRules": [
         "required"
       ]
+    },
+    {
+      "fieldName": "departureDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "boardingGate",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "airlineName",
+      "fieldType": "String"
     }
   ],
   "relationships": [
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "flightHandling",
-      "otherEntityRelationshipName": "flight",
-      "relationshipName": "flightHandler",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "airport",
@@ -60,25 +74,9 @@
       "relationshipValidateRules": "required",
       "relationshipName": "destination",
       "otherEntityField": "id"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "airline",
-      "otherEntityRelationshipName": "flight",
-      "relationshipValidateRules": "required",
-      "relationshipName": "airline",
-      "otherEntityField": "id"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "plane",
-      "otherEntityRelationshipName": "flight",
-      "relationshipValidateRules": "required",
-      "relationshipName": "plane",
-      "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200820205622",
+  "changelogDate": "20200916230336",
   "entityTableName": "flight",
   "dto": "no",
   "pagination": "no",

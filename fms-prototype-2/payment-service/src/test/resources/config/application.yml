@@ -17,15 +17,15 @@ eureka:
   client:
     enabled: false
   instance:
-    appname: payment
-    instanceId: payment:${spring.application.instance-id:${random.value}}
+    appname: payments
+    instanceId: payments:${spring.application.instance-id:${random.value}}
 
 spring:
   profiles:
   # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
   #active: testcontainers
   application:
-    name: payment
+    name: payments
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:bookings;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -67,13 +67,13 @@ spring:
       enabled: false
   task:
     execution:
-      thread-name-prefix: payment-task-
+      thread-name-prefix: payments-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: payment-scheduling-
+      thread-name-prefix: payments-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -91,7 +91,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'paymentApp'
+    name: 'paymentsApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -104,7 +104,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: Yzk4NDgyZDYyYjk3OTFjNWY2MTIxMjdkZWQ3Nzk5N2Q1MDY1ZDk5NDIwZDUwOTZiZTMxYmFjMDJkMTVjZmMwOTlmNWI5MGM4Y2UwZjFlNmI0YjgwNzE1MWVjMjFmN2U1OGNjZmI2NWI4OTk4MTg2M2EwZGIwZTE1ODUxNzNkMzk=
+        base64-secret: MDI1YjI3NDAxOWJkODJlMDA4NmU0OWE3ZjZhNDgyNmFhMzI0NmI4YmQ5MTg4MWI4Y2FkNGRhMTViMzExNTVhMWY3MDIwODUyN2M5Y2NiMjA1MTk4NDFiZTM5OWNjNzcwZWNkNTE3ZjkyN2FmN2NmN2U4NWMyNTRiY2U1NjZmN2E=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:

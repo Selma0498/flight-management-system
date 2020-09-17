@@ -3,9 +3,9 @@ import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { GatewayTestModule } from '../../../../test.module';
-import { PaymentComponent } from 'app/entities/payment/payment/payment.component';
-import { PaymentService } from 'app/entities/payment/payment/payment.service';
-import { Payment } from 'app/shared/model/payment/payment.model';
+import { PaymentComponent } from 'app/entities/payments/payment/payment.component';
+import { PaymentService } from 'app/entities/payments/payment/payment.service';
+import { Payment } from 'app/shared/model/payments/payment.model';
 
 describe('Component Tests', () => {
   describe('Payment Management Component', () => {

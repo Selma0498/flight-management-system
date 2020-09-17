@@ -4,22 +4,14 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { IFlight, Flight } from 'app/shared/model/flights/flight.model';
 import { FlightService } from './flight.service';
-import { IFlightHandling } from 'app/shared/model/flights/flight-handling.model';
-import { FlightHandlingService } from 'app/entities/flights/flight-handling/flight-handling.service';
 import { IAirport } from 'app/shared/model/flights/airport.model';
 import { AirportService } from 'app/entities/flights/airport/airport.service';
-import { IAirline } from 'app/shared/model/flights/airline.model';
-import { AirlineService } from 'app/entities/flights/airline/airline.service';
-import { IPlane } from 'app/shared/model/flights/plane.model';
-import { PlaneService } from 'app/entities/flights/plane/plane.service';
 import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 import {NotificationService} from "app/entities/notifications/notification/notification.service";
-
-type SelectableEntity = IFlightHandling | IAirport | IAirline | IPlane;
+import {NotificationRepoService} from "app/entities/passengers/notification-repo/notification-repo.service";
 
 @Component({
   selector: 'jhi-flight-update',
@@ -27,10 +19,8 @@ type SelectableEntity = IFlightHandling | IAirport | IAirline | IPlane;
 })
 export class FlightUpdateComponent implements OnInit {
   isSaving = false;
-  flighthandlers: IFlightHandling[] = [];
   airports: IAirport[] = [];
-  airlines: IAirline[] = [];
-  planes: IPlane[] = [];
+  departureDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -38,56 +28,29 @@ export class FlightUpdateComponent implements OnInit {
     flightType: [null, [Validators.required]],
     fareType: [null, [Validators.required]],
     pilot: [],
+    planeModelNumber: [],
     price: [null, [Validators.required]],
-    flightHandler: [],
+    departureDate: [null, [Validators.required]],
+    boardingGate: [null, [Validators.required]],
+    airlineName: [],
     origin: [null, Validators.required],
     destination: [null, Validators.required],
-    airline: [null, Validators.required],
-    plane: [null, Validators.required],
   });
 
   constructor(
     protected flightService: FlightService,
-    protected flightHandlingService: FlightHandlingService,
     protected airportService: AirportService,
-    protected airlineService: AirlineService,
-    protected planeService: PlaneService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private notificationRepoService: NotificationRepoService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ flight }) => {
       this.updateForm(flight);
 
-      this.flightHandlingService
-        .query({ filter: 'flight-is-null' })
-        .pipe(
-          map((res: HttpResponse<IFlightHandling[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IFlightHandling[]) => {
-          if (!flight.flightHandler || !flight.flightHandler.id) {
-            this.flighthandlers = resBody;
-          } else {
-            this.flightHandlingService
-              .find(flight.flightHandler.id)
-              .pipe(
-                map((subRes: HttpResponse<IFlightHandling>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IFlightHandling[]) => (this.flighthandlers = concatRes));
-          }
-        });
-
       this.airportService.query().subscribe((res: HttpResponse<IAirport[]>) => (this.airports = res.body || []));
-
-      this.airlineService.query().subscribe((res: HttpResponse<IAirline[]>) => (this.airlines = res.body || []));
-
-      this.planeService.query().subscribe((res: HttpResponse<IPlane[]>) => (this.planes = res.body || []));
     });
   }
 
@@ -98,12 +61,13 @@ export class FlightUpdateComponent implements OnInit {
       flightType: flight.flightType,
       fareType: flight.fareType,
       pilot: flight.pilot,
+      planeModelNumber: flight.planeModelNumber,
       price: flight.price,
-      flightHandler: flight.flightHandler,
+      departureDate: flight.departureDate,
+      boardingGate: flight.boardingGate,
+      airlineName: flight.airlineName,
       origin: flight.origin,
       destination: flight.destination,
-      airline: flight.airline,
-      plane: flight.plane,
     });
   }
 
@@ -129,12 +93,13 @@ export class FlightUpdateComponent implements OnInit {
       flightType: this.editForm.get(['flightType'])!.value,
       fareType: this.editForm.get(['fareType'])!.value,
       pilot: this.editForm.get(['pilot'])!.value,
+      planeModelNumber: this.editForm.get(['planeModelNumber'])!.value,
       price: this.editForm.get(['price'])!.value,
-      flightHandler: this.editForm.get(['flightHandler'])!.value,
+      departureDate: this.editForm.get(['departureDate'])!.value,
+      boardingGate: this.editForm.get(['boardingGate'])!.value,
+      airlineName: this.editForm.get(['airlineName'])!.value,
       origin: this.editForm.get(['origin'])!.value,
       destination: this.editForm.get(['destination'])!.value,
-      airline: this.editForm.get(['airline'])!.value,
-      plane: this.editForm.get(['plane'])!.value,
     };
   }
 
@@ -145,8 +110,9 @@ export class FlightUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
+
     this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
       .subscribe(notification => {
         if(notification.description !== undefined) {
@@ -162,7 +128,7 @@ export class FlightUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
+  trackById(index: number, item: IAirport): any {
     return item.id;
   }
 }

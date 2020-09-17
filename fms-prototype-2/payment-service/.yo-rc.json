@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "payment"
+      "packageName": "payments"
     },
     "jhipsterVersion": "6.9.0",
     "applicationType": "microservice",
-    "baseName": "payment",
-    "packageName": "payment",
-    "packageFolder": "payment",
+    "baseName": "payments",
+    "packageName": "payments",
+    "packageFolder": "payments",
     "serverPort": "8085",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -21,9 +21,9 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "Yzk4NDgyZDYyYjk3OTFjNWY2MTIxMjdkZWQ3Nzk5N2Q1MDY1ZDk5NDIwZDUwOTZiZTMxYmFjMDJkMTVjZmMwOTlmNWI5MGM4Y2UwZjFlNmI0YjgwNzE1MWVjMjFmN2U1OGNjZmI2NWI4OTk4MTg2M2EwZGIwZTE1ODUxNzNkMzk=",
+    "jwtSecretKey": "MDI1YjI3NDAxOWJkODJlMDA4NmU0OWE3ZjZhNDgyNmFhMzI0NmI4YmQ5MTg4MWI4Y2FkNGRhMTViMzExNTVhMWY3MDIwODUyN2M5Y2NiMjA1MTk4NDFiZTM5OWNjNzcwZWNkNTE3ZjkyN2FmN2NmN2U4NWMyNTRiY2U1NjZmN2E=",
     "embeddableLaunchScript": false,
-    "creationTimestamp": 1597876809195,
+    "creationTimestamp": 1600297723309,
     "testFrameworks": ["gatling"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",

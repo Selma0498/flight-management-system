@@ -63,12 +63,12 @@ class CreditCardGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all creditCards")
-            .get("/services/payment/api/credit-cards")
+            .get("/services/payments/api/credit-cards")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new creditCard")
-            .post("/services/payment/api/credit-cards")
+            .post("/services/payments/api/credit-cards")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
@@ -82,12 +82,12 @@ class CreditCardGatlingTest extends Simulation {
             .pause(10)
             .repeat(5) {
                 exec(http("Get created creditCard")
-                .get("/services/payment${new_creditCard_url}")
+                .get("/services/payments${new_creditCard_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
             .exec(http("Delete created creditCard")
-            .delete("/services/payment${new_creditCard_url}")
+            .delete("/services/payments${new_creditCard_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

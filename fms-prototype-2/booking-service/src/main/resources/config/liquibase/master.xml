@@ -14,20 +14,18 @@
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820204622_added_entity_Booking.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820204722_added_entity_Flight.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820204822_added_entity_Airport.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820204922_added_entity_Airline.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205022_added_entity_Plane.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205122_added_entity_FlightHandling.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205222_added_entity_Luggage.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205322_added_entity_Passenger.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205422_added_entity_Invoice.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205522_added_entity_CreditCard.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205622_added_entity_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152113_added_entity_Booking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152213_added_entity_Flight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152313_added_entity_Airport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152413_added_entity_Luggage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152513_added_entity_Passenger.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152613_added_entity_NotificationRepo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152713_added_entity_CreditCard.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152813_added_entity_Payment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20200820204722_added_entity_constraints_Flight.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200820205622_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152213_added_entity_constraints_Flight.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152613_added_entity_constraints_NotificationRepo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200917152813_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

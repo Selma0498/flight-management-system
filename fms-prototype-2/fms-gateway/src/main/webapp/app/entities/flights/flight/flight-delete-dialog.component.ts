@@ -29,6 +29,7 @@ export class FlightDeleteDialogComponent {
       this.eventManager.broadcast('flightListModification');
       this.activeModal.close();
     });
+
     this.notificationService.getNotification(ENotificationType.FLIGHT_CANCELLED)
       .subscribe(notification => {
         if(notification.description !== undefined) {
