@@ -9,20 +9,8 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./flights/flight/flight.module').then(m => m.FlightsFlightModule),
       },
       {
-        path: 'flight-handling',
-        loadChildren: () => import('./flights/flight-handling/flight-handling.module').then(m => m.FlightsFlightHandlingModule),
-      },
-      {
         path: 'airport',
         loadChildren: () => import('./flights/airport/airport.module').then(m => m.FlightsAirportModule),
-      },
-      {
-        path: 'airline',
-        loadChildren: () => import('./flights/airline/airline.module').then(m => m.FlightsAirlineModule),
-      },
-      {
-        path: 'plane',
-        loadChildren: () => import('./flights/plane/plane.module').then(m => m.FlightsPlaneModule),
       },
       {
         path: 'booking',
@@ -43,6 +31,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'credit-card',
         loadChildren: () => import('./payments/credit-card/credit-card.module').then(m => m.PaymentsCreditCardModule),
+      },
+      {
+        path: 'passenger',
+        loadChildren: () => import('./passengers/passenger/passenger.module').then(m => m.PassengersPassengerModule),
+      },
+      {
+        path: 'notification-repo',
+        loadChildren: () => import('./passengers/notification-repo/notification-repo.module').then(m => m.PassengersNotificationRepoModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

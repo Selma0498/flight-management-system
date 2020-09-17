@@ -11,6 +11,8 @@ import { IAirport } from 'app/shared/model/flights/airport.model';
 import { AirportService } from 'app/entities/flights/airport/airport.service';
 import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 import {NotificationService} from "app/entities/notifications/notification/notification.service";
+import {NotificationRepo} from "app/shared/model/passengers/notification-repo.model";
+import {NotificationRepoService} from "app/entities/passengers/notification-repo/notification-repo.service";
 
 @Component({
   selector: 'jhi-flight-update',
@@ -41,7 +43,9 @@ export class FlightUpdateComponent implements OnInit {
     protected airportService: AirportService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private notificationRepo: NotificationRepo,
+    private notificationRepoService: NotificationRepoService
   ) {}
 
   ngOnInit(): void {
@@ -110,6 +114,11 @@ export class FlightUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
+    //save notification in notification repo for passengers to see
+    this.notificationRepo.name = "FLIGHT UPDATED";
+    this.notificationRepo.description = "Flight with id= " + this.editForm.get(['flightNumber'])!.value + " has been updated. Please view flight details for more information.";
+    this.notificationRepoService.updateNotificationRepo(this.notificationRepo);
+
     this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
       .subscribe(notification => {
         if(notification.description !== undefined) {
