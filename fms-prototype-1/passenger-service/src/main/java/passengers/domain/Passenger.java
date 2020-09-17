@@ -50,6 +50,9 @@ public class Passenger implements Serializable {
     @JsonIgnore
     private Set<NotificationRepo> notificationRepos = new HashSet<>();
 
+    public Passenger() {
+    }
+
     public Passenger(@NotNull String username, @NotNull String name, @NotNull String surname, @NotNull String email) {
         this.username = username;
         this.name = name;

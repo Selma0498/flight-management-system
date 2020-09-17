@@ -110,11 +110,8 @@ export class FlightUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
-    //save notification in notification repo for passengers to see
-    //save notification in notification repo for passengers to see
-    this.notificationRepoService.updateNotificationRepo(ENotificationType.FLIGHT_CANCELLED, this.editForm.get(['flightNumber'])!.value);
 
     this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
       .subscribe(notification => {

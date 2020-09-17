@@ -13,8 +13,6 @@ type EntityArrayResponseType = HttpResponse<INotificationRepo[]>;
 @Injectable({ providedIn: 'root' })
 export class NotificationRepoService {
   public resourceUrl = SERVER_API_URL + 'services/passengers/api/notification-repos';
-  public saveNotificationUrl = SERVER_API_URL + 'services/passengers/api/notification-repos/notification-repos';
-
 
   constructor(protected http: HttpClient) {}
 
@@ -35,9 +33,4 @@ export class NotificationRepoService {
     return this.http.get<INotificationRepo[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  public updateNotificationRepo(notificationType: ENotificationType, id: number): Observable<EntityResponseType> {
-    return this.http.post(this.saveNotificationUrl,
-      new NotificationRepo(undefined, "FLIGHT CANCELLED", "Flight with id= " + id + " has been cancelled."),
-      { observe: 'response' });
-  }
 }
