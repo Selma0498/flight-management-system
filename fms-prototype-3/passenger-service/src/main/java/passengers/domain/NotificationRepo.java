@@ -39,6 +39,9 @@ public class NotificationRepo implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "passenger_id", referencedColumnName = "id"))
     private Set<Passenger> passengers = new HashSet<>();
 
+    public NotificationRepo() {
+    }
+
     public NotificationRepo(@NotNull String name, @NotNull String description) {
         this.name = name;
         this.description = description;

@@ -135,7 +135,7 @@ public class UserService {
         return true;
     }
 
-    public User createUser(UserDTO userDTO) {
+   public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());

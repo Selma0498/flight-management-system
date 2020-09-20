@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { INotificationRepo } from 'app/shared/model/passengers/notification-repo.model';
+import {INotificationRepo, NotificationRepo} from 'app/shared/model/passengers/notification-repo.model';
+import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
 
 type EntityResponseType = HttpResponse<INotificationRepo>;
 type EntityArrayResponseType = HttpResponse<INotificationRepo[]>;
@@ -14,6 +15,14 @@ export class NotificationRepoService {
   public resourceUrl = SERVER_API_URL + 'services/passengers/api/notification-repos';
 
   constructor(protected http: HttpClient) {}
+
+  create(notificationRepo: INotificationRepo): Observable<EntityResponseType> {
+    return this.http.post<INotificationRepo>(this.resourceUrl, notificationRepo, { observe: 'response' });
+  }
+
+  update(notificationRepo: INotificationRepo): Observable<EntityResponseType> {
+    return this.http.put<INotificationRepo>(this.resourceUrl, notificationRepo, { observe: 'response' });
+  }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<INotificationRepo>(`${this.resourceUrl}/${id}`, { observe: 'response' });

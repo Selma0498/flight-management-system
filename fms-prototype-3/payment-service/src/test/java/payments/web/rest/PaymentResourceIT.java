@@ -2,6 +2,7 @@ package payments.web.rest;
 
 import payments.PaymentsApp;
 import payments.domain.Payment;
+import payments.domain.CreditCard;
 import payments.repository.PaymentRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +61,16 @@ public class PaymentResourceIT {
             .passengerId(DEFAULT_PASSENGER_ID)
             .toPay(DEFAULT_TO_PAY)
             .bookingNumber(DEFAULT_BOOKING_NUMBER);
+        // Add required entity
+        CreditCard creditCard;
+        if (TestUtil.findAll(em, CreditCard.class).isEmpty()) {
+            creditCard = CreditCardResourceIT.createEntity(em);
+            em.persist(creditCard);
+            em.flush();
+        } else {
+            creditCard = TestUtil.findAll(em, CreditCard.class).get(0);
+        }
+        payment.setCreditCard(creditCard);
         return payment;
     }
     /**
@@ -73,6 +84,16 @@ public class PaymentResourceIT {
             .passengerId(UPDATED_PASSENGER_ID)
             .toPay(UPDATED_TO_PAY)
             .bookingNumber(UPDATED_BOOKING_NUMBER);
+        // Add required entity
+        CreditCard creditCard;
+        if (TestUtil.findAll(em, CreditCard.class).isEmpty()) {
+            creditCard = CreditCardResourceIT.createUpdatedEntity(em);
+            em.persist(creditCard);
+            em.flush();
+        } else {
+            creditCard = TestUtil.findAll(em, CreditCard.class).get(0);
+        }
+        payment.setCreditCard(creditCard);
         return payment;
     }
 

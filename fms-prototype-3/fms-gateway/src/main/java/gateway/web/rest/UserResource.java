@@ -227,7 +227,7 @@ public class UserResource {
             // if the user is logged in for the first time with username 'user' register a passenger at the passenger microservice
             if(login.equals("user") && result == null) {
 
-               ResponseEntity resultCode = restTemplate.postForObject(
+                ResponseEntity resultCode = restTemplate.postForObject(
                     passengerMicroserviceBaseURL+"/api/passengers/",
                     userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new),
                     ResponseEntity.class

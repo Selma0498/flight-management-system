@@ -9,6 +9,9 @@ import { IFlight, Flight } from 'app/shared/model/flights/flight.model';
 import { FlightService } from './flight.service';
 import { IAirport } from 'app/shared/model/flights/airport.model';
 import { AirportService } from 'app/entities/flights/airport/airport.service';
+import {ENotificationType} from "app/shared/model/enumerations/e-notification-type.model";
+import {NotificationService} from "app/entities/notifications/notification/notification.service";
+import {NotificationRepoService} from "app/entities/passengers/notification-repo/notification-repo.service";
 
 @Component({
   selector: 'jhi-flight-update',
@@ -38,7 +41,9 @@ export class FlightUpdateComponent implements OnInit {
     protected flightService: FlightService,
     protected airportService: AirportService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notificationService: NotificationService,
+    private notificationRepoService: NotificationRepoService
   ) {}
 
   ngOnInit(): void {
@@ -105,8 +110,17 @@ export class FlightUpdateComponent implements OnInit {
     );
   }
 
-  protected onSaveSuccess(): void {
+  public onSaveSuccess(): void {
     this.isSaving = false;
+
+    this.notificationService.getNotification(ENotificationType.FLIGHT_UPDATED)
+      .subscribe(notification => {
+        if(notification.description !== undefined) {
+          window.confirm(notification.description);
+        } else {
+          window.confirm("undefined");
+        }
+      });
     this.previousState();
   }
 

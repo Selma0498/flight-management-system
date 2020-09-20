@@ -39,7 +39,7 @@ export const passengerRoute: Routes = [
     path: '',
     component: PassengerComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Passengers',
     },
     canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const passengerRoute: Routes = [
       passenger: PassengerResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Passengers',
     },
     canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const passengerRoute: Routes = [
       passenger: PassengerResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Passengers',
     },
     canActivate: [UserRouteAccessService],
@@ -75,7 +75,7 @@ export const passengerRoute: Routes = [
       passenger: PassengerResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Passengers',
     },
     canActivate: [UserRouteAccessService],

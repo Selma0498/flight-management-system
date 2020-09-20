@@ -6,29 +6,29 @@
     <div class="table-responsive" id="entities" *ngIf="notificationRepos && notificationRepos.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr>
-                    <th scope="col" ><span>ID</span></th>
-                    <th scope="col" ><span>Name</span></th>
-                    <th scope="col" ><span>Description</span></th>
-                    <th scope="col"></th>
-                </tr>
+            <tr>
+                <th scope="col" ><span>ID</span></th>
+                <th scope="col" ><span>Name</span></th>
+                <th scope="col" ><span>Description</span></th>
+                <th scope="col"></th>
+            </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let notificationRepo of notificationRepos ;trackBy: trackId">
-                    <td><a [routerLink]="['/notification-repo', notificationRepo.id, 'view']">{{ notificationRepo.id }}</a></td>
-                    <td>{{ notificationRepo.name }}</td>
-                    <td>{{ notificationRepo.description }}</td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/notification-repo', notificationRepo.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline">View</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tr *ngFor="let notificationRepo of notificationRepos ;trackBy: trackId">
+                <td><a [routerLink]="['/notification-repo', notificationRepo.id, 'view']">{{ notificationRepo.id }}</a></td>
+                <td>{{ notificationRepo.name }}</td>
+                <td>{{ notificationRepo.description }}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/notification-repo', notificationRepo.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -25,15 +25,15 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "relationshipType": "many-to-one",
       "otherEntityName": "creditCard",
       "otherEntityRelationshipName": "payment",
+      "relationshipValidateRules": "required",
       "relationshipName": "creditCard",
-      "otherEntityField": "cardNumber",
-      "ownerSide": true
+      "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200915233358",
+  "changelogDate": "20200919213303",
   "entityTableName": "payment",
   "dto": "no",
   "pagination": "no",

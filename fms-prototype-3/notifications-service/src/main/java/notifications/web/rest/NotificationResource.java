@@ -37,7 +37,7 @@ public class NotificationResource {
      * or with status {@code 500 (Internal Server Error)} if the notification could not be created.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @GetMapping("/notify/")
+    @GetMapping("/notify")
     public ResponseEntity<Notification> createNotification(@RequestParam ENotificationType notificationType) throws URISyntaxException {
 
         if(notificationType == null) {

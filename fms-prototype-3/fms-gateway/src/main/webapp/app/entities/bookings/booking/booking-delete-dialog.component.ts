@@ -29,6 +29,7 @@ export class BookingDeleteDialogComponent {
       this.eventManager.broadcast('bookingListModification');
       this.activeModal.close();
     });
+
     this.notificationService.getNotification(ENotificationType.BOOKING_CANCELLED)
       .subscribe(notification => {
         if(notification.description !== undefined) {

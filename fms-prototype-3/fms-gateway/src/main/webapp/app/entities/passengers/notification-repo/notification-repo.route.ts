@@ -10,6 +10,7 @@ import { INotificationRepo, NotificationRepo } from 'app/shared/model/passengers
 import { NotificationRepoService } from './notification-repo.service';
 import { NotificationRepoComponent } from './notification-repo.component';
 import { NotificationRepoDetailComponent } from './notification-repo-detail.component';
+import { NotificationRepoUpdateComponent } from './notification-repo-update.component';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationRepoResolve implements Resolve<INotificationRepo> {
@@ -46,6 +47,18 @@ export const notificationRepoRoute: Routes = [
   {
     path: ':id/view',
     component: NotificationRepoDetailComponent,
+    resolve: {
+      notificationRepo: NotificationRepoResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'NotificationRepos',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'new',
+    component: NotificationRepoUpdateComponent,
     resolve: {
       notificationRepo: NotificationRepoResolve,
     },

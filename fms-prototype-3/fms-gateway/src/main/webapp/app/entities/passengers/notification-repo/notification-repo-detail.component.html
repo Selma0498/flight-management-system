@@ -16,12 +16,24 @@
                 <dd>
                     <span>{{ notificationRepo.description }}</span>
                 </dd>
+                <dt><span>Passenger</span></dt>
+                <dd>
+                    <span *ngFor="let passenger of notificationRepo.passengers; let last = last">
+                        <a [routerLink]="['/passenger', passenger?.id, 'view']">{{ passenger.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/notification-repo', notificationRepo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

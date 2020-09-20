@@ -31,16 +31,8 @@
       ]
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "payment",
-      "otherEntityRelationshipName": "creditCard",
-      "relationshipName": "payment",
-      "ownerSide": false
-    }
-  ],
-  "changelogDate": "20200915233258",
+  "relationships": [],
+  "changelogDate": "20200919213203",
   "entityTableName": "credit_card",
   "dto": "no",
   "pagination": "no",
