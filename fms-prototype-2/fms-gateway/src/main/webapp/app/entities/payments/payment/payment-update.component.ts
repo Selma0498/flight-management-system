@@ -27,7 +27,7 @@ export class PaymentUpdateComponent implements OnInit {
     passengerId: [null, [Validators.required]],
     toPay: [null, [Validators.required]],
     bookingNumber: [null, [Validators.required]],
-    creditCard: [],
+    creditCard: [null, Validators.required],
   });
 
   constructor(
@@ -42,27 +42,7 @@ export class PaymentUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ payment }) => {
       this.updateForm(payment);
 
-      this.creditCardService
-        .query({ filter: 'payment-is-null' })
-        .pipe(
-          map((res: HttpResponse<ICreditCard[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ICreditCard[]) => {
-          if (!payment.creditCard || !payment.creditCard.id) {
-            this.creditcards = resBody;
-          } else {
-            this.creditCardService
-              .find(payment.creditCard.id)
-              .pipe(
-                map((subRes: HttpResponse<ICreditCard>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ICreditCard[]) => (this.creditcards = concatRes));
-          }
-        });
+      this.creditCardService.query().subscribe((res: HttpResponse<ICreditCard[]>) => (this.creditcards = res.body || []));
     });
   }
 

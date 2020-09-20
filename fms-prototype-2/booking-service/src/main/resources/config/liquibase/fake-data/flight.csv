@@ -1,11 +1,11 @@
 id;flight_number;flight_type;fare_type;pilot;plane_model_number;price;departure_date;boarding_gate;airline_name;origin_id;destination_id
-1;Courts;ONE_WAY;BUSINESS;Fish;Sleek Frozen Pants;15911;2020-09-17;33327;Motorway Buckinghamshire mobile;1;1
-2;compelling Gorgeous Soft Ball;ONE_WAY;ECONOMY;Mississippi;hacking digital;32392;2020-09-17;69520;Lakes Tools parsing;2;2
-3;quantify Communications;RETURN_TRIP;BUSINESS;communities green Rustic Steel Bike;database;42296;2020-09-17;61961;orange Chad Personal Loan Account;3;3
-4;Squares moratorium;RETURN_TRIP;BUSINESS;Balanced Grocery International;moderator;49316;2020-09-17;94234;Handcrafted Steel Mouse;4;4
-5;Group withdrawal Balboa US Dollar;RETURN_TRIP;ECONOMY;online parsing;scalable;80455;2020-09-17;56062;Credit Card Account orchid;5;5
-6;Rubber Pants Vatu;ONE_WAY;BUSINESS;mint green Cape Verde Escudo;out-of-the-box backing up;60406;2020-09-17;27008;Concrete;6;6
-7;connect;RETURN_TRIP;BUSINESS;Iceland matrix Versatile;microchip web-enabled;44294;2020-09-16;86044;Ohio;7;7
-8;Fantastic;ONE_WAY;BUSINESS;bypassing Tasty Iowa;Grocery Borders;31353;2020-09-17;9549;Solutions;8;8
-9;proactive;RETURN_TRIP;ECONOMY;compress Ergonomic;Crossroad;31012;2020-09-17;83278;Small Metal Bike 24/7;9;9
-10;multi-byte;ONE_WAY;ECONOMY;Neck ROI Expanded;Licensed Plastic Fish;95391;2020-09-17;52068;hack Fork;10;10
+1;Courts;ONE_WAY;BUSINESS;Fish;Sleek Frozen Pants;15911;2020-09-19;33327;Motorway Buckinghamshire mobile;1;1
+2;compelling Gorgeous Soft Ball;ONE_WAY;ECONOMY;Mississippi;hacking digital;32392;2020-09-19;69520;Lakes Tools parsing;2;2
+3;quantify Communications;RETURN_TRIP;BUSINESS;communities green Rustic Steel Bike;database;42296;2020-09-19;61961;orange Chad Personal Loan Account;3;3
+4;Squares moratorium;RETURN_TRIP;BUSINESS;Balanced Grocery International;moderator;49316;2020-09-19;94234;Handcrafted Steel Mouse;4;4
+5;Group withdrawal Balboa US Dollar;RETURN_TRIP;ECONOMY;online parsing;scalable;80455;2020-09-19;56062;Credit Card Account orchid;5;5
+6;Rubber Pants Vatu;ONE_WAY;BUSINESS;mint green Cape Verde Escudo;out-of-the-box backing up;60406;2020-09-19;27008;Concrete;6;6
+7;connect;RETURN_TRIP;BUSINESS;Iceland matrix Versatile;microchip web-enabled;44294;2020-09-19;86044;Ohio;7;7
+8;Fantastic;ONE_WAY;BUSINESS;bypassing Tasty Iowa;Grocery Borders;31353;2020-09-19;9549;Solutions;8;8
+9;proactive;RETURN_TRIP;ECONOMY;compress Ergonomic;Crossroad;31012;2020-09-19;83278;Small Metal Bike 24/7;9;9
+10;multi-byte;ONE_WAY;ECONOMY;Neck ROI Expanded;Licensed Plastic Fish;95391;2020-09-19;52068;hack Fork;10;10

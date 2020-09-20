@@ -1,5 +1,6 @@
 package payments.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -34,8 +35,9 @@ public class Payment implements Serializable {
     @Column(name = "booking_number", nullable = false)
     private Integer bookingNumber;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = "payments", allowSetters = true)
     private CreditCard creditCard;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

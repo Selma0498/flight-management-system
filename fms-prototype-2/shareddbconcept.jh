@@ -76,13 +76,10 @@ enum ECardType {
     MASTERCARD, VISA, MAESTRO
 }
 
-relationship OneToOne {
-    Payment{creditCard(cardNumber)} to CreditCard{payment(passengerId)}
-}
-
 relationship ManyToOne {
 	Flight{origin required} to Airport,
-    Flight{destination required} to Airport
+    Flight{destination required} to Airport,
+    Payment{creditCard required} to CreditCard
 }
 
 relationship ManyToMany{

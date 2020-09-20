@@ -18,8 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link payments.domain.CreditCard}.
@@ -85,18 +83,10 @@ public class CreditCardResource {
     /**
      * {@code GET  /credit-cards} : get all the creditCards.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of creditCards in body.
      */
     @GetMapping("/credit-cards")
-    public List<CreditCard> getAllCreditCards(@RequestParam(required = false) String filter) {
-        if ("payment-is-null".equals(filter)) {
-            log.debug("REST request to get all CreditCards where payment is null");
-            return StreamSupport
-                .stream(creditCardRepository.findAll().spliterator(), false)
-                .filter(creditCard -> creditCard.getPayment() == null)
-                .collect(Collectors.toList());
-        }
+    public List<CreditCard> getAllCreditCards() {
         log.debug("REST request to get all CreditCards");
         return creditCardRepository.findAll();
     }
