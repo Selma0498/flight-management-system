@@ -1,0 +1,10 @@
+{
+  "simulation": "AdminLoginFlightCreationAndDeletion",
+  "simulationId": "adminloginflightcreationanddeletion",
+  "start": 1600593676424,
+  "description": "",
+  "scenarios": ["AdminLoginFlightCreationAndDeletion"],
+  "assertions": [
+
+  ]
+}
